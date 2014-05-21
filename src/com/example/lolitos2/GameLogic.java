@@ -22,24 +22,42 @@ public class GameLogic {
 		}
 	}
 
-	public static boolean col(int ax1,int ay1, int bx1,int by1)
+	public static boolean col(int ax1,int ay1, int bx1,int by1, int[] x)
 	{
 		//Log.e("colide",bx1+" º "+by1);
 		
-		//esta a direita
-		if(bx1>=ax1+Entidade.tamanhoCelula)return false;
-		//esta a baixo
-		if(by1>=ay1+Entidade.tamanhoCelula)return false;
-		//esta a esquerda
-		if(bx1+Entidade.tamanhoCelula<=ax1)return false;
-		//esta a cima
-		if(by1+Entidade.tamanhoCelula<=ay1)return false;
-		
-		return true;
+		// esta a direita
+		boolean flag = false;
+		int a=0;
+		if (bx1+x[0] <= ax1 + Entidade.tamanhoCelula && bx1+x[0]>=ax1) {
+			flag = true;
+			a++;
+		}
+		// esta a baixo
+		if (by1+x[1] <= ay1 + Entidade.tamanhoCelula && by1+x[1]>=ay1) {
+			flag = true;
+			a++;
+		}
+		// esta a esquerda
+		if (bx1 + Entidade.tamanhoCelula +x[0]>= ax1 && bx1 + Entidade.tamanhoCelula +x[0]<=ax1+Entidade.tamanhoCelula) {
+			flag = true;
+			a++;
+		}
+		// esta a cima
+		if (by1 + Entidade.tamanhoCelula +x[1] <= ay1 && by1 + Entidade.tamanhoCelula +x[1] >= ay1+Entidade.tamanhoCelula) {
+			flag = true;
+			a++;
+		}
+		if(a==2)
+			return true;
+		else 
+			return false;
+		//return flag;
 	}
 	
-	public static boolean verificaMovimento(Jogo jogo, int dx, int dy)
+	public static boolean verificaMovimento(Jogo jogo, int[] x)
 	{
+		
 		//precorre todas as paredes e compara
 		for(int i =0;i<jogo.getParedes().length;i++)
 			for(int j=0;j<jogo.getParedes()[i].length;j++)
@@ -49,14 +67,15 @@ public class GameLogic {
 				if(col((Entidade.sw/2)-(Entidade.tamanhoCelula/2)
 						,(Entidade.sh/2)-(Entidade.tamanhoCelula/2)
 						,jogo.getParedes()[i][j].getX()*Entidade.tamanhoCelula+Entidade.dx
-						,jogo.getParedes()[i][j].getY()*Entidade.tamanhoCelula+Entidade.dy))
+						,jogo.getParedes()[i][j].getY()*Entidade.tamanhoCelula+Entidade.dy,x))
 					{
 					jogo.getParedes()[i][j].color=Color.CYAN;
+					Log.e("parede", "lol");
 					/*Log.e("putas cu crlh", "----"+Entidade.dx+" ~ "
 					+Entidade.dy);
 					Log.e("putas cu crlh", "----"+(jogo.getParedes()[i][j].getX()*Entidade.tamanhoCelula+Entidade.dx)+" ~ "
 					+(jogo.getParedes()[i][j].getY()*Entidade.tamanhoCelula+Entidade.dy));*/
-					return false;
+					//return false;
 					}
 				}
 			}

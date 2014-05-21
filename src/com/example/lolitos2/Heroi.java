@@ -42,6 +42,8 @@ public class Heroi extends Personagem{
 		canvas.drawText(Entidade.deslocX+"-"+Entidade.deslocY, 60, 60, paint);*/
 		paint.setColor(Color.BLUE);
 		//Log.e("draw", w+"."+w/2+"   "+h+"."+h/2);
+		canvas.drawRect(w/2-Entidade.tamanhoCelula/2, h/2-Entidade.tamanhoCelula/2, 
+				w/2+Entidade.tamanhoCelula/2, h/2+Entidade.tamanhoCelula/2, paint);
 		canvas.drawCircle(w/2, h/2, 
 				Math.abs((float)(Math.sin((float)getVida()/20000)*(tamanhoCelula/2))), paint);
 	}
