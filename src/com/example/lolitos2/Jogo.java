@@ -25,6 +25,7 @@ public class Jogo {
 	private Parede[][] paredes= new Parede[200][200];
 	private InputStream inputStream;
 	
+
 	
 	//inicializa o jogo
 	public Jogo(int tamanhoCelula,InputStream inputStream){
@@ -67,6 +68,13 @@ public class Jogo {
 
 	
 	
+	public Jogo(int i) {
+
+	}
+
+
+
+
 	//le o texto para um array list
 	private ArrayList<String> readText()
 	{
@@ -121,6 +129,27 @@ public class Jogo {
 
 	public void setParedes(Parede[][] paredes) {
 		this.paredes = paredes;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//////////////////A IMPLEMTENTAR PARA OS TESTES //////////////////////////
+	public void movimentarHeroi(int x, int y) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

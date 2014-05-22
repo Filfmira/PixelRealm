@@ -24,7 +24,14 @@ public class GameLogic {
 
 	public static boolean col(int ax1,int ay1, int bx1,int by1, int[] x)
 	{
-		//Log.e("colide",bx1+" º "+by1);
+		bx1+=x[0];
+		by1+=x[1];
+		
+		
+		
+		return true;
+		
+		/*//Log.e("colide",bx1+" º "+by1);
 		
 		// esta a direita
 		boolean flag = false;
@@ -52,7 +59,7 @@ public class GameLogic {
 			return true;
 		else 
 			return false;
-		//return flag;
+		//return flag;*/
 	}
 	
 	public static boolean verificaMovimento(Jogo jogo, int[] x)
