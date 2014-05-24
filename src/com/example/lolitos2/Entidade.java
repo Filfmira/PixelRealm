@@ -12,7 +12,7 @@ public class Entidade {
 	protected static int deslocY=0;
 	private int width;
 	private int height;
-	protected static int tamanhoCelula=200;
+	public static int tamanhoCelula=200;
 	protected static int sw=0;//screenwidth
 	protected static int sh=0;//screenheight
 	protected static int dx=0;

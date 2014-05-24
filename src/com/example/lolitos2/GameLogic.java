@@ -2,6 +2,7 @@ package com.example.lolitos2;
 
 import java.util.ArrayList;
 
+import jogo.view.GameView;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -82,7 +83,7 @@ public class GameLogic {
 					+Entidade.dy);
 					Log.e("putas cu crlh", "----"+(jogo.getParedes()[i][j].getX()*Entidade.tamanhoCelula+Entidade.dx)+" ~ "
 					+(jogo.getParedes()[i][j].getY()*Entidade.tamanhoCelula+Entidade.dy));*/
-					//return false;
+					return false;
 					}
 				}
 			}

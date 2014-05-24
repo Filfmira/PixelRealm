@@ -2,6 +2,10 @@ package com.example.lolitos2;
 
 import java.io.InputStream;
 
+import com.example.lolitos2.R;
+import com.example.lolitos2.R.drawable;
+import com.example.lolitos2.R.raw;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
