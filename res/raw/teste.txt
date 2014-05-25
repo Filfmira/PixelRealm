@@ -1,13 +1,13 @@
 oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 ooo                                                                         oooooooooo
-ooo                      x                                           v       oooooooooo
-ooo   v                                    x            v                   oooooooooo
-ooo         x      x         x                                              oooooooooo
-ooo                                     x                       v            oooooooooo
-ooo        x    v                                                           oooooooooo
-ooo                                  ooooooooo                                     oooooooooo
-ooo                           x     ooooooooooooo                                      oooooooooo
+ooo                  o    x                                           v       oooooooooo
+ooo   v              o                      x            v                   oooooooooo
+ooo         x      x o        x                                              oooooooooo
+ooo                  o                   x                       v            oooooooooo
+ooo        x    v    o                                                       oooooooooo
+ooo                  o                ooooooooo                                     oooooooooo
+ooo                  o         x     ooooooooooooo                                      oooooooooo
 ooo                                oooooo   oooo                                   oooooooooo
 ooo     v          x               ooooooo   v  ooooo  v                                oooooooooo
 ooooo                            oooooooo      ooooo         oooo                        oooooooooooo

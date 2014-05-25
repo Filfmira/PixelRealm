@@ -131,14 +131,14 @@ import android.view.WindowManager;
 			
 			
 			int[] x={b,a};
-			Log.e("colide", x[0]+"-"+x[1]);
+			//Log.e("colide", x[0]+"-"+x[1]);
 			if(!GameLogic.verificaMovimento(parent.getJogo(),x))
 			{
 				/*a=-a;
 				b=-b;*/
-				Log.e("yooo", x[0]+"-"+x[1]);
+				//Log.e("yooo", x[0]+"-"+x[1]);
 			}
-			Log.e("colide2", x[0]+"-"+x[1]);
+			//Log.e("colide2", x[0]+"-"+x[1]);
 			Entidade.dy+= x[1];
 			Entidade.dx+= x[0];
 

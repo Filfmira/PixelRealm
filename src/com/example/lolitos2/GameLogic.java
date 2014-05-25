@@ -30,37 +30,73 @@ public class GameLogic {
 		
 		
 		
-		return true;
+		//Log.e("colide",bx1+" º "+by1);
 		
-		/*//Log.e("colide",bx1+" º "+by1);
-		
-		// esta a direita
+		// sup esquerda monstro
 		boolean flag = false;
 		int a=0;
-		if (bx1+x[0] <= ax1 + Entidade.tamanhoCelula && bx1+x[0]>=ax1) {
+		int t=Entidade.tamanhoCelula;
+		if (bx1 <= ax1 + t && bx1>=ax1 && by1>=ay1 && by1<=ay1+t) {
 			flag = true;
-			a++;
+			x[0]=0;
 		}
+		//inf esquerda monstro
+		if (bx1 <= ax1 + t && bx1>=ax1 && by1+t>=ay1 && by1+t<=ay1+t) {
+			flag = true;
+			Log.e("0", "0");
+			x[0]=0;
+		}
+		
+		
+		//sup direita monstro
+		if (bx1+t >= ax1 && bx1+t<=ax1+t && by1>=ay1 && by1<=ay1+t) {
+			flag = true;
+			x[0]=0;
+			Log.e("1", "1");
+		}
+		
+		// inf direita monstro
+		if (bx1+t >= ax1 && bx1+t<=ax1+t && by1+t>=ay1 && by1+t<=ay1+t) {
+					flag = true;
+					x[0]=0;
+					Log.e("2", "2");
+				}
+		
+		// esq cima monstro
+				if (bx1 >= ax1 && bx1<=ax1+t && by1<=ay1+t && by1>=ay1) {
+							flag = true;
+							x[1]=0;
+							Log.e("3", "3");
+						}
+		// dir cima monstro
+		if (bx1+t >= ax1 && bx1+t <= ax1 + t && by1 <= ay1 + t && by1 >= ay1) {
+			flag = true;
+			x[1] = 0;
+			Log.e("4", "4");
+		}
+		
 		// esta a baixo
-		if (by1+x[1] <= ay1 + Entidade.tamanhoCelula && by1+x[1]>=ay1) {
+		/*if (by1<= ay1 + Entidade.tamanhoCelula && by1>=ay1) {
 			flag = true;
 			a++;
 		}
 		// esta a esquerda
-		if (bx1 + Entidade.tamanhoCelula +x[0]>= ax1 && bx1 + Entidade.tamanhoCelula +x[0]<=ax1+Entidade.tamanhoCelula) {
+		if (bx1 + Entidade.tamanhoCelula >= ax1 && bx1 + Entidade.tamanhoCelula <=ax1+Entidade.tamanhoCelula) {
 			flag = true;
 			a++;
 		}
 		// esta a cima
-		if (by1 + Entidade.tamanhoCelula +x[1] <= ay1 && by1 + Entidade.tamanhoCelula +x[1] >= ay1+Entidade.tamanhoCelula) {
+		if (by1 + Entidade.tamanhoCelula +x[1] <= ay1 && by1 + Entidade.tamanhoCelula  >= ay1+Entidade.tamanhoCelula) {
 			flag = true;
 			a++;
 		}
 		if(a==2)
 			return true;
 		else 
-			return false;
-		//return flag;*/
+			return false;*/
+				if(flag)
+					Log.e("---", "----");
+		return flag;
 	}
 	
 	public static boolean verificaMovimento(Jogo jogo, int[] x)
