@@ -116,7 +116,7 @@ import android.view.WindowManager;
 			// the joystick is dragged from its center
 			int a=(int) (-Math.sin(angle*(Math.PI/180))*5);
 			int b=(int) (-Math.cos(angle*(Math.PI/180))*5);
-			if(a<0)
+			/*if(a<0)
 			{
 				a=-2;
 			}
@@ -128,7 +128,7 @@ import android.view.WindowManager;
 			}
 			else
 				b=2;
-			
+			*/
 			
 			int[] x={b,a};
 			//Log.e("colide", x[0]+"-"+x[1]);

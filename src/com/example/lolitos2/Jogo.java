@@ -61,7 +61,8 @@ public class Jogo {
 				
 			}
 		}
-		setHeroi(new Heroi(5,7));
+		//setHeroi(new Heroi(5,7));
+		setHeroi(new Heroi((Entidade.sw/2)-(Entidade.tamanhoCelula/2),(Entidade.sh/2)-(Entidade.tamanhoCelula/2)));
 		//if(getInimigos().isEmpty())getHeroi().color=Color.GREEN;
 	}
 

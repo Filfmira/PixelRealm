@@ -23,80 +23,81 @@ public class GameLogic {
 		}
 	}
 
-	public static boolean col(int ax1,int ay1, int bx1,int by1, int[] x)
+	public static void adjustDx(int[] x){
+		
+	}
+	public static boolean testaColisao(Entidade heroi, Entidade objecto, int[] x){
+		int tamanho = Entidade.tamanhoCelula;
+		int xHeroi = heroi.getX(), yHeroi = heroi.getY();
+		int xObjecto = objecto.getX()*tamanho + Entidade.dx;
+		int yObjecto = objecto.getY()*tamanho + Entidade.dy;
+		
+		boolean colideHorDir = xObjecto+x[0] <= xHeroi+tamanho && xObjecto+x[0] >= xHeroi;
+		boolean colideHorEsq = xObjecto+tamanho+x[0] >= xHeroi && xObjecto+tamanho+x[0] <= xHeroi+tamanho;
+		boolean colideVerBaixo = yObjecto+x[1] <= yHeroi+tamanho && yObjecto+x[1] >= yHeroi;
+		boolean colideVerCima = yObjecto+tamanho+x[1] >= yHeroi && yObjecto+tamanho+x[1] <= yHeroi+tamanho;
+		
+		
+		return ((colideVerCima || colideVerBaixo) && (colideHorEsq || colideHorDir));
+		
+	}
+	//public static boolean col(int ax1,int ay1, int bx1,int by1, int[] x)
+	public static boolean col(Entidade heroi, Entidade objecto, int[] x)
 	{
-		bx1+=x[0];
-		by1+=x[1];
+		int tamanho = Entidade.tamanhoCelula;
+		int xHeroi = heroi.getX(), yHeroi = heroi.getY();
+		int xObjecto = objecto.getX()*tamanho + Entidade.dx;
+		int yObjecto = objecto.getY()*tamanho + Entidade.dy;
+		
+		boolean colideHorDir = xObjecto+x[0] <= xHeroi+tamanho && xObjecto+x[0] >= xHeroi;
+		boolean colideHorEsq = xObjecto+tamanho+x[0] >= xHeroi && xObjecto+tamanho+x[0] <= xHeroi+tamanho;
+		boolean colideVerBaixo = yObjecto+x[1] <= yHeroi+tamanho && yObjecto+x[1] >= yHeroi;
+		boolean colideVerCima = yObjecto+tamanho+x[1] >= yHeroi && yObjecto+tamanho+x[1] <= yHeroi+tamanho;
 		
 		
+		if (! ((colideVerCima || colideVerBaixo) && (colideHorEsq || colideHorDir)))
+			return false;
 		
-		//Log.e("colide",bx1+" º "+by1);
+		if (!testaColisao(heroi, objecto, x))
+			return false;
+			
 		
-		// sup esquerda monstro
-		boolean flag = false;
-		int a=0;
-		int t=Entidade.tamanhoCelula;
-		if (bx1 <= ax1 + t && bx1>=ax1 && by1>=ay1 && by1<=ay1+t) {
-			flag = true;
-			x[0]=0;
-		}
-		//inf esquerda monstro
-		if (bx1 <= ax1 + t && bx1>=ax1 && by1+t>=ay1 && by1+t<=ay1+t) {
-			flag = true;
-			Log.e("0", "0");
-			x[0]=0;
-		}
+		//testa ajuste horizontal
+	/*	if (colideHorDir)
+			dx += xHeroi+tamanho - (xObjecto + dx);
+		else dx += xHeroi - (xObjecto+tamanho + dx);*/
+
 		
-		
-		//sup direita monstro
-		if (bx1+t >= ax1 && bx1+t<=ax1+t && by1>=ay1 && by1<=ay1+t) {
-			flag = true;
-			x[0]=0;
-			Log.e("1", "1");
-		}
-		
-		// inf direita monstro
-		if (bx1+t >= ax1 && bx1+t<=ax1+t && by1+t>=ay1 && by1+t<=ay1+t) {
-					flag = true;
-					x[0]=0;
-					Log.e("2", "2");
-				}
-		
-		// esq cima monstro
-				if (bx1 >= ax1 && bx1<=ax1+t && by1<=ay1+t && by1>=ay1) {
-							flag = true;
-							x[1]=0;
-							Log.e("3", "3");
-						}
-		// dir cima monstro
-		if (bx1+t >= ax1 && bx1+t <= ax1 + t && by1 <= ay1 + t && by1 >= ay1) {
-			flag = true;
-			x[1] = 0;
-			Log.e("4", "4");
-		}
-		
-		// esta a baixo
-		/*if (by1<= ay1 + Entidade.tamanhoCelula && by1>=ay1) {
-			flag = true;
-			a++;
-		}
-		// esta a esquerda
-		if (bx1 + Entidade.tamanhoCelula >= ax1 && bx1 + Entidade.tamanhoCelula <=ax1+Entidade.tamanhoCelula) {
-			flag = true;
-			a++;
-		}
-		// esta a cima
-		if (by1 + Entidade.tamanhoCelula +x[1] <= ay1 && by1 + Entidade.tamanhoCelula  >= ay1+Entidade.tamanhoCelula) {
-			flag = true;
-			a++;
-		}
-		if(a==2)
+		int[] temp = {0, x[1]};
+		//teste
+		if (!testaColisao(heroi,objecto,temp)){ //se for suficiente
+			x[0] = 0; //ajusta x[0] e retorna
+			Log.e("ajusteDX", x[0]+ "#" + x[1] + "#" + Entidade.dx + "#" + Entidade.dy);
 			return true;
-		else 
-			return false;*/
-				if(flag)
-					Log.e("---", "----");
-		return flag;
+		}
+		
+		//senao tem de testar ajuste vertical
+		//ajusta
+		/*if (colideVerBaixo)
+			dy += yHeroi + tamanho - (yObjecto + dy);
+		else dy += yHeroi - (xObjecto+tamanho + dy);*/
+
+		
+		//testa novamente
+		temp[0] = x[0]; temp[1] = 0;		
+		if (!testaColisao(heroi,objecto,temp)){
+			x[1] = 0;//se funcionar, retorna
+			Log.e("ajusteDY", x[0]+ "#" + x[1] + "#" + Entidade.dx + "#" + Entidade.dy);
+			return true;
+		}
+		
+		/*if (colideHorDir)
+			x[0] += xHeroi+tamanho - (xObjecto + x[0]);
+		else x[0] += xHeroi - (xObjecto+tamanho + x[0]);*/
+		x[0] = 0;
+		x[1] = 0;
+		Log.e("ajusteDXDY", x[0]+ "#" + x[1] + "#" + Entidade.dx + "#" + Entidade.dy);;
+		return true;
 	}
 	
 	public static boolean verificaMovimento(Jogo jogo, int[] x)
@@ -108,10 +109,11 @@ public class GameLogic {
 			{
 				if(jogo.getParedes()[i][j]!=null)
 				{
-				if(col((Entidade.sw/2)-(Entidade.tamanhoCelula/2)
+				/*if(col((Entidade.sw/2)-(Entidade.tamanhoCelula/2)
 						,(Entidade.sh/2)-(Entidade.tamanhoCelula/2)
 						,jogo.getParedes()[i][j].getX()*Entidade.tamanhoCelula+Entidade.dx
-						,jogo.getParedes()[i][j].getY()*Entidade.tamanhoCelula+Entidade.dy,x))
+						(,jogo.getParedes()[i][j].getY()*Entidade.tamanhoCelula+Entidade.dy,x))*/
+				if (col (jogo.getHeroi(), jogo.getParedes()[i][j], x))
 					{
 					jogo.getParedes()[i][j].color=Color.CYAN;
 					Log.e("parede", "lol");
@@ -119,7 +121,7 @@ public class GameLogic {
 					+Entidade.dy);
 					Log.e("putas cu crlh", "----"+(jogo.getParedes()[i][j].getX()*Entidade.tamanhoCelula+Entidade.dx)+" ~ "
 					+(jogo.getParedes()[i][j].getY()*Entidade.tamanhoCelula+Entidade.dy));*/
-					return false;
+					//return false;
 					}
 				}
 			}
