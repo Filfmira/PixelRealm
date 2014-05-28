@@ -23,7 +23,20 @@ public class GameLogic {
 		}
 	}
 	
-
+	static public void setasUpdate(Jogo jogo)
+	{
+		for(int i =0;i<jogo.getInimigos().size();i++)
+		{
+			for(int j=0;j<jogo.getSetas().size();j++)
+				if(testaColisao(jogo.getSetas().get(j),jogo.getInimigos().get(i)))
+				{
+					jogo.getSetas().get(j).atacar(jogo.getInimigos().get(i));
+					if(jogo.getInimigos().get(i).getVida()<=0)
+						jogo.getInimigos().remove(i);
+					jogo.getSetas().remove(j);
+				}
+		}
+	}
 
 	static public void apanharGems(ArrayList<GemsVida> gemsVida, Heroi heroi) {
 		for (int i = 0; i < gemsVida.size(); i++) {
@@ -238,17 +251,10 @@ public class GameLogic {
 		
 		paint.setColor(Color.YELLOW);
 		for (int i = 0; i < jogo.getSetas().size(); i++) {
-			canvas.drawLine(Entidade.sw/2, Entidade.sh/2, jogo.getSetas().get(i).x, jogo.getSetas().get(i).y, paint);
+			//canvas.drawLine(Entidade.sw/2, Entidade.sh/2, jogo.getSetas().get(i).x, jogo.getSetas().get(i).y, paint);
 			jogo.getSetas().get(i).drawDirect(canvas, paint);
-			jogo.getSetas().get(i).update();
+			if(!jogo.getSetas().get(i).update())
+				jogo.getSetas().remove(i);
 		}
-		/*for (int i = 0; i < jogo.getSetas().size(); i++) {
-			if(jogo.getSetas().get(i).x>Entidade.sw || 
-					jogo.getSetas().get(i).x<0 ||
-					jogo.getSetas().get(i).y>Entidade.sh ||
-					jogo.getSetas().get(i).y<0 )
-			jogo.getSetas().remove(i);
-		}*/
-		//drawMiniMap(jogo, canvas, paint);
 	}
 }

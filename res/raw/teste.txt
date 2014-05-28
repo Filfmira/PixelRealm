@@ -1,15 +1,15 @@
 oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 ooo                                                                         oooooooooo
-ooo                  o    x                                           v       oooooooooo
-ooo   v              o                      x            v                   oooooooooo
-ooo         x      x o        x                                              oooooooooo
-ooo                  o                   x                       v            oooooooooo
-ooo        x    v    o                                                       oooooooooo
-ooo                  o                ooooooooo                                     oooooooooo
-ooo                  o         x     ooooooooooooo                                      oooooooooo
-ooo                                oooooo   oooo                                   oooooooooo
-ooo     v          x               ooooooo   v  ooooo  v                                oooooooooo
+ooo         x x   x     o    x                                           v       oooooooooo
+ooo   v    x x         o                      x            v                   oooooooooo
+ooo       x  x x     x o        x                                              oooooooooo
+ooo   x    x    x       o                   x                       v            oooooooooo
+ooo     x   x x   v    o                                                       oooooooooo
+ooo   x  x     x        o                ooooooooo                                     oooooooooo
+ooo     x     x   x     o         x     ooooooooooooo                                      oooooooooo
+ooo  x      x                        oooooo   oooo                                   oooooooooo
+ooo     v      x    x               ooooooo   v  ooooo  v                                oooooooooo
 ooooo                            oooooooo      ooooo         oooo                        oooooooooooo
 ooooooo                           oooooo              oooo     x                  oooo   ooooooooooo
 oooooooo               v                                            v      ooo  oooooooooo

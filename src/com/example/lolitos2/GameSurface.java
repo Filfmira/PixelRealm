@@ -199,7 +199,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		}
 		
 		GameLogic.lutar(jogo.getInimigos(),jogo.getHeroi());
-		
+		GameLogic.setasUpdate(jogo);
 		GameLogic.apanharGems(jogo.getGemsVida(), jogo.getHeroi());
 		
 		// lança o metodo draw p/desenhar
