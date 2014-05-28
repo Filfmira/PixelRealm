@@ -109,7 +109,7 @@ public class GameLogic {
 		
 		dx=0;
 		dy=0;
-		
+				
 		//int[] temp = {0, x[1]};
 		int[] temp = {dx, x[1]};
 		//teste
@@ -121,20 +121,16 @@ public class GameLogic {
 		
 		//senao tem de testar ajuste vertical
 		//ajusta
-		
-
-		
+		dy = 0;		
 		//testa novamente
-		temp[0] = x[0]; temp[1] = 0;		
+		temp[0] = x[0]; temp[1] = dy;		
 		if (!testaColisao(heroi,objecto,temp)){
 			x[1] = dy;//se funcionar, retorna
 			Log.e("ajusteDY", x[0]+ "#" + x[1] + "#" + Entidade.dx + "#" + Entidade.dy);
 			return true;
 		}
 		
-		/*if (colideHorDir)
-			x[0] += xHeroi+tamanho - (xObjecto + x[0]);
-		else x[0] += xHeroi - (xObjecto+tamanho + x[0]);*/
+		
 		x[0] = dx;
 		x[1] = dy;
 		Log.e("ajusteDXDY", x[0]+ "#" + x[1] + "#" + Entidade.dx + "#" + Entidade.dy);;
