@@ -85,7 +85,9 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		if (getJogo() == null) {
 			this.iniciaJogo(canvas);
 		}
-
+		_controls.setJogo(jogo);
+		///////////////////////////////
+		
 		GameLogic.desenharEntidades(getJogo(), canvas, paint);
 
 		
@@ -105,6 +107,8 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		paint.setColor(Color.WHITE);
 		paint.setTextSize(50);
 		canvas.drawText("life:"+jogo.getHeroi().getVida(), 50, 50, paint);
+		
+		canvas.drawText(""+jogo.getSetas().size(), 50, 200, paint);
 		
 
 	}

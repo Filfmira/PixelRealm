@@ -22,10 +22,12 @@ import android.view.WindowManager;
 	public int xBJ,yBJ;
 	public Point _touchingPoint;
 	private Boolean _dragging = false;
+	private Boolean _draggingSeta = false;
 	private int sBJ;//size big joystick
 	private int sSJ;//size small joystick
 	private Entidade pontoEntidade;
 	public Entidade joystickEntidade;
+	private Jogo jogo;
 	
 	public GameControls(GameSurface gameSurface) {
 		this.parent=gameSurface;
@@ -71,6 +73,7 @@ import android.view.WindowManager;
 	       int pointerId = event.getPointerId(0);
 	       Log.e("putas d epontos", pointerCount+"....");
 		update(event);
+		touchProjetil(event);
 		return true;
 	}
 
@@ -157,4 +160,43 @@ import android.view.WindowManager;
 			//shaft.alpha = 0;
 		}
 	}
+
+	public void touchProjetil(MotionEvent event)
+	{
+		
+		//arrastar
+				if ( event.getAction() == MotionEvent.ACTION_DOWN ){
+					int a = (int)event.getX();
+					int b= (int)event.getY();
+					pontoEntidade.setX(a);
+					pontoEntidade.setY(b);
+					
+					if(!joystickEntidade.colide(pontoEntidade))
+						_draggingSeta=true;
+					
+				}
+				
+				//largar
+				else if ( event.getAction() == MotionEvent.ACTION_UP && _draggingSeta){
+					_draggingSeta = false;
+				}
+		
+				if(_draggingSeta)
+				{
+					int a = (int)event.getX();
+					int b= (int)event.getY();
+					int c1=Entidade.sw/2-Entidade.tamanhoCelula/2;
+					int c2=Entidade.sh/2-Entidade.tamanhoCelula/2;
+					jogo.getSetas().add(new Projectil(c1,c2,(a-c1)/10,(b-c2)/10));
+				}
+					
+		
+	}
+	public Jogo getJogo() {
+		return jogo;
+	}
+	public void setJogo(Jogo jogo) {
+		this.jogo = jogo;
+	}
+	
 }

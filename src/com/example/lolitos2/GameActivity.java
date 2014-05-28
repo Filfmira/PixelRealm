@@ -27,7 +27,7 @@ public class GameActivity extends Activity {
     	//setContentView(R.layout.game_game);
 		setContentView(game);
 	}
-
+/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -50,7 +50,7 @@ public class GameActivity extends Activity {
 
 	/**
 	 * A placeholder fragment containing a simple view.
-	 */
+	 *//*
 	public static class PlaceholderFragment extends Fragment {
 
 		public PlaceholderFragment() {
@@ -64,5 +64,5 @@ public class GameActivity extends Activity {
 			return rootView;
 		}
 	}
-
+*/
 }

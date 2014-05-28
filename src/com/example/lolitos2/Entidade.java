@@ -116,8 +116,9 @@ public class Entidade {
 	public void drawDirect(Canvas canvas, Paint paint){
 		/*x=x+deslocX;
 		y=y+deslocY;*/
-		paint.setColor(color);
-		canvas.drawRect(x , y , this.getWidth(), this.getHeight(), paint);
+		/*paint.setColor(color);
+		canvas.drawRect(x , y , this.getWidth(), this.getHeight(), paint);*/
+		canvas.drawBitmap(imagem, x, y , paint);
 	}
 	
 	public void movimento(int direcao)

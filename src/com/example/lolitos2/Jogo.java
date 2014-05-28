@@ -32,7 +32,7 @@ public class Jogo {
 	public Jogo(int tamanhoCelula,InputStream inputStream){
 		this.inputStream=inputStream;
 		ArrayList<String>tab=readText();
-		setas= new ArrayList<Projectil>();
+		setSetas(new ArrayList<Projectil>());
 		setInimigos(new ArrayList<Monstro>());
 		setGemsVida(new ArrayList<GemsVida>());
 		
@@ -153,6 +153,20 @@ public class Jogo {
 	public void movimentarHeroi(int x, int y) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+
+
+	public ArrayList<Projectil> getSetas() {
+		return setas;
+	}
+
+
+
+
+	public void setSetas(ArrayList<Projectil> setas) {
+		this.setas = setas;
 	}
 
 
