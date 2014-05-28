@@ -1,5 +1,7 @@
 package com.example.lolitos2;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -17,7 +19,9 @@ public class Entidade {
 	protected static int sh=0;//screenheight
 	protected static int dx=0;
 	protected static int dy=0;
+	protected static Resources res;
 	protected int color=Color.RED;
+	protected Bitmap imagem;
 	
 	public int getX() {
 		return x;
@@ -96,25 +100,40 @@ public class Entidade {
 	public void draw(Canvas canvas, Paint paint){
 		/*x=x+deslocX;
 		y=y+deslocY;*/
-		paint.setColor(color);
+		/*paint.setColor(color);
 		canvas.drawRect(x * tamanhoCelula+Entidade.dx, y * tamanhoCelula+Entidade.dy, tamanhoCelula + x * tamanhoCelula+Entidade.dx, tamanhoCelula + y * tamanhoCelula+Entidade.dy, paint);
+		*/
+		/*if(tamanhoCelula + x * tamanhoCelula+Entidade.dx<0 ||
+				tamanhoCelula + y * tamanhoCelula+Entidade.dy<0 ||
+				x * tamanhoCelula+Entidade.dx>Entidade.sw ||
+				tamanhoCelula + y * tamanhoCelula+Entidade.dy>Entidade.sh
+				)
+		return;*/
+		canvas.drawBitmap(imagem, x * tamanhoCelula+Entidade.dx, y * tamanhoCelula+Entidade.dy, paint);
 	}
 	
+	
+	public void drawDirect(Canvas canvas, Paint paint){
+		/*x=x+deslocX;
+		y=y+deslocY;*/
+		paint.setColor(color);
+		canvas.drawRect(x , y , this.getWidth(), this.getHeight(), paint);
+	}
 	
 	public void movimento(int direcao)
 	{
 		switch (direcao) {
 		case 0:
-			setX(getX()-getWidth());
+			setX(getX()-1);
 			break;
 		case 1:
-			setX(getX()+getWidth());
+			setX(getX()+1);
 			break;
 		case 2:
-			setY(getY()-getHeight());
+			setY(getY()-1);
 			break;
 		case 3:
-			setY(getY()+getHeight());
+			setY(getY()+1);
 			break;
 
 		default:

@@ -22,6 +22,7 @@ public class Jogo {
 	private ArrayList<Monstro> monstros;
 	//private ArrayList<Parede>  paredes;
 	private ArrayList<GemsVida>  gemsVida;
+	private ArrayList<Projectil>  setas;
 	private Parede[][] paredes= new Parede[200][200];
 	private InputStream inputStream;
 	
@@ -31,6 +32,7 @@ public class Jogo {
 	public Jogo(int tamanhoCelula,InputStream inputStream){
 		this.inputStream=inputStream;
 		ArrayList<String>tab=readText();
+		setas= new ArrayList<Projectil>();
 		setInimigos(new ArrayList<Monstro>());
 		setGemsVida(new ArrayList<GemsVida>());
 		

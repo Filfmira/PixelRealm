@@ -140,7 +140,7 @@ public class GameView extends View implements Runnable {
 			x = (int) event.getX();
 			y = (int) event.getY();
 			// faz p movimento do heroi
-			GameLogic.movimentaHeroi(jogo, x, y, this);
+			//GameLogic.movimentaHeroi(jogo, x, y, this);
 		}
 
 		return super.onTouchEvent(event);

@@ -1,5 +1,7 @@
 package com.example.lolitos2;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
 public class GemsVida extends Entidade{
@@ -9,6 +11,9 @@ public class GemsVida extends Entidade{
 		super(x,y,tamanhoCelula,tamanhoCelula);
 		this.color=Color.CYAN;
 		this.setCapacidade(capacidade);
+		imagem=Imagens.gemsvida;
+		/*imagem = BitmapFactory.decodeResource(res, R.drawable.gemsvida);
+	 	imagem = Bitmap.createScaledBitmap(imagem, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);*/
 	}
 	public int getCapacidade() {
 		return capacidade;

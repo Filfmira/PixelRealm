@@ -1,5 +1,7 @@
 package com.example.lolitos2;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -17,7 +19,7 @@ public class Heroi extends Personagem{
 		ataque=50;
 		movimento=2;
 		color=Color.BLUE;
-		// TODO Auto-generated constructor stub
+	 	imagem = Imagens.heroi;
 	}
 
 	/*
@@ -33,19 +35,8 @@ public class Heroi extends Personagem{
 	 * desenha o heroi no centro do ecra
 	 */
 	public void draw(Canvas canvas, Paint paint){
-		//super.draw(canvas, paint);
-		int w=canvas.getWidth();
-		int h=canvas.getHeight();
-		paint.setColor(color);
-		/*paint.setColor(Color.WHITE);
-		paint.setTextSize(30);
-		canvas.drawText(Entidade.deslocX+"-"+Entidade.deslocY, 60, 60, paint);*/
-		paint.setColor(Color.BLUE);
-		//Log.e("draw", w+"."+w/2+"   "+h+"."+h/2);
-		canvas.drawRect(w/2-Entidade.tamanhoCelula/2, h/2-Entidade.tamanhoCelula/2, 
-				w/2+Entidade.tamanhoCelula/2, h/2+Entidade.tamanhoCelula/2, paint);
-		canvas.drawCircle(w/2, h/2, 
-				Math.abs((float)(Math.sin((float)getVida()/20000)*(tamanhoCelula/2))), paint);
+		
+		canvas.drawBitmap(imagem, this.getX(), this.getY(), paint);
 	}
 	
 	
@@ -111,5 +102,11 @@ public class Heroi extends Personagem{
 		deslocY=0;*/
 	}
 	//Arma??
+	
+	
+	public void apanharGemsVida(GemsVida gm)
+	{
+		this.setVida(this.getVida()+gm.getCapacidade());
+	}
 	
 }

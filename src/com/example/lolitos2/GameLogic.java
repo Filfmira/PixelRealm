@@ -14,7 +14,7 @@ public class GameLogic {
 	static public void lutar(ArrayList<Monstro> inimigos, Heroi heroi) {
 		for (int i = 0; i < inimigos.size(); i++) {
 
-			if (inimigos.get(i).colideNear(heroi)) {
+			if (testaColisao(heroi,inimigos.get(i))) {
 				heroi.lutar(inimigos.get(i));
 				// Log.e("lutar", ""+heroi.getVida());
 				if (inimigos.get(i).getVida() < 0)
@@ -22,10 +22,41 @@ public class GameLogic {
 			}
 		}
 	}
+	
+	static public void apanharGems(ArrayList<GemsVida> gemsVida, Heroi heroi)
+	{
+		for (int i = 0; i < gemsVida.size(); i++) {
 
+			if (testaColisao(heroi,gemsVida.get(i))) {
+				heroi.apanharGemsVida(gemsVida.get(i));
+				gemsVida.remove(i);
+			}
+		}
+	}
+	
+
+	public static boolean testaColisao(Entidade heroi, Entidade objecto){
+		int tamanho = Entidade.tamanhoCelula;
+		int xHeroi = heroi.getX(), yHeroi = heroi.getY();
+		int xObjecto = objecto.getX()*tamanho + Entidade.dx;
+		int yObjecto = objecto.getY()*tamanho + Entidade.dy;
+		
+		boolean colideHorDir = xObjecto <= xHeroi+tamanho && xObjecto >= xHeroi;
+		boolean colideHorEsq = xObjecto+tamanho >= xHeroi && xObjecto+tamanho <= xHeroi+tamanho;
+		boolean colideVerBaixo = yObjecto <= yHeroi+tamanho && yObjecto >= yHeroi;
+		boolean colideVerCima = yObjecto+tamanho >= yHeroi && yObjecto+tamanho <= yHeroi+tamanho;
+		
+		
+		return ((colideVerCima || colideVerBaixo) && (colideHorEsq || colideHorDir));
+		
+	}
+	
+	
 	public static void adjustDx(int[] x){
 		
 	}
+	
+
 	public static boolean testaColisao(Entidade heroi, Entidade objecto, int[] x){
 		int tamanho = Entidade.tamanhoCelula;
 		int xHeroi = heroi.getX(), yHeroi = heroi.getY();
@@ -41,6 +72,10 @@ public class GameLogic {
 		return ((colideVerCima || colideVerBaixo) && (colideHorEsq || colideHorDir));
 		
 	}
+	
+
+	
+	
 	//public static boolean col(int ax1,int ay1, int bx1,int by1, int[] x)
 	public static boolean col(Entidade heroi, Entidade objecto, int[] x)
 	{
@@ -62,31 +97,37 @@ public class GameLogic {
 			return false;
 			
 		
+		int dx = x[0], dy = x[1];
 		//testa ajuste horizontal
-	/*	if (colideHorDir)
-			dx += xHeroi+tamanho - (xObjecto + dx);
-		else dx += xHeroi - (xObjecto+tamanho + dx);*/
-
+		/*if (colideHorDir)
+			dx = xHeroi+tamanho - xObjecto;
+		else dx = xHeroi - (xObjecto+tamanho);
 		
-		int[] temp = {0, x[1]};
+		if (colideVerBaixo)
+			dy = yHeroi + tamanho - yObjecto;
+		else dy = yHeroi - (xObjecto+tamanho);*/
+		
+		dx=0;
+		dy=0;
+		
+		//int[] temp = {0, x[1]};
+		int[] temp = {dx, x[1]};
 		//teste
 		if (!testaColisao(heroi,objecto,temp)){ //se for suficiente
-			x[0] = 0; //ajusta x[0] e retorna
+			x[0] = dx; //ajusta x[0] e retorna
 			Log.e("ajusteDX", x[0]+ "#" + x[1] + "#" + Entidade.dx + "#" + Entidade.dy);
 			return true;
 		}
 		
 		//senao tem de testar ajuste vertical
 		//ajusta
-		/*if (colideVerBaixo)
-			dy += yHeroi + tamanho - (yObjecto + dy);
-		else dy += yHeroi - (xObjecto+tamanho + dy);*/
+		
 
 		
 		//testa novamente
 		temp[0] = x[0]; temp[1] = 0;		
 		if (!testaColisao(heroi,objecto,temp)){
-			x[1] = 0;//se funcionar, retorna
+			x[1] = dy;//se funcionar, retorna
 			Log.e("ajusteDY", x[0]+ "#" + x[1] + "#" + Entidade.dx + "#" + Entidade.dy);
 			return true;
 		}
@@ -94,8 +135,8 @@ public class GameLogic {
 		/*if (colideHorDir)
 			x[0] += xHeroi+tamanho - (xObjecto + x[0]);
 		else x[0] += xHeroi - (xObjecto+tamanho + x[0]);*/
-		x[0] = 0;
-		x[1] = 0;
+		x[0] = dx;
+		x[1] = dy;
 		Log.e("ajusteDXDY", x[0]+ "#" + x[1] + "#" + Entidade.dx + "#" + Entidade.dy);;
 		return true;
 	}
@@ -109,73 +150,27 @@ public class GameLogic {
 			{
 				if(jogo.getParedes()[i][j]!=null)
 				{
-				/*if(col((Entidade.sw/2)-(Entidade.tamanhoCelula/2)
-						,(Entidade.sh/2)-(Entidade.tamanhoCelula/2)
-						,jogo.getParedes()[i][j].getX()*Entidade.tamanhoCelula+Entidade.dx
-						(,jogo.getParedes()[i][j].getY()*Entidade.tamanhoCelula+Entidade.dy,x))*/
 				if (col (jogo.getHeroi(), jogo.getParedes()[i][j], x))
-					{
 					jogo.getParedes()[i][j].color=Color.CYAN;
-					Log.e("parede", "lol");
-					/*Log.e("putas cu crlh", "----"+Entidade.dx+" ~ "
-					+Entidade.dy);
-					Log.e("putas cu crlh", "----"+(jogo.getParedes()[i][j].getX()*Entidade.tamanhoCelula+Entidade.dx)+" ~ "
-					+(jogo.getParedes()[i][j].getY()*Entidade.tamanhoCelula+Entidade.dy));*/
-					//return false;
-					}
+					
+					
 				}
+			}
+		for(int i =0;i<jogo.getInimigos().size();i++)
+			{
+				if(col (jogo.getHeroi(), jogo.getInimigos().get(i), x))
+				{
+				jogo.getHeroi().lutar(jogo.getInimigos().get(i));
+				if (jogo.getInimigos().get(i).getVida() < 0)
+					jogo.getInimigos().remove(i);
+				}
+				
 			}
 		return true;
 		//se algum der true, poe o dx e dy a 0
 		
 	}
 	
-	
-	// trata de movimentar o heroi, nao o deixa chocar com coisas
-	public static void movimentaHeroi(Jogo jogo, int x, int y, GameView gameView) {
-		int movimento = 0;
-		int movimentoBack = 0;
-		if (x < gameView.getWidth() / 5) {
-			movimento = 1;
-			movimentoBack = 0;
-		}
-		if (x > (gameView.getWidth() / 5) * 4) {
-			movimento = 0;
-			movimentoBack = 1;
-		}
-		if (y < gameView.getHeight() / 5) {
-			movimento = 3;
-			movimentoBack = 2;
-		}
-		if (y > (gameView.getHeight() / 5) * 4) {
-			movimento = 2;
-			movimentoBack = 3;
-		}
-		boolean colide = false;
-		int xVelho = jogo.getHeroi().getX();
-		int yVelho = jogo.getHeroi().getY();
-		jogo.getHeroi().movimento(movimento, jogo);
-
-		// verifica se foi contra qq coisa
-		/*
-		 * //verifica se foi contra uma parede for (int i = 0; i <
-		 * jogo.getParedes().length; i++) { for (int j = 0; j <
-		 * jogo.getParedes()[i].length; j++) { if(jogo.getParedes()[i][j]!=null)
-		 * if (jogo.getParedes()[i][j].colide(jogo.getHeroi())) { colide = true;
-		 * } } } //verifica se foi contra um inimigo for(int
-		 * i=0;i<jogo.getInimigos().size();i++) {
-		 * 
-		 * if(jogo.getInimigos().get(i).colide(jogo.getHeroi())) { colide=true;
-		 * } } //se colifiu nao anda if(colide) {
-		 * jogo.getHeroi().movimento(movimentoBack,jogo); } //verifica se tem
-		 * algum gems for(int i=0;i<jogo.getGemsVida().size();i++) {
-		 * 
-		 * if(jogo.getGemsVida().get(i).colide(jogo.getHeroi())) {
-		 * jogo.getHeroi(
-		 * ).setVida(jogo.getHeroi().getVida()+jogo.getGemsVida().get
-		 * (i).getCapacidade()); jogo.getGemsVida().remove(i); } }
-		 */
-	}
 
 	// ///////////////desenhar mini mapa ///////////////////////////////////
 	public static void drawMiniMap(Jogo jogo, Canvas canvas, Paint paint) {
@@ -249,7 +244,7 @@ public static void drawMap(Jogo jogo, Canvas canvas, Paint paint) {
 		
 		jogo.getHeroi().draw(canvas, paint);
 		
-		
 
+		drawMiniMap(jogo,canvas,paint);
 	}
 }

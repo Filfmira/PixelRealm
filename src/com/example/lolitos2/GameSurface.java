@@ -3,12 +3,9 @@ package com.example.lolitos2;
 import java.io.InputStream;
 
 import com.example.lolitos2.R;
-import com.example.lolitos2.R.drawable;
-import com.example.lolitos2.R.raw;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -26,18 +23,18 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 	private GameJoystick _joystick;
 
 	//////////////////////////
-	private static final int INTERVAL = 10; // pausa de 10ms
-	private boolean running = true; // se esta a ser executado ou nao
+	//private static final int INTERVAL = 10; // pausa de 10ms
+	//private boolean running = true; // se esta a ser executado ou nao
 	private Paint paint;// variavel usada para desenhar
-	private int FRAMES_PER_SECOND = 25;
-	private int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
-	private long next_game_tick = System.currentTimeMillis();
-	private int sleep_time = 0;
-	private int tamanhoCelula = 200;
+	//private int FRAMES_PER_SECOND = 25;
+	//private int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
+	//private long next_game_tick = System.currentTimeMillis();
+	//private int sleep_time = 0;
+	//private int tamanhoCelula = 200;
 	
 	private Jogo jogo;
 ////////////////////////////////
-	private Bitmap _pointer;
+	//private Bitmap _pointer;
 
 	public GameSurface(Context context) {
 		super(context);
@@ -59,24 +56,19 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 
 
 		set_joystick(new GameJoystick(getContext().getResources()));
-		_pointer = (Bitmap)BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
 		//contols
 		_controls = new GameControls(this);
 		setOnTouchListener(_controls);
-		/////////////////////////////
+		
 		paint = new Paint();
-		/*Entidade.tamanhoCelula = this.getWidth() / 11;
-		Log.e("tC", this.getWidth()+"");*/
-		/*InputStream inputStream = this.getResources().openRawResource(
-				R.raw.teste);*/
-		//jogo = new Jogo(Entidade.tamanhoCelula, inputStream);
-	///////////////////////////////////
+		
 		
 	}
 	
 
 	public void iniciaJogo(Canvas canvas) {
-		Entidade.tamanhoCelula = (int) canvas.getWidth()/11;
+		Entidade.tamanhoCelula = (int) canvas.getWidth()/8;
+		Imagens.inicializarImagens(this.getResources());
 		Entidade.sw=canvas.getWidth();
 		Entidade.sh=canvas.getHeight();
 		Log.e("tC", Entidade.tamanhoCelula+"");
@@ -96,18 +88,24 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 
 		GameLogic.desenharEntidades(getJogo(), canvas, paint);
 
-		// /////////////////////
-		// update the pointer
+		
 		_controls.update(null);
 		
-		int wJ = get_joystick().get_joystickBg().getWidth();
+		
 		// draw the joystick background
-		canvas.drawBitmap(get_joystick().get_joystickBg(), wJ,
-				(float) (canvas.getHeight() - wJ * 1.5), null);
+		canvas.drawBitmap(get_joystick().get_joystickBg(), _controls.xBJ,
+				_controls.yBJ, null);
+		
 
 		// draw the dragable joystick
 		canvas.drawBitmap(get_joystick().get_joystick(),
 				_controls._touchingPoint.x, _controls._touchingPoint.y, null);
+		
+		
+		paint.setColor(Color.WHITE);
+		paint.setTextSize(50);
+		canvas.drawText("life:"+jogo.getHeroi().getVida(), 50, 50, paint);
+		
 
 	}
 
@@ -178,19 +176,27 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 	int counter = 0;
 
 	public void Update() {
-		counter++;
+		
+		
 		if (getJogo() == null) {
 			return;
 		}
 
+		
+		counter++;
+		
 		// mexe
 		if (counter == 15) {
 			//GameLogic.movimentaHeroi(jogo, x, y, this);
 			for (int i = 0; i < getJogo().getInimigos().size(); i++) {
-				//jogo.getInimigos().get(i).movimento((int) (Math.random() * 4));
+				jogo.getInimigos().get(i).movimento((int) (Math.random() * 4));
 			}
 			counter = 0;
 		}
+		
+		GameLogic.lutar(jogo.getInimigos(),jogo.getHeroi());
+		
+		GameLogic.apanharGems(jogo.getGemsVida(), jogo.getHeroi());
 		
 		// lança o metodo draw p/desenhar
 		postInvalidate();

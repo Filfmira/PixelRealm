@@ -1,5 +1,7 @@
 package com.example.lolitos2;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -16,7 +18,9 @@ public class Monstro extends Personagem{
 		vidaInicial=5000;
 		ataque=40;
 		movimento=1;
-		// TODO Auto-generated constructor stub
+		imagem=Imagens.monstro;
+		/*imagem = BitmapFactory.decodeResource(res, R.drawable.monstro);
+	 	imagem = Bitmap.createScaledBitmap(imagem, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);*/
 	}
 
 	public void setMovimento(int mov) {
@@ -27,9 +31,9 @@ public class Monstro extends Personagem{
 
 	public void draw(Canvas canvas, Paint paint){
 		super.draw(canvas, paint);
-		paint.setColor(Color.GREEN);
+		/*paint.setColor(Color.GREEN);
 		canvas.drawCircle(x * tamanhoCelula+Entidade.dx+tamanhoCelula/2, y * tamanhoCelula+Entidade.dy+tamanhoCelula/2, 
-				Math.abs((float)(Math.sin((float)getVida()/vidaInicial)*tamanhoCelula/2)), paint);
+				Math.abs((float)(Math.sin((float)getVida()/vidaInicial)*tamanhoCelula/2)), paint);*/
 	}
 	
 	public void movimento(int direcao)
