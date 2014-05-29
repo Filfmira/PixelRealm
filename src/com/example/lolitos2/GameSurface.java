@@ -191,6 +191,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		
 		// mexe
 		if (counter == 15) {
+			//_thread.state=_thread.PAUSED;
 			//GameLogic.movimentaHeroi(jogo, x, y, this);
 			for (int i = 0; i < getJogo().getInimigos().size(); i++) {
 				jogo.getInimigos().get(i).movimento((int) (Math.random() * 4));

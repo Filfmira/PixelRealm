@@ -12,6 +12,7 @@ public class Parede extends Entidade {
 		imagem=Imagens.parede;
 		/*imagem = BitmapFactory.decodeResource(res, R.drawable.parede);
 	 	imagem = Bitmap.createScaledBitmap(imagem, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);*/
+		
 	}
 
 }

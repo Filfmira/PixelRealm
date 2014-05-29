@@ -3,6 +3,7 @@ package com.example.lolitos2;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 
 public class Imagens {
 	
@@ -29,6 +30,14 @@ public class Imagens {
 		
 		seta = BitmapFactory.decodeResource(res, R.drawable.seta);
 		seta = Bitmap.createScaledBitmap(seta, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
+	}
+	
+	
+	public static Bitmap RotateBitmap(Bitmap source, float angle)
+	{
+	      Matrix matrix = new Matrix();
+	      matrix.postRotate(angle);
+	      return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
 	}
 
 }

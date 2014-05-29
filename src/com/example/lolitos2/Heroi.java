@@ -37,6 +37,11 @@ public class Heroi extends Personagem{
 	public void draw(Canvas canvas, Paint paint){
 		
 		canvas.drawBitmap(imagem, this.getX(), this.getY(), paint);
+		
+		//paint.setColor(Color.RED);
+		//canvas.drawRect(x, y+tamanhoCelula*7/8, x+Entidade.tamanhoCelula, y+Entidade.tamanhoCelula, paint);
+		//paint.setColor(Color.CYAN);
+		//canvas.drawRect(x , y  +tamanhoCelula*7/8, x+Entidade.tamanhoCelula*(this.getVida()/this.vidaInicial), y  +Entidade.tamanhoCelula, paint);
 	}
 	
 	

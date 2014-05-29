@@ -23,7 +23,7 @@ public class GameThread extends Thread {
 	//amount of time to sleep for (in milliseconds)
 	private long delay=70;
 	//state of game (Running or Paused).
-	int state = 1;
+	public int state = 1;
 	public final static int RUNNING = 1;
 	public final static int PAUSED = 2;
 	public final static int STOPED = 3;

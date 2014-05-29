@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import jogo.view.GameView;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.Log;
 
@@ -17,7 +18,7 @@ public class GameLogic {
 			if (testaColisao(heroi, inimigos.get(i))) {
 				heroi.lutar(inimigos.get(i));
 				// Log.e("lutar", ""+heroi.getVida());
-				if (inimigos.get(i).getVida() < 0)
+				if (inimigos.get(i).getVida() <= 0)
 					inimigos.remove(i);
 			}
 		}
@@ -36,6 +37,16 @@ public class GameLogic {
 					jogo.getSetas().remove(j);
 				}
 		}
+		
+		for(int i=0;i<jogo.getParedes().length;i++)
+			for(int k=0;k<jogo.getParedes()[i].length;k++)
+				for(int j=0;j<jogo.getSetas().size();j++)
+				{
+					/*if(testaColisao(jogo.getSetas().get(j),jogo.getParedes()[i][k]))
+					{
+						jogo.getSetas().remove(j);
+					}*/
+				}
 	}
 
 	static public void apanharGems(ArrayList<GemsVida> gemsVida, Heroi heroi) {
@@ -130,8 +141,8 @@ public class GameLogic {
 		// teste
 		if (!testaColisao(heroi, objecto, temp)) { // se for suficiente
 			x[0] = dx; // ajusta x[0] e retorna
-			Log.e("ajusteDX", x[0] + "#" + x[1] + "#" + Entidade.dx + "#"
-					+ Entidade.dy);
+			/*Log.e("ajusteDX", x[0] + "#" + x[1] + "#" + Entidade.dx + "#"
+					+ Entidade.dy);*/
 			return true;
 		}
 
@@ -143,15 +154,15 @@ public class GameLogic {
 		temp[1] = dy;
 		if (!testaColisao(heroi, objecto, temp)) {
 			x[1] = dy;// se funcionar, retorna
-			Log.e("ajusteDY", x[0] + "#" + x[1] + "#" + Entidade.dx + "#"
-					+ Entidade.dy);
+			/*Log.e("ajusteDY", x[0] + "#" + x[1] + "#" + Entidade.dx + "#"
+					+ Entidade.dy);*/
 			return true;
 		}
 
 		x[0] = dx;
 		x[1] = dy;
-		Log.e("ajusteDXDY", x[0] + "#" + x[1] + "#" + Entidade.dx + "#"
-				+ Entidade.dy);
+		/*Log.e("ajusteDXDY", x[0] + "#" + x[1] + "#" + Entidade.dx + "#"
+				+ Entidade.dy);*/
 		;
 		return true;
 	}

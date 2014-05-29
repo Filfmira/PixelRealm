@@ -1,5 +1,7 @@
 package com.example.lolitos2;
 
+import android.util.Log;
+
 public class Projectil extends Entidade{
 
 	float pdx,pdy;
@@ -16,6 +18,16 @@ public class Projectil extends Entidade{
 		a=x;
 		b=y;
 		ataque=500;
+		//if(x<=Entidade.sw/2)
+		float angulo=0;
+		//Log.e("tintas", xInicial+"-"+Entidade.sw/2);
+		if(pdx>=0)
+			angulo=(float) (135+Math.toDegrees(Math.atan((float)(pdy/pdx))));
+		else
+			angulo=(float) (180+135+Math.toDegrees(Math.atan((float)(pdy/pdx))));
+		this.imagem=Imagens.RotateBitmap(this.imagem, angulo);
+		/*else
+			this.imagem=Imagens.RotateBitmap(this.imagem, (float) (-45+Math.toDegrees(Math.atan((float)(pdy/pdx)))));*/
 	}
 	
 	public boolean update()

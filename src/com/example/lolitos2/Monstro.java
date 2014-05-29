@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 
 public class Monstro extends Personagem{
 
@@ -19,6 +20,7 @@ public class Monstro extends Personagem{
 		ataque=40;
 		movimento=1;
 		imagem=Imagens.monstro;
+		
 		/*imagem = BitmapFactory.decodeResource(res, R.drawable.monstro);
 	 	imagem = Bitmap.createScaledBitmap(imagem, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);*/
 	}
@@ -31,9 +33,10 @@ public class Monstro extends Personagem{
 
 	public void draw(Canvas canvas, Paint paint){
 		super.draw(canvas, paint);
-		/*paint.setColor(Color.GREEN);
-		canvas.drawCircle(x * tamanhoCelula+Entidade.dx+tamanhoCelula/2, y * tamanhoCelula+Entidade.dy+tamanhoCelula/2, 
-				Math.abs((float)(Math.sin((float)getVida()/vidaInicial)*tamanhoCelula/2)), paint);*/
+		paint.setColor(Color.RED);
+		canvas.drawRect(x*Entidade.tamanhoCelula+Entidade.dx, y*tamanhoCelula+tamanhoCelula*7/8+Entidade.dy, x*tamanhoCelula+Entidade.tamanhoCelula+Entidade.dx, y*tamanhoCelula+Entidade.tamanhoCelula+Entidade.dy, paint);
+		paint.setColor(Color.CYAN);
+		canvas.drawRect(x*Entidade.tamanhoCelula+Entidade.dx, y*tamanhoCelula+tamanhoCelula*7/8+Entidade.dy, ((float)(x*tamanhoCelula+(Entidade.tamanhoCelula*((float)(getVida()/vidaInicial)))+Entidade.dx)), y*tamanhoCelula+Entidade.tamanhoCelula+Entidade.dy, paint);
 	}
 	
 	public void movimento(int direcao)
