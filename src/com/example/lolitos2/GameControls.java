@@ -76,7 +76,10 @@ public class GameControls implements OnTouchListener {
 		// Log.e("putas d epontos", pointerCount+"....");
 		update(event);
 		touchProjetil(event);
+		handleMultitouch(event);
 		return true;
+		
+		
 	}
 
 	private MotionEvent lastEvent;
@@ -228,6 +231,55 @@ public class GameControls implements OnTouchListener {
 
 	}
 
+	
+	public void handleMultitouch(MotionEvent event)
+	{
+		int ptrId=-1;
+		int action = event.getAction();
+		
+		switch (action & MotionEvent.ACTION_MASK) {
+		case MotionEvent.ACTION_MOVE:
+			Log.e("down","");
+			_touchingPoint.x = (int) event.getX();
+			_touchingPoint.y = (int) event.getY();
+			pontoEntidade.setX((int) event.getX());
+			pontoEntidade.setY((int) event.getY());
+			break;
+
+		case MotionEvent.ACTION_UP:
+			Log.e("up","");
+			break;	
+			
+		case MotionEvent.ACTION_POINTER_DOWN:
+            ptrId = action >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+            int ptrIdx = event.findPointerIndex(ptrId);
+            Log.e("APD", (int)event.getX(ptrIdx)+"-"+(int)event.getY(ptrIdx));
+            for(int i = 0; i < event.getPointerCount(); ++i)
+            {
+               Log.e("APD", event.getPointerId(i)+"");
+            }
+        break;
+        
+		case MotionEvent.ACTION_POINTER_UP:
+            ptrId = action >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+            int a=(int)event.getX(ptrId);
+            int b=(int)event.getY(ptrId);
+            int c1 = Entidade.sw / 2 - Entidade.tamanhoCelula / 2;
+			int c2 = Entidade.sh / 2 - Entidade.tamanhoCelula / 2;
+			jogo.getSetas().add(new Projectil(c1, c2, (a - c1) / 10,(b - c2) / 10,parent.getJogo().getHeroi()));
+           /* Log.e("APU", (int)event.getX(ptrId)+"-"+(int)event.getY(ptrId));*/
+        break;
+			
+		/* case MotionEvent.ACTION_MOVE:
+	            for(int i = 0; i < event.getPointerCount(); ++i)
+	            {
+	               Log.e("AM", event.getPointerId(i)+"");
+	            }
+	        break;*/
+		default:
+			break;
+		}
+	}
 	public Jogo getJogo() {
 		return jogo;
 	}
