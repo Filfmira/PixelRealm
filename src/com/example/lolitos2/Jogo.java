@@ -22,7 +22,9 @@ public class Jogo {
 	private ArrayList<Monstro> monstros;
 	//private ArrayList<Parede>  paredes;
 	private ArrayList<GemsVida>  gemsVida;
+	private ArrayList<GemsAtaque>  gemsAtaque;
 	private ArrayList<Projectil>  setas;
+	private ArrayList<Moeda>  moedas;
 	private Parede[][] paredes= new Parede[200][200];
 	private InputStream inputStream;
 	
@@ -35,6 +37,8 @@ public class Jogo {
 		setSetas(new ArrayList<Projectil>());
 		setInimigos(new ArrayList<Monstro>());
 		setGemsVida(new ArrayList<GemsVida>());
+		setGemsAtaque(new ArrayList<GemsAtaque>());
+		setMoedas(new ArrayList<Moeda>());
 		
 		//percorre o ficheiro do mapa
 		for(int i =0;i<tab.size();i++)
@@ -167,6 +171,34 @@ public class Jogo {
 
 	public void setSetas(ArrayList<Projectil> setas) {
 		this.setas = setas;
+	}
+
+
+
+
+	public ArrayList<Moeda> getMoedas() {
+		return moedas;
+	}
+
+
+
+
+	public void setMoedas(ArrayList<Moeda> moedas) {
+		this.moedas = moedas;
+	}
+
+
+
+
+	public ArrayList<GemsAtaque> getGemsAtaque() {
+		return gemsAtaque;
+	}
+
+
+
+
+	public void setGemsAtaque(ArrayList<GemsAtaque> gemsAtaque) {
+		this.gemsAtaque = gemsAtaque;
 	}
 
 

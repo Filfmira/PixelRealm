@@ -50,8 +50,8 @@ public class GameControls implements OnTouchListener {
 		sSJ = parent.get_joystick().get_joystick().getWidth();
 
 		// mudar estes dois para mudar o sitio onde estao os joysticks
-		xBJ = (int) (sBJ);
-		yBJ = (int) (h - sBJ * 2);
+		xBJ = (int) (sBJ)/2;
+		yBJ = (int) (h - sBJ*4/3);
 
 		xSJ = (int) (xBJ + (sBJ - sSJ) / 2);
 		ySJ = (int) (yBJ + (sBJ - sSJ) / 2);
@@ -163,7 +163,7 @@ public class GameControls implements OnTouchListener {
 			{
 				j=false;
 			}
-			Log.e("dragging false", ""+_touchingPoint.x);
+			//Log.e("dragging false", ""+_touchingPoint.x);
 			_touchingPoint.x = (int) initx;
 			_touchingPoint.y = (int) inity;
 			
@@ -221,7 +221,7 @@ public class GameControls implements OnTouchListener {
 				if (jogo.getSetas().size() < 20) {
 					int c1 = Entidade.sw / 2 - Entidade.tamanhoCelula / 2;
 					int c2 = Entidade.sh / 2 - Entidade.tamanhoCelula / 2;
-					jogo.getSetas().add(new Projectil(c1, c2, (a - c1) / 10,(b - c2) / 10));
+					jogo.getSetas().add(new Projectil(c1, c2, (a - c1) / 10,(b - c2) / 10,parent.getJogo().getHeroi()));
 				}
 			}
 		}

@@ -8,7 +8,7 @@ public class Projectil extends Entidade{
 	float a, b;
 	int ataque;
 	int xInicial,yInicial;
-	public Projectil(int x, int y, float pdx, float pdy) {
+	public Projectil(int x, int y, float pdx, float pdy,Heroi heroi) {
 		super(x,y,tamanhoCelula,tamanhoCelula);
 		xInicial=x;
 		yInicial=y;
@@ -17,7 +17,7 @@ public class Projectil extends Entidade{
 		this.pdy=pdy;
 		a=x;
 		b=y;
-		ataque=500;
+		ataque=(int) (heroi.ataque*2);
 		//if(x<=Entidade.sw/2)
 		float angulo=0;
 		//Log.e("tintas", xInicial+"-"+Entidade.sw/2);

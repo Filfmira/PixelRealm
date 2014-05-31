@@ -1,10 +1,12 @@
 package com.example.lolitos2;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.util.Log;
@@ -67,8 +69,6 @@ public class GameThread extends Thread {
 				synchronized (mSurfaceHolder) {
 					//clear the screen with the black painter.
 					//reset the canvas
-					
-					
 					//This is where we draw the game engine.
 					gEngine.doDraw(c);
 				}

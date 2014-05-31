@@ -981,17 +981,24 @@ containing a value of this type.
         public static final int abc_textfield_searchview_holo_light=0x7f020054;
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020055;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
-        public static final int gemsvida=0x7f020057;
-        public static final int heroi=0x7f020058;
-        public static final int ic_launcher=0x7f020059;
-        public static final int joystick=0x7f02005a;
-        public static final int joystick_bg=0x7f02005b;
-        public static final int loading=0x7f02005c;
-        public static final int monstro=0x7f02005d;
-        public static final int parede=0x7f02005e;
-        public static final int seta=0x7f02005f;
-        public static final int teste=0x7f020060;
-        public static final int ui3=0x7f020061;
+        public static final int coin=0x7f020057;
+        public static final int gem1=0x7f020058;
+        public static final int gem2=0x7f020059;
+        public static final int gem_ataque=0x7f02005a;
+        public static final int gem_ataque2=0x7f02005b;
+        public static final int gemsataque=0x7f02005c;
+        public static final int gemsvida=0x7f02005d;
+        public static final int heroi=0x7f02005e;
+        public static final int ic_launcher=0x7f02005f;
+        public static final int joystick=0x7f020060;
+        public static final int joystick_bg=0x7f020061;
+        public static final int loading=0x7f020062;
+        public static final int moeda=0x7f020063;
+        public static final int monstro=0x7f020064;
+        public static final int parede=0x7f020065;
+        public static final int seta=0x7f020066;
+        public static final int teste=0x7f020067;
+        public static final int ui3=0x7f020068;
     }
     public static final class id {
         public static final int action_bar=0x7f06001c;

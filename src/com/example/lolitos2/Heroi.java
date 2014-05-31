@@ -9,14 +9,15 @@ import android.util.Log;
 
 public class Heroi extends Personagem{
 
-	int dinheiro;
+	private int dinheiro;
 	Arma arma;
+	int incAtaque=0;	//incremento de ataque temporario
 	
 	public Heroi(int x, int y) {
 		super(x, y);
 		setVida(20000);
 		vidaInicial=20000;
-		ataque=50;
+		ataque=200;
 		movimento=2;
 		color=Color.BLUE;
 	 	imagem = Imagens.heroi;
@@ -53,18 +54,7 @@ public class Heroi extends Personagem{
 		deslocX=0;
 		deslocY=0;
 		switch (direcao) {
-		/*case 0:
-			Entidade.deslocX=	-Entidade.tamanhoCelula;
-			break;
-		case 1:
-			Entidade.deslocX=	+Entidade.tamanhoCelula;
-			break;
-		case 2:
-			Entidade.deslocY=	-Entidade.tamanhoCelula;
-			break;
-		case 3:
-			Entidade.deslocY=	+Entidade.tamanhoCelula;
-			break;*/
+		
 		case 0:
 			x+=	-1;
 			break;
@@ -79,32 +69,7 @@ public class Heroi extends Personagem{
 			break;
 		}
 		Log.v("heroi", x+".."+y);
-		/*for(int i =0;i<jogo.getParedes().length;i++)
-		{
-			for(int j =0;j<jogo.getParedes().length;j++)
-			{
-				if(jogo.getParedes()[i][j]!=null)
-				{
-					jogo.getParedes()[i][j].setX(jogo.getParedes()[i][j].getX()+deslocX);
-					jogo.getParedes()[i][j].setY(jogo.getParedes()[i][j].getY()+deslocY);
-				}
-			}
-		}
-		for(int i =0;i<jogo.getGemsVida().size();i++)
-		{
-			jogo.getGemsVida().get(i).setX(jogo.getGemsVida().get(i).getX()+deslocX);
-			jogo.getGemsVida().get(i).setY(jogo.getGemsVida().get(i).getY()+deslocY);
-		}
-		for(int i =0;i<jogo.getInimigos().size();i++)
-		{
-			jogo.getInimigos().get(i).setX(jogo.getInimigos().get(i).getX()+deslocX);
-			jogo.getInimigos().get(i).setY(jogo.getInimigos().get(i).getY()+deslocY);
-			jogo.getInimigos().get(i).setOriginalX(jogo.getInimigos().get(i).getOriginalX()+deslocX);
-			jogo.getInimigos().get(i).setOriginalY(jogo.getInimigos().get(i).getOriginalY()+deslocY);
-			
-		}
-		deslocX=0;
-		deslocY=0;*/
+		
 	}
 	//Arma??
 	
@@ -112,6 +77,49 @@ public class Heroi extends Personagem{
 	public void apanharGemsVida(GemsVida gm)
 	{
 		this.setVida(this.getVida()+gm.getCapacidade());
+	}
+	
+	public void apanharGemsAtaque(GemsAtaque gm)
+	{
+		if(incAtaque==0)
+		{incAtaque=gm.capacidade;
+		ataque+=gm.capacidade;
+		}
+	}
+	
+	public void apanharMoeda(Moeda m)
+	{
+		this.setDinheiro(this.getDinheiro() + m.capacidade);
+	}
+
+	public int getDinheiro() {
+		return dinheiro;
+	}
+
+	public void setDinheiro(int dinheiro) {
+		this.dinheiro = dinheiro;
+	}
+	
+	
+	int contadorAtaque=0;
+	public void update()
+	{
+		//trata de retirar os incremntos de ataques temporarios
+		
+		if(incAtaque>0)
+		{
+			if(contadorAtaque==0)
+				contadorAtaque=50;
+			contadorAtaque--;
+			if(contadorAtaque==1)
+			{
+				this.ataque-=this.incAtaque;
+				this.incAtaque=0;
+				this.contadorAtaque=0;
+			}
+		}
+		else if(contadorAtaque==0)
+			incAtaque=0;
 	}
 	
 }

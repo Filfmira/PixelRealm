@@ -7,7 +7,7 @@ import android.graphics.Color;
 public class Parede extends Entidade {
 
 	public Parede(int x, int y) {
-		super(x,y,tamanhoCelula,tamanhoCelula);
+		super(x,y,Entidade.tamanhoCelula,Entidade.tamanhoCelula);
 		color=Color.GRAY;
 		imagem=Imagens.parede;
 		/*imagem = BitmapFactory.decodeResource(res, R.drawable.parede);

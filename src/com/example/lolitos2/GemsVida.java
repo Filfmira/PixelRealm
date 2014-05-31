@@ -2,7 +2,9 @@ package com.example.lolitos2;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 
 public class GemsVida extends Entidade{
 
@@ -22,4 +24,5 @@ public class GemsVida extends Entidade{
 		this.capacidade = capacidade;
 	}
 
+	
 }

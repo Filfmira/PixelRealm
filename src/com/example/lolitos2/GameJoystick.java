@@ -22,7 +22,9 @@ public class GameJoystick {
 	public GameJoystick(Resources res){
 		
 		_joystick = (Bitmap)BitmapFactory.decodeResource(res, com.example.lolitos2.R.drawable.joystick);
+		this._joystick=Bitmap.createScaledBitmap(_joystick, Entidade.tamanhoCelula/2, Entidade.tamanhoCelula/2, true);
 		_joystickBg = (Bitmap)BitmapFactory.decodeResource(res,com.example.lolitos2.R.drawable.joystick_bg);
+		this._joystickBg=Bitmap.createScaledBitmap(_joystickBg, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
 
 	}
 

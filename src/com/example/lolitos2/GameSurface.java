@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -19,8 +20,8 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 	private Context _context;
 	private GameThread _thread;
 	private GameControls _controls;
-
 	private GameJoystick _joystick;
+	private int c=8;
 
 	//////////////////////////
 	//private static final int INTERVAL = 10; // pausa de 10ms
@@ -41,6 +42,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		// TODO Auto-generated constructor stub
 		_context = context;
 		init();
+		
 	}
 
 	private void init(){
@@ -67,7 +69,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 	
 
 	public void iniciaJogo(Canvas canvas) {
-		Entidade.tamanhoCelula = (int) canvas.getWidth()/8;
+		Entidade.tamanhoCelula = (int) canvas.getWidth()/c;
 		Imagens.inicializarImagens(this.getResources());
 		Entidade.sw=canvas.getWidth();
 		Entidade.sh=canvas.getHeight();
@@ -88,11 +90,10 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		_controls.setJogo(jogo);
 		///////////////////////////////
 		
-		GameLogic.desenharEntidades(getJogo(), canvas, paint);
-
-		
 		_controls.update(null);
+		GameLogic.desenharEntidades(getJogo(), canvas, paint);
 		
+		jogo.getHeroi().update();
 		
 		// draw the joystick background
 		canvas.drawBitmap(get_joystick().get_joystickBg(), _controls.xBJ,
@@ -107,10 +108,11 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		paint.setColor(Color.WHITE);
 		paint.setTextSize(50);
 		canvas.drawText("life:"+jogo.getHeroi().getVida(), 50, 50, paint);
+		canvas.drawText("points:"+jogo.getHeroi().getDinheiro(), 50, 100, paint);
 		
-		canvas.drawText(""+jogo.getSetas().size(), 50, 200, paint);
-		
-
+		canvas.drawText("Setas:"+jogo.getSetas().size(), 50, 200, paint);
+		canvas.drawText("ataque:"+jogo.getHeroi().ataque, 50, 250, paint);
+		canvas.drawText("contador:"+jogo.getHeroi().contadorAtaque, 50, 300, paint);
 	}
 
 
@@ -193,15 +195,17 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		if (counter == 15) {
 			//_thread.state=_thread.PAUSED;
 			//GameLogic.movimentaHeroi(jogo, x, y, this);
+			// Get instance of Vibrator from current Context
 			for (int i = 0; i < getJogo().getInimigos().size(); i++) {
 				jogo.getInimigos().get(i).movimento((int) (Math.random() * 4));
 			}
 			counter = 0;
 		}
 		
-		GameLogic.lutar(jogo.getInimigos(),jogo.getHeroi());
+		GameLogic.lutar(jogo,this);
 		GameLogic.setasUpdate(jogo);
-		GameLogic.apanharGems(jogo.getGemsVida(), jogo.getHeroi());
+		GameLogic.apanharGems(jogo);
+		GameLogic.apanharMoedas(jogo);
 		
 		// lança o metodo draw p/desenhar
 		postInvalidate();

@@ -13,6 +13,10 @@ public class Imagens {
 	protected static Bitmap gemsvida;
 	protected static Bitmap monstro;
 	protected static Bitmap seta;
+	protected static Bitmap moeda;
+	protected static Bitmap moeda2;
+	protected static Bitmap gemsataque;
+
 	
 	static void inicializarImagens(Resources res)
 	{
@@ -30,6 +34,15 @@ public class Imagens {
 		
 		seta = BitmapFactory.decodeResource(res, R.drawable.seta);
 		seta = Bitmap.createScaledBitmap(seta, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
+		
+		moeda = BitmapFactory.decodeResource(res, R.drawable.gem1);
+		moeda = Bitmap.createScaledBitmap(moeda, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
+		
+		moeda2 = BitmapFactory.decodeResource(res, R.drawable.gem2);
+		moeda2 = Bitmap.createScaledBitmap(moeda2, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
+		
+		gemsataque = BitmapFactory.decodeResource(res, R.drawable.gemsataque);
+		gemsataque = Bitmap.createScaledBitmap(gemsataque, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
 	}
 	
 	

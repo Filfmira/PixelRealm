@@ -11,6 +11,8 @@ public class Monstro extends Personagem{
 
 	private int originalX;
 	private int originalY;
+	private int transparencia;
+	private int incremento;
 	public Monstro(int x, int y) {
 		super(x, y);
 		setOriginalX(x);
@@ -18,8 +20,10 @@ public class Monstro extends Personagem{
 		setVida(5000);
 		vidaInicial=5000;
 		ataque=40;
-		movimento=1;
+		movimento=20;
 		imagem=Imagens.monstro;
+		setTransparencia((int) ((Math.random()*100)+100));
+		incremento=1;
 		
 		/*imagem = BitmapFactory.decodeResource(res, R.drawable.monstro);
 	 	imagem = Bitmap.createScaledBitmap(imagem, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);*/
@@ -53,6 +57,15 @@ public class Monstro extends Personagem{
 		}
 	}
 
+	public void update()
+	{
+		if(getTransparencia()>=240)
+			incremento=-17;
+		if(getTransparencia()<=150)
+			incremento=17;
+		setTransparencia(getTransparencia() + incremento);
+	}
+	
 	public int getOriginalX() {
 		return originalX;
 	}
@@ -67,6 +80,14 @@ public class Monstro extends Personagem{
 
 	public void setOriginalY(int originalY) {
 		this.originalY = originalY;
+	}
+
+	public int getTransparencia() {
+		return transparencia;
+	}
+
+	public void setTransparencia(int transparencia) {
+		this.transparencia = transparencia;
 	}
 
 }

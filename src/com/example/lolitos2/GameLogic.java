@@ -3,62 +3,113 @@ package com.example.lolitos2;
 import java.util.ArrayList;
 
 import jogo.view.GameView;
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.os.Vibrator;
 import android.util.Log;
 
 public class GameLogic {
 
 	// trata de lutar o heroi contra os monstros
-	static public void lutar(ArrayList<Monstro> inimigos, Heroi heroi) {
-		for (int i = 0; i < inimigos.size(); i++) {
+	static int t=0;
+	static public void lutar(Jogo jogo, GameSurface gameSurface) {
+		boolean lutar=false;
+		for (int i = 0; i < jogo.getInimigos().size(); i++) {
 
-			if (testaColisao(heroi, inimigos.get(i))) {
-				heroi.lutar(inimigos.get(i));
+			if (testaColisao(jogo.getHeroi(), jogo.getInimigos().get(i))) {
+				lutar=true;
+				jogo.getHeroi().lutar(jogo.getInimigos().get(i));
 				// Log.e("lutar", ""+heroi.getVida());
-				if (inimigos.get(i).getVida() <= 0)
-					inimigos.remove(i);
+				if (jogo.getInimigos().get(i).getVida() <= 0) {
+					int x=(int) (Math.random()*4);
+					if(x==1)
+						jogo.getGemsAtaque().add(new GemsAtaque(jogo.getInimigos().get(i)));
+					else
+					jogo.getMoedas().add(new Moeda(jogo.getInimigos().get(i)));
+					jogo.getInimigos().remove(i);
+				}
+			}
+		}
+		if(lutar)
+		{
+			Vibrator v = (Vibrator) gameSurface.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+
+			// Vibrate for 400 milliseconds
+			v.vibrate(10);
+			if(t==1)
+			{
+				t=0;
+			Entidade.dx=Entidade.dx-4;
+			}
+			else
+			{
+				t=1;
+				Entidade.dx=Entidade.dx+4;
+			}
+		}
+	}
+
+	static public void setasUpdate(Jogo jogo) {
+		for (int i = 0; i < jogo.getInimigos().size(); i++) {
+			for (int j = 0; j < jogo.getSetas().size(); j++)
+				if (testaColisao(jogo.getSetas().get(j), jogo.getInimigos()
+						.get(i))) {
+					jogo.getSetas().get(j).atacar(jogo.getInimigos().get(i));
+					if (jogo.getInimigos().get(i).getVida() <= 0) {
+						int x=(int) (Math.random()*4);
+						if(x==1)
+							jogo.getGemsAtaque().add(new GemsAtaque(jogo.getInimigos().get(i)));
+						else
+						jogo.getMoedas().add(new Moeda(jogo.getInimigos().get(i)));
+						jogo.getInimigos().remove(i);
+					}
+					jogo.getSetas().remove(j);
+				}
+		}
+
+		for (int i = 0; i < jogo.getParedes().length; i++)
+			for (int k = 0; k < jogo.getParedes()[i].length; k++)
+				for (int j = 0; j < jogo.getSetas().size(); j++) {
+					if (jogo.getParedes()[i][k] != null
+							&& testaColisao(jogo.getSetas().get(j),
+									jogo.getParedes()[i][k])) {
+						jogo.getSetas().remove(j);
+					}
+				}
+	}
+
+	static public void apanharGems(Jogo jogo) {
+		for (int i = 0; i < jogo.getGemsVida().size(); i++) {
+
+			if (testaColisao(jogo.getHeroi(), jogo.getGemsVida().get(i))) {
+				jogo.getHeroi().apanharGemsVida(jogo.getGemsVida().get(i));
+				jogo.getGemsVida().remove(i);
+			}
+		}
+		
+		for (int i = 0; i < jogo.getGemsAtaque().size(); i++) {
+
+			if (testaColisao(jogo.getHeroi(), jogo.getGemsAtaque().get(i))) {
+				jogo.getHeroi().apanharGemsAtaque(jogo.getGemsAtaque().get(i));
+				jogo.getGemsAtaque().remove(i);
+			}
+		}
+	}
+
+	static public void apanharMoedas(Jogo jogo)
+	{
+		for (int i = 0; i < jogo.getMoedas().size(); i++) {
+
+			if (testaColisao(jogo.getHeroi(), jogo.getMoedas().get(i))) {
+				jogo.getHeroi().apanharMoeda(jogo.getMoedas().get(i));
+				jogo.getMoedas().remove(i);
 			}
 		}
 	}
 	
-	static public void setasUpdate(Jogo jogo)
-	{
-		for(int i =0;i<jogo.getInimigos().size();i++)
-		{
-			for(int j=0;j<jogo.getSetas().size();j++)
-				if(testaColisao(jogo.getSetas().get(j),jogo.getInimigos().get(i)))
-				{
-					jogo.getSetas().get(j).atacar(jogo.getInimigos().get(i));
-					if(jogo.getInimigos().get(i).getVida()<=0)
-						jogo.getInimigos().remove(i);
-					jogo.getSetas().remove(j);
-				}
-		}
-		
-		for(int i=0;i<jogo.getParedes().length;i++)
-			for(int k=0;k<jogo.getParedes()[i].length;k++)
-				for(int j=0;j<jogo.getSetas().size();j++)
-				{
-					/*if(testaColisao(jogo.getSetas().get(j),jogo.getParedes()[i][k]))
-					{
-						jogo.getSetas().remove(j);
-					}*/
-				}
-	}
-
-	static public void apanharGems(ArrayList<GemsVida> gemsVida, Heroi heroi) {
-		for (int i = 0; i < gemsVida.size(); i++) {
-
-			if (testaColisao(heroi, gemsVida.get(i))) {
-				heroi.apanharGemsVida(gemsVida.get(i));
-				gemsVida.remove(i);
-			}
-		}
-	}
-
 	public static boolean testaColisao(Entidade heroi, Entidade objecto) {
 		int tamanho = Entidade.tamanhoCelula;
 		int xHeroi = heroi.getX(), yHeroi = heroi.getY();
@@ -141,8 +192,10 @@ public class GameLogic {
 		// teste
 		if (!testaColisao(heroi, objecto, temp)) { // se for suficiente
 			x[0] = dx; // ajusta x[0] e retorna
-			/*Log.e("ajusteDX", x[0] + "#" + x[1] + "#" + Entidade.dx + "#"
-					+ Entidade.dy);*/
+			/*
+			 * Log.e("ajusteDX", x[0] + "#" + x[1] + "#" + Entidade.dx + "#" +
+			 * Entidade.dy);
+			 */
 			return true;
 		}
 
@@ -154,15 +207,19 @@ public class GameLogic {
 		temp[1] = dy;
 		if (!testaColisao(heroi, objecto, temp)) {
 			x[1] = dy;// se funcionar, retorna
-			/*Log.e("ajusteDY", x[0] + "#" + x[1] + "#" + Entidade.dx + "#"
-					+ Entidade.dy);*/
+			/*
+			 * Log.e("ajusteDY", x[0] + "#" + x[1] + "#" + Entidade.dx + "#" +
+			 * Entidade.dy);
+			 */
 			return true;
 		}
 
 		x[0] = dx;
 		x[1] = dy;
-		/*Log.e("ajusteDXDY", x[0] + "#" + x[1] + "#" + Entidade.dx + "#"
-				+ Entidade.dy);*/
+		/*
+		 * Log.e("ajusteDXDY", x[0] + "#" + x[1] + "#" + Entidade.dx + "#" +
+		 * Entidade.dy);
+		 */
 		;
 		return true;
 	}
@@ -233,13 +290,27 @@ public class GameLogic {
 		int x1 = jogo.getHeroi().getX();
 		int y1 = jogo.getHeroi().getY();
 
-		for (int i = 0; i < jogo.getInimigos().size(); i++) {
-			jogo.getInimigos().get(i).draw(canvas, paint);
-		}
-		for (int i = 0; i < jogo.getGemsVida().size(); i++) {
-			jogo.getGemsVida().get(i).draw(canvas, paint);
+		Paint paintMonstros = new Paint();
+		// Monstros
+		for (int i = 0; i < jogo.getInimigos().size(); i++)
+		{
+			jogo.getInimigos().get(i).update();
+			paintMonstros.setAlpha(jogo.getInimigos().get(i).getTransparencia());
+			jogo.getInimigos().get(i).draw(canvas, paintMonstros);
 		}
 
+		// Gems
+		for (int i = 0; i < jogo.getGemsVida().size(); i++)
+			jogo.getGemsVida().get(i).draw(canvas, paint);
+		
+		for (int i = 0; i < jogo.getGemsAtaque().size(); i++)
+			jogo.getGemsAtaque().get(i).draw(canvas, paint);
+		
+		//Moedas
+		for (int i = 0; i < jogo.getMoedas().size(); i++)
+			jogo.getMoedas().get(i).draw(canvas, paint);
+
+		//Paredes
 		for (int i = 0; i < jogo.getParedes().length; i++) {
 			for (int j = 0; j < jogo.getParedes()[i].length; j++) {
 				if (jogo.getParedes()[i][j] != null) {
@@ -248,8 +319,18 @@ public class GameLogic {
 				}
 			}
 		}
-		
 
+	}
+
+	private static void drawSetas(Jogo jogo, Canvas canvas, Paint paint) {
+		paint.setColor(Color.YELLOW);
+		for (int i = 0; i < jogo.getSetas().size(); i++) {
+			// canvas.drawLine(Entidade.sw/2, Entidade.sh/2,
+			// jogo.getSetas().get(i).x, jogo.getSetas().get(i).y, paint);
+			jogo.getSetas().get(i).drawDirect(canvas, paint);
+			if (!jogo.getSetas().get(i).update())
+				jogo.getSetas().remove(i);
+		}
 	}
 
 	// desenha tudo no mapa
@@ -259,13 +340,20 @@ public class GameLogic {
 		// drawMiniMap(jogo,canvas,paint);
 
 		jogo.getHeroi().draw(canvas, paint);
-		
-		paint.setColor(Color.YELLOW);
-		for (int i = 0; i < jogo.getSetas().size(); i++) {
-			//canvas.drawLine(Entidade.sw/2, Entidade.sh/2, jogo.getSetas().get(i).x, jogo.getSetas().get(i).y, paint);
-			jogo.getSetas().get(i).drawDirect(canvas, paint);
-			if(!jogo.getSetas().get(i).update())
-				jogo.getSetas().remove(i);
-		}
+
+		drawSetas(jogo, canvas, paint);
+		desenharUpdates(jogo,canvas,paint);
+	}
+
+	
+	
+	public static void desenharUpdates(Jogo jogo, Canvas canvas, Paint paint)
+	{
+		int x=Entidade.tamanhoCelula*2/3;
+		int y=Entidade.tamanhoCelula*4/3;
+		Paint p = new Paint();
+		p.setColor(Color.YELLOW);
+		if(jogo.getHeroi().incAtaque>0)
+		canvas.drawRect(x, y, x+(Entidade.tamanhoCelula*3/2*((float)(jogo.getHeroi().contadorAtaque)/50)), y+Entidade.tamanhoCelula*1/8, p);
 	}
 }
