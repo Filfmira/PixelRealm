@@ -10,6 +10,7 @@ public class Imagens {
 	
 	protected static Bitmap parede;
 	protected static Bitmap heroi;
+	protected static Bitmap heroi2;
 	protected static Bitmap gemsvida;
 	protected static Bitmap monstro;
 	protected static Bitmap seta;
@@ -25,6 +26,9 @@ public class Imagens {
 		
 		heroi = BitmapFactory.decodeResource(res, R.drawable.heroi);
 		heroi = Bitmap.createScaledBitmap(heroi, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
+		
+		heroi2 = BitmapFactory.decodeResource(res, R.drawable.heroi2);
+		heroi2 = Bitmap.createScaledBitmap(heroi2, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
 		
 		gemsvida = BitmapFactory.decodeResource(res, R.drawable.gemsvida);
 		gemsvida = Bitmap.createScaledBitmap(gemsvida, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);

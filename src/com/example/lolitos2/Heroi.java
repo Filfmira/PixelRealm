@@ -37,7 +37,12 @@ public class Heroi extends Personagem{
 	 */
 	public void draw(Canvas canvas, Paint paint){
 		
+		
+		if(this.incAtaque==0)
 		canvas.drawBitmap(imagem, this.getX(), this.getY(), paint);
+		else
+			canvas.drawBitmap(Imagens.heroi2, this.getX(), this.getY(), paint);
+
 		
 		//paint.setColor(Color.RED);
 		//canvas.drawRect(x, y+tamanhoCelula*7/8, x+Entidade.tamanhoCelula, y+Entidade.tamanhoCelula, paint);
@@ -82,14 +87,14 @@ public class Heroi extends Personagem{
 	public void apanharGemsAtaque(GemsAtaque gm)
 	{
 		if(incAtaque==0)
-		{incAtaque=gm.capacidade;
-		ataque+=gm.capacidade;
+		{incAtaque=gm.getCapacidade();
+		ataque+=gm.getCapacidade();
 		}
 	}
 	
 	public void apanharMoeda(Moeda m)
 	{
-		this.setDinheiro(this.getDinheiro() + m.capacidade);
+		this.setDinheiro(this.getDinheiro() + m.getCapacidade());
 	}
 
 	public int getDinheiro() {
@@ -109,7 +114,7 @@ public class Heroi extends Personagem{
 		if(incAtaque>0)
 		{
 			if(contadorAtaque==0)
-				contadorAtaque=50;
+				contadorAtaque=200;
 			contadorAtaque--;
 			if(contadorAtaque==1)
 			{

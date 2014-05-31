@@ -1,12 +1,11 @@
 package com.example.lolitos2;
 
-public class GemsAtaque extends Entidade{
+public class GemsAtaque extends Catchable{
 
-	int capacidade;
 	public GemsAtaque(Monstro m) {
-		super(m.x, m.y, Entidade.tamanhoCelula, Entidade.tamanhoCelula);
+		super(m,5000);
 		imagem=Imagens.gemsataque;
-		capacidade=5000;
-
 	}
+
+	
 }

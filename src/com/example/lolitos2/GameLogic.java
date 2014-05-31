@@ -354,6 +354,6 @@ public class GameLogic {
 		Paint p = new Paint();
 		p.setColor(Color.YELLOW);
 		if(jogo.getHeroi().incAtaque>0)
-		canvas.drawRect(x, y, x+(Entidade.tamanhoCelula*3/2*((float)(jogo.getHeroi().contadorAtaque)/50)), y+Entidade.tamanhoCelula*1/8, p);
+		canvas.drawRect(x, y, x+(Entidade.tamanhoCelula*3/2*((float)(jogo.getHeroi().contadorAtaque)/200)), y+Entidade.tamanhoCelula*1/8, p);
 	}
 }

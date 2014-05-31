@@ -3,23 +3,20 @@ package com.example.lolitos2;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public class Moeda extends Entidade{
+public class Moeda extends Catchable{
 
-	int capacidade;
-	int t=0;
 	public Moeda(int x, int y, int capacidade) {
-		super(x, y, Entidade.tamanhoCelula, Entidade.tamanhoCelula);
-		this.capacidade=capacidade;
+		super(x,y,capacidade);
 		imagem=Imagens.moeda;
 	}
 	
 	public Moeda(Monstro m)
 	{
-		super(m.getX(),m.getY(),Entidade.tamanhoCelula,Entidade.tamanhoCelula);
-		this.capacidade=(int) (m.vidaInicial/500);
+		super(m,(int) (m.vidaInicial/500));
 		imagem=Imagens.moeda;
 	}
 	
+	int t=0;
 	int counter =0;
 	public void draw(Canvas canvas, Paint paint){
 		
