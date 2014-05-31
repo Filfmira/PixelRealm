@@ -74,9 +74,10 @@ public class GameControls implements OnTouchListener {
 		//int pointerCount = event.getPointerCount();
 		//int pointerId = event.getPointerId(0);
 		// Log.e("putas d epontos", pointerCount+"....");
-		update(event);
-		touchProjetil(event);
-		handleMultitouch(event);
+			handleMultitouch(event);
+		
+		/*update(event);
+		touchProjetil(event);*/
 		return true;
 		
 		
@@ -84,6 +85,91 @@ public class GameControls implements OnTouchListener {
 
 	private MotionEvent lastEvent;
 	private MotionEvent lastEventSetas;
+	
+	
+	public void JSdown(int i,int l)
+	{
+		_touchingPoint.x = (int) i-sSJ/2;
+		_touchingPoint.y = (int)l-sSJ/2;
+		pontoEntidade.setX((int) i-sSJ/2);
+		pontoEntidade.setY((int) l-sSJ/2);
+
+		if (joystickEntidade.colide(pontoEntidade))
+			_dragging = true;
+		
+		if (_dragging) {
+			// get the pos
+			j=true;
+			JS=true;
+
+			// bound to a box
+			if (_touchingPoint.x < xSJ - (sBJ - sSJ) / 2) {
+				_touchingPoint.x = (int) (xSJ - (sBJ - sSJ) / 2);
+			}
+			if (_touchingPoint.x > xSJ + (sBJ - sSJ) / 2) {
+				_touchingPoint.x = (int) (xSJ + (sBJ - sSJ) / 2);
+			}
+			if (_touchingPoint.y < ySJ - (sBJ - sSJ)) {
+				_touchingPoint.y = (int) (ySJ - (sBJ - sSJ) / 2);
+			}
+			if (_touchingPoint.y > ySJ + (sBJ - sSJ)) {
+				_touchingPoint.y = (int) (ySJ + (sBJ - sSJ) / 2);
+			}
+
+			// get the angle
+			double angle = Math.atan2(_touchingPoint.y - inity,
+					_touchingPoint.x - initx) / (Math.PI / 180);
+
+			// Move the beetle in proportion to how far
+			// the joystick is dragged from its center
+			int a = (int) (-Math.sin(angle * (Math.PI / 180)) * 5);
+			int b = (int) (-Math.cos(angle * (Math.PI / 180)) * 5);
+
+			int[] x = { b, a };
+			// Log.e("colide", x[0]+"-"+x[1]);
+			if (!GameLogic.verificaMovimento(parent.getJogo(), x)) {
+				// ?
+			}
+			Entidade.dy += x[1];
+			Entidade.dx += x[0];
+
+		}
+		
+	}
+
+	public void JSup(MotionEvent event)
+	{
+		// largar
+				if (event.getAction() == MotionEvent.ACTION_UP && _dragging) {
+					_dragging = false;
+				}
+				
+				if (!_dragging) {
+					// Snap back to center when the joystick is released
+					if(j==false)
+					{
+						JS=false;
+					}
+					if(j==true)
+					{
+						j=false;
+					}
+					//Log.e("dragging false", ""+_touchingPoint.x);
+					_touchingPoint.x = (int) initx;
+					_touchingPoint.y = (int) inity;
+					
+					// shaft.alpha = 0;
+				}
+	}
+
+	public void Sup(int a, int b)
+	{
+		if (jogo.getSetas().size() < 20) {
+			int c1 = Entidade.sw / 2 - Entidade.tamanhoCelula / 2;
+			int c2 = Entidade.sh / 2 - Entidade.tamanhoCelula / 2;
+			jogo.getSetas().add(new Projectil(c1, c2, (a - c1) / 10,(b - c2) / 10,parent.getJogo().getHeroi()));
+		}
+	}
 	
 	public void update(MotionEvent event) {
 
@@ -94,8 +180,6 @@ public class GameControls implements OnTouchListener {
 		} else {
 			lastEvent = event;
 		}
-
-		
 		
 		// arrastar
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -231,6 +315,7 @@ public class GameControls implements OnTouchListener {
 
 	}
 
+	int idJoystick=-1;
 	
 	public void handleMultitouch(MotionEvent event)
 	{
@@ -238,38 +323,75 @@ public class GameControls implements OnTouchListener {
 		int action = event.getAction();
 		
 		switch (action & MotionEvent.ACTION_MASK) {
-		case MotionEvent.ACTION_MOVE:
-			Log.e("down","");
-			_touchingPoint.x = (int) event.getX();
-			_touchingPoint.y = (int) event.getY();
-			pontoEntidade.setX((int) event.getX());
-			pontoEntidade.setY((int) event.getY());
+		case MotionEvent.ACTION_DOWN:
+			pontoEntidade.x=(int) event.getX();
+			pontoEntidade.y=(int) event.getY();
+			if(joystickEntidade.colide(pontoEntidade))
+			{
+				Log.e("down",event.getPointerId(0) +"");
+				idJoystick=action;
+				JSdown(pontoEntidade.x,pontoEntidade.y);
+			}
 			break;
 
 		case MotionEvent.ACTION_UP:
-			Log.e("up","");
+			pontoEntidade.x=(int) event.getX();
+			pontoEntidade.y=(int) event.getY();
+			if(event.getPointerId(0)==idJoystick)
+			{
+			JSup(event);
+			idJoystick=-1;
+			}
+			else
+				Sup(pontoEntidade.x,pontoEntidade.y);
 			break;	
 			
 		case MotionEvent.ACTION_POINTER_DOWN:
             ptrId = action >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+				//Log.e("gg", 2+"");
+				
+				
             int ptrIdx = event.findPointerIndex(ptrId);
-            Log.e("APD", (int)event.getX(ptrIdx)+"-"+(int)event.getY(ptrIdx));
+            
+            pontoEntidade.x=(int) event.getX(ptrIdx);
+			pontoEntidade.y=(int) event.getY(ptrIdx);
+			if (joystickEntidade.colide(pontoEntidade))
+			{
+				idJoystick=ptrId;
+				JSdown(pontoEntidade.x,pontoEntidade.y);
+			}
+			  else
+					Sup( pontoEntidade.x,pontoEntidade.y);
+            /*Log.e("gg", 3+"");
+            //Log.e("APD", (int)event.getX(ptrIdx)+"-"+(int)event.getY(ptrIdx));
             for(int i = 0; i < event.getPointerCount(); ++i)
             {
                Log.e("APD", event.getPointerId(i)+"");
-            }
+            }*/
         break;
         
 		case MotionEvent.ACTION_POINTER_UP:
             ptrId = action >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
-            int a=(int)event.getX(ptrId);
-            int b=(int)event.getY(ptrId);
-            int c1 = Entidade.sw / 2 - Entidade.tamanhoCelula / 2;
-			int c2 = Entidade.sh / 2 - Entidade.tamanhoCelula / 2;
-			jogo.getSetas().add(new Projectil(c1, c2, (a - c1) / 10,(b - c2) / 10,parent.getJogo().getHeroi()));
-           /* Log.e("APU", (int)event.getX(ptrId)+"-"+(int)event.getY(ptrId));*/
+            /*if (joystickEntidade.colide(pontoEntidade))
+    			JSup(event);
+            else*/
+            pontoEntidade.x=(int) event.getX(ptrId);
+			pontoEntidade.y=(int) event.getY(ptrId);
+            if(idJoystick==ptrId)
+            {
+            	JSdown(pontoEntidade.x,pontoEntidade.y);
+            }
+            /* Log.e("APU", (int)event.getX(ptrId)+"-"+(int)event.getY(ptrId));*/
         break;
 			
+        
+		case MotionEvent.ACTION_MOVE:
+			pontoEntidade.x=(int) event.getX();
+			pontoEntidade.y=(int) event.getY();
+			 for(int i = 0; i < event.getPointerCount(); ++i)
+			if(event.getPointerId(i)==idJoystick)
+			JSdown(pontoEntidade.x,pontoEntidade.y);
+			break;
 		/* case MotionEvent.ACTION_MOVE:
 	            for(int i = 0; i < event.getPointerCount(); ++i)
 	            {
@@ -280,6 +402,7 @@ public class GameControls implements OnTouchListener {
 			break;
 		}
 	}
+	
 	public Jogo getJogo() {
 		return jogo;
 	}

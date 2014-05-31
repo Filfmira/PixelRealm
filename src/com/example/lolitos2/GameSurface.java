@@ -112,7 +112,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		
 		canvas.drawText("Setas:"+jogo.getSetas().size(), 50, 200, paint);
 		canvas.drawText("ataque:"+jogo.getHeroi().ataque, 50, 250, paint);
-		canvas.drawText("contador:"+jogo.getHeroi().contadorAtaque, 50, 300, paint);
+		canvas.drawText("JSID:"+_controls.idJoystick, 50, 300, paint);
 	}
 
 
