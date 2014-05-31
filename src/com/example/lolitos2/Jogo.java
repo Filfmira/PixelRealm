@@ -16,78 +16,69 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 
 import javax.imageio.ImageIO;
+
 public class Jogo {
-	
+
 	private Heroi heroi;
 	private ArrayList<Monstro> monstros;
-	//private ArrayList<Parede>  paredes;
-	private ArrayList<GemsVida>  gemsVida;
-	private ArrayList<GemsAtaque>  gemsAtaque;
-	private ArrayList<Projectil>  setas;
-	private ArrayList<Moeda>  moedas;
-	private Parede[][] paredes= new Parede[200][200];
+	// private ArrayList<Parede> paredes;
+	private ArrayList<GemsVida> gemsVida;
+	private ArrayList<GemsAtaque> gemsAtaque;
+	private ArrayList<Projectil> setas;
+	private ArrayList<Moeda> moedas;
+	private Parede[][] paredes = new Parede[200][200];
 	private InputStream inputStream;
-	
 
-	
-	//inicializa o jogo
-	public Jogo(int tamanhoCelula,InputStream inputStream){
-		this.inputStream=inputStream;
-		ArrayList<String>tab=readText();
+	// inicializa o jogo
+	public Jogo(int tamanhoCelula, InputStream inputStream) {
+		this.inputStream = inputStream;
+		ArrayList<String> tab = readText();
 		setSetas(new ArrayList<Projectil>());
 		setInimigos(new ArrayList<Monstro>());
 		setGemsVida(new ArrayList<GemsVida>());
 		setGemsAtaque(new ArrayList<GemsAtaque>());
 		setMoedas(new ArrayList<Moeda>());
-		
-		//percorre o ficheiro do mapa
-		for(int i =0;i<tab.size();i++)
-		{
-			for(int j=0;j<tab.get(i).length();j++)
-			{
-				int x=j;
-				int y=i;
+
+		// percorre o ficheiro do mapa
+		for (int i = 0; i < tab.size(); i++) {
+			for (int j = 0; j < tab.get(i).length(); j++) {
+				int x = j;
+				int y = i;
 				switch (tab.get(i).charAt(j)) {
-				// se x é um inimigo
-				case 'x':
-					getInimigos().add (new Monstro(x,y));
-					getInimigos().get(getInimigos().size()-1).setMovimento(0);
-					break;
-				//se o é uma parede
+				// se o é uma parede
 				case 'o':
-					getParedes()[x][y]=new Parede(x,y);
+					getParedes()[x][y] = new Parede(x, y);
 					break;
-				//se v é uma gem de vida
+				// se v é uma gem de vida
 				case 'v':
-					getGemsVida().add(new GemsVida(x,y,5000));
+					getGemsVida().add(new GemsVida(x, y, 5000));
 					break;
 				default:
 					break;
 				}
-				
+
 			}
 		}
-		//setHeroi(new Heroi(5,7));
-		setHeroi(new Heroi((Entidade.sw/2)-(Entidade.tamanhoCelula/2),(Entidade.sh/2)-(Entidade.tamanhoCelula/2)));
-		//if(getInimigos().isEmpty())getHeroi().color=Color.GREEN;
+		// setHeroi(new Heroi(5,7));
+		setHeroi(new Heroi((Entidade.sw / 2) - (Entidade.tamanhoCelula / 2),
+				(Entidade.sh / 2) - (Entidade.tamanhoCelula / 2)));
+		// if(getInimigos().isEmpty())getHeroi().color=Color.GREEN;
+		gerarMonstros();
 	}
 
-
-	
-	
 	public Jogo(int i) {
 
 	}
 
+	/**
+	 * le o texto para um array list
+	 * @return
+	 */
+	private ArrayList<String> readText() {
 
-
-
-	//le o texto para um array list
-	private ArrayList<String> readText()
-	{
-		
 		ArrayList<String> s = new ArrayList<String>();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				inputStream));
 		String line;
 		try {
 			while ((line = reader.readLine()) != null) {
@@ -101,10 +92,38 @@ public class Jogo {
 	}
 
 	
+	/**
+	 * gera monstros aleatoriamente
+	 */
+	public void gerarMonstros()
+	{
+		for(int x=0;x<300;x++)
+		{
+			int rL,rC;
+			do {
+				rL=(int) (Math.random()*(paredes.length/4));
+				rC= (int) (Math.random()*paredes[rL].length);
+			} while (paredes[rL][rC]!=null);
+			Log.e("monstro", rL+"."+rC);
+			monstros.add(new Monstro(rL,rC));
+		}
+	}
+
+	// ////////////////A IMPLEMTENTAR PARA OS TESTES //////////////////////////
+	public void movimentarHeroi(int x, int y) {
+		// TODO Auto-generated method stub
+
+	}
+
 	
 	
-	//////////////////			GETS e SETS 				//////////////////
-	
+	// ////////////////GETS e SETS //////////////////
+
+
+	public ArrayList<Projectil> getSetas() {
+		return setas;
+	}
+
 	
 	public ArrayList<Monstro> getInimigos() {
 		return monstros;
@@ -138,78 +157,24 @@ public class Jogo {
 		this.paredes = paredes;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//////////////////A IMPLEMTENTAR PARA OS TESTES //////////////////////////
-	public void movimentarHeroi(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-
-	public ArrayList<Projectil> getSetas() {
-		return setas;
-	}
-
-
-
-
 	public void setSetas(ArrayList<Projectil> setas) {
 		this.setas = setas;
 	}
-
-
-
 
 	public ArrayList<Moeda> getMoedas() {
 		return moedas;
 	}
 
-
-
-
 	public void setMoedas(ArrayList<Moeda> moedas) {
 		this.moedas = moedas;
 	}
-
-
-
 
 	public ArrayList<GemsAtaque> getGemsAtaque() {
 		return gemsAtaque;
 	}
 
-
-
-
 	public void setGemsAtaque(ArrayList<GemsAtaque> gemsAtaque) {
 		this.gemsAtaque = gemsAtaque;
 	}
-
-
-
-
-
-
-
-
-	
-
-
 
 }

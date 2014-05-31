@@ -291,6 +291,16 @@ public class GameLogic {
 		int y1 = jogo.getHeroi().getY();
 
 		Paint paintMonstros = new Paint();
+		
+		//Paredes
+				for (int i = 0; i < jogo.getParedes().length; i++) {
+					for (int j = 0; j < jogo.getParedes()[i].length; j++) {
+						if (jogo.getParedes()[i][j] != null) {
+							jogo.getParedes()[i][j].draw(canvas, paint);
+
+						}
+					}
+				}
 		// Monstros
 		for (int i = 0; i < jogo.getInimigos().size(); i++)
 		{
@@ -310,15 +320,7 @@ public class GameLogic {
 		for (int i = 0; i < jogo.getMoedas().size(); i++)
 			jogo.getMoedas().get(i).draw(canvas, paint);
 
-		//Paredes
-		for (int i = 0; i < jogo.getParedes().length; i++) {
-			for (int j = 0; j < jogo.getParedes()[i].length; j++) {
-				if (jogo.getParedes()[i][j] != null) {
-					jogo.getParedes()[i][j].draw(canvas, paint);
-
-				}
-			}
-		}
+		
 
 	}
 

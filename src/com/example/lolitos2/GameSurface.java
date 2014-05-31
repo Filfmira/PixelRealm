@@ -12,6 +12,7 @@ import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -22,7 +23,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 	private GameControls _controls;
 	private GameJoystick _joystick;
 	private int c=8;
-
+	private GestureDetector g;
 	//////////////////////////
 	//private static final int INTERVAL = 10; // pausa de 10ms
 	//private boolean running = true; // se esta a ser executado ou nao
@@ -89,8 +90,13 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		}
 		_controls.setJogo(jogo);
 		///////////////////////////////
-		
-		_controls.update(null);
+		if(_controls.idJoystick!=-1)
+		{
+			int x2=_controls.jsx;
+			int x3=_controls.jsy;
+			_controls.JSdown(x2,x3);
+		}
+		//_controls.update(null);
 		GameLogic.desenharEntidades(getJogo(), canvas, paint);
 		
 		jogo.getHeroi().update();
@@ -104,7 +110,8 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		canvas.drawBitmap(get_joystick().get_joystick(),
 				_controls._touchingPoint.x, _controls._touchingPoint.y, null);
 		
-		
+		/*paint.setColor(Color.YELLOW);
+		canvas.drawCircle(_controls.jsx, _controls.jsy, 50, paint);*/
 		paint.setColor(Color.WHITE);
 		paint.setTextSize(50);
 		canvas.drawText("life:"+jogo.getHeroi().getVida(), 50, 50, paint);
@@ -112,7 +119,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		
 		canvas.drawText("Setas:"+jogo.getSetas().size(), 50, 200, paint);
 		canvas.drawText("ataque:"+jogo.getHeroi().ataque, 50, 250, paint);
-		canvas.drawText("JSID:"+_controls.idJoystick, 50, 300, paint);
+		canvas.drawText("JSID:"+_controls.c, 50, 300, paint);
 	}
 
 
@@ -192,7 +199,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		counter++;
 		
 		// mexe
-		if (counter == 15) {
+		/*if (counter == 15) {
 			//_thread.state=_thread.PAUSED;
 			//GameLogic.movimentaHeroi(jogo, x, y, this);
 			// Get instance of Vibrator from current Context
@@ -200,7 +207,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 				jogo.getInimigos().get(i).movimento((int) (Math.random() * 4));
 			}
 			counter = 0;
-		}
+		}*/
 		
 		GameLogic.lutar(jogo,this);
 		GameLogic.setasUpdate(jogo);

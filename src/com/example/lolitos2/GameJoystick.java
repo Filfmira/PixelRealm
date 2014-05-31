@@ -3,8 +3,10 @@ package com.example.lolitos2;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.View;
+import android.view.View.OnLongClickListener;
 
-public class GameJoystick {
+public class GameJoystick implements OnLongClickListener{
 	
 	private Bitmap _joystick;
 	private Bitmap _joystickBg;
@@ -50,5 +52,11 @@ public class GameJoystick {
 
 	public void set_trigger(Bitmap trigger) {
 		_trigger = trigger;
+	}
+
+	@Override
+	public boolean onLongClick(View v) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

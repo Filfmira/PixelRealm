@@ -997,9 +997,10 @@ containing a value of this type.
         public static final int moeda=0x7f020064;
         public static final int monstro=0x7f020065;
         public static final int parede=0x7f020066;
-        public static final int seta=0x7f020067;
-        public static final int teste=0x7f020068;
-        public static final int ui3=0x7f020069;
+        public static final int pausa=0x7f020067;
+        public static final int seta=0x7f020068;
+        public static final int teste=0x7f020069;
+        public static final int ui3=0x7f02006a;
     }
     public static final class id {
         public static final int action_bar=0x7f06001c;

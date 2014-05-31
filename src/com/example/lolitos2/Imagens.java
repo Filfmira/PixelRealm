@@ -17,6 +17,7 @@ public class Imagens {
 	protected static Bitmap moeda;
 	protected static Bitmap moeda2;
 	protected static Bitmap gemsataque;
+	protected static Bitmap pausa;
 
 	
 	static void inicializarImagens(Resources res)
@@ -47,6 +48,9 @@ public class Imagens {
 		
 		gemsataque = BitmapFactory.decodeResource(res, R.drawable.gemsataque);
 		gemsataque = Bitmap.createScaledBitmap(gemsataque, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
+		
+		pausa = BitmapFactory.decodeResource(res, R.drawable.pausa);
+		pausa = Bitmap.createScaledBitmap(pausa, Entidade.tamanhoCelula*3/2, Entidade.tamanhoCelula*3/2, true);
 	}
 	
 	
