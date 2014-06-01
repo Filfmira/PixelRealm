@@ -18,10 +18,13 @@ public class Imagens {
 	protected static Bitmap moeda2;
 	protected static Bitmap gemsataque;
 	protected static Bitmap pausa;
-
+	protected static Bitmap mapa;
 	
 	static void inicializarImagens(Resources res)
 	{
+		mapa = BitmapFactory.decodeResource(res, R.drawable.mapa);
+		mapa = Bitmap.createScaledBitmap(mapa, Entidade.tamanhoCelula*32, Entidade.tamanhoCelula*32, true);
+		
 		parede = BitmapFactory.decodeResource(res, R.drawable.parede);
 		parede = Bitmap.createScaledBitmap(parede, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
 		
@@ -50,7 +53,7 @@ public class Imagens {
 		gemsataque = Bitmap.createScaledBitmap(gemsataque, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
 		
 		pausa = BitmapFactory.decodeResource(res, R.drawable.pausa);
-		pausa = Bitmap.createScaledBitmap(pausa, Entidade.tamanhoCelula*3/2, Entidade.tamanhoCelula*3/2, true);
+		pausa = Bitmap.createScaledBitmap(pausa, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
 	}
 	
 	

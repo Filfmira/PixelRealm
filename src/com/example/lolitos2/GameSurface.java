@@ -6,9 +6,12 @@ import com.example.lolitos2.R;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.util.Log;
@@ -23,7 +26,9 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 	private GameControls _controls;
 	private GameJoystick _joystick;
 	private int c=8;
-	private GestureDetector g;
+	private Sprite sprite;
+	private Bitmap teste;
+	
 	//////////////////////////
 	//private static final int INTERVAL = 10; // pausa de 10ms
 	//private boolean running = true; // se esta a ser executado ou nao
@@ -66,6 +71,8 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		paint = new Paint();
 		
 		
+		teste=BitmapFactory.decodeResource(this.getResources(),R.drawable.tetse);
+		sprite= new Sprite(teste);
 	}
 	
 
@@ -83,23 +90,26 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 	public void doDraw(Canvas canvas) {
 
 		canvas.drawColor(Color.rgb(50, 100, 10));
-
+		//canvas.drawBitmap(Imagens.mapa, 2, 2, null);
 		// //////////////////////////
 		if (getJogo() == null) {
 			this.iniciaJogo(canvas);
+			_controls.setJogo(jogo);
 		}
-		_controls.setJogo(jogo);
+		
 		///////////////////////////////
+		
+		
 		if(_controls.idJoystick!=-1)
 		{
 			int x2=_controls.jsx;
 			int x3=_controls.jsy;
 			_controls.JSdown(x2,x3);
 		}
+		
+		canvas.drawBitmap(Imagens.mapa,Entidade.dx,Entidade.dy,null);
 		//_controls.update(null);
 		GameLogic.desenharEntidades(getJogo(), canvas, paint);
-		
-		jogo.getHeroi().update();
 		
 		// draw the joystick background
 		canvas.drawBitmap(get_joystick().get_joystickBg(), _controls.xBJ,
@@ -120,6 +130,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		canvas.drawText("Setas:"+jogo.getSetas().size(), 50, 200, paint);
 		canvas.drawText("ataque:"+jogo.getHeroi().ataque, 50, 250, paint);
 		canvas.drawText("JSID:"+_controls.c, 50, 300, paint);
+		sprite.draw(canvas);
 	}
 
 
@@ -199,7 +210,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		counter++;
 		
 		// mexe
-		/*if (counter == 15) {
+		if (counter == 15) {
 			//_thread.state=_thread.PAUSED;
 			//GameLogic.movimentaHeroi(jogo, x, y, this);
 			// Get instance of Vibrator from current Context
@@ -207,8 +218,9 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 				jogo.getInimigos().get(i).movimento((int) (Math.random() * 4));
 			}
 			counter = 0;
-		}*/
+		}
 		
+		jogo.getHeroi().update();
 		GameLogic.lutar(jogo,this);
 		GameLogic.setasUpdate(jogo);
 		GameLogic.apanharGems(jogo);

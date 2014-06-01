@@ -351,11 +351,18 @@ public class GameLogic {
 	
 	public static void desenharUpdates(Jogo jogo, Canvas canvas, Paint paint)
 	{
+		//Desenhar Barra de ataque++
 		int x=Entidade.tamanhoCelula*2/3;
 		int y=Entidade.tamanhoCelula*4/3;
 		Paint p = new Paint();
 		p.setColor(Color.YELLOW);
 		if(jogo.getHeroi().incAtaque>0)
 		canvas.drawRect(x, y, x+(Entidade.tamanhoCelula*3/2*((float)(jogo.getHeroi().contadorAtaque)/200)), y+Entidade.tamanhoCelula*1/8, p);
+	
+		
+		//desenhar pausa
+		x=Entidade.tamanhoCelula*1/2;
+		y=Entidade.tamanhoCelula*1/2;
+		canvas.drawBitmap(Imagens.pausa, x, y, paint);
 	}
 }
