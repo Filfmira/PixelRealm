@@ -8,17 +8,21 @@ import android.graphics.Matrix;
 public class Imagens {
 	
 	
-	protected static Bitmap parede;
-	protected static Bitmap heroi;
-	protected static Bitmap heroi2;
-	protected static Bitmap gemsvida;
-	protected static Bitmap monstro;
-	protected static Bitmap seta;
-	protected static Bitmap moeda;
-	protected static Bitmap moeda2;
-	protected static Bitmap gemsataque;
+	protected static Bitmap parede;	
+	protected static Bitmap heroi;		//sbust por sprite
+	protected static Bitmap heroi2;		//subst por srpite
+	protected static Bitmap gemsvida;	//a elimniar
+	protected static Bitmap monstro;	//subst por sprite
+	protected static Bitmap seta;		//subst por sprtie
+	protected static Bitmap moeda;		//a eliminar
+	protected static Bitmap moeda2;		//a eliminar
+	protected static Bitmap gemsataque;	//a eliminar
 	protected static Bitmap pausa;
-	protected static Bitmap mapa;
+	protected static Bitmap mapa;		//a elimniar
+	protected static Bitmap gemsVidaSprite;
+	protected static Bitmap gemsAtaqueSprite;
+	protected static Bitmap moedasSprite;
+	protected static Bitmap portal;		//subst por sprite
 	
 	static void inicializarImagens(Resources res)
 	{
@@ -54,6 +58,16 @@ public class Imagens {
 		
 		pausa = BitmapFactory.decodeResource(res, R.drawable.pausa);
 		pausa = Bitmap.createScaledBitmap(pausa, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
+		
+		gemsVidaSprite= BitmapFactory.decodeResource(res, R.drawable.gemsvidasprite);
+		
+		gemsAtaqueSprite=BitmapFactory.decodeResource(res, R.drawable.gemsataquesprite);
+		
+		moedasSprite= BitmapFactory.decodeResource(res, R.drawable.moedassprite);
+		
+		portal = BitmapFactory.decodeResource(res, R.drawable.portal);
+		portal = Bitmap.createScaledBitmap(portal, Entidade.tamanhoCelula*2, Entidade.tamanhoCelula*2, true);
+		
 	}
 	
 	

@@ -1,13 +1,19 @@
 package com.example.lolitos2;
 
+import java.io.Serializable;
+
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-public class Entidade {
+public class Entidade  implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1298143729161602601L;
 	protected int x;
 	protected int y;
 	protected static int deslocX=0;

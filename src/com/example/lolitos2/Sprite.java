@@ -1,26 +1,33 @@
 package com.example.lolitos2;
 
+import java.io.Serializable;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-public class Sprite {
+public class Sprite  implements Serializable{
 
-	int x,y;
-	int xSpeed, ySpeed;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -366547613844788236L;
 	int height,width;
 	int currentFrame=0;
-	int direction=0;
+	private int direction=0;
 	int counter=0;
+	int lines,colums;
 	Bitmap b;
-	public Sprite(Bitmap bitmap)
+	public Sprite(Bitmap bitmap, int lines , int colums, int w, int h)
 	{
 		b=bitmap;
-		height=b.getHeight();
-		width=b.getWidth()/4;
-		x=y=0;
-		xSpeed=5;
-		ySpeed=0;
+		this.lines=lines;
+		this.colums=colums;
+		this.width=w;
+		this.height=h;
+		
+		height=b.getHeight()/lines;
+		width=b.getWidth()/colums;
 	}
 	int lol=0;
 	
@@ -36,22 +43,35 @@ public class Sprite {
 		default:
 			break;
 		}
-		if(counter==3)
+		if(counter==2)
 		{
 			counter=0;
-		currentFrame=++currentFrame%4; //4 collums
+		currentFrame=++currentFrame%colums; //4 collums
 		}
 		counter++;
 	}
 	
-	public void draw(Canvas canvas)
+	
+	////////////////////////////////////////////////////////////////////////////
+	////ATENCAO, TEMOS DE MUDAR O DST PARA O TAMNHO SER VARIAVEL ///////////////
+	////////////////////////////////////////////////////////////////////////////
+	
+	public void draw(Canvas canvas,int x,int y)
 	{
 		update();
-		int srcY=direction*height;
+		int srcY=getDirection()*height;
 		int srcX=currentFrame*width;
 		Rect src= new Rect(srcX,srcY,srcX+width,srcY+height);
-		Rect dst= new Rect(x,y,x+width,y+height);
+		Rect dst= new Rect(x,y,x+Entidade.tamanhoCelula,y+Entidade.tamanhoCelula);
 		canvas.drawBitmap(b,src,dst,null);
+	}
+
+	public int getDirection() {
+		return direction;
+	}
+
+	public void setDirection(int direction) {
+		this.direction = direction;
 	}
 	
 }

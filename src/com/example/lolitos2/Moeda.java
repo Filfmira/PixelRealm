@@ -1,45 +1,28 @@
 package com.example.lolitos2;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
+import java.io.Serializable;
 
-public class Moeda extends Catchable{
+public class Moeda extends Catchable implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -999092554446903040L;
 
 	public Moeda(int x, int y, int capacidade) {
 		super(x,y,capacidade);
-		imagem=Imagens.moeda;
+		init();
 	}
 	
 	public Moeda(Monstro m)
 	{
 		super(m,(int) (m.vidaInicial/500));
-		imagem=Imagens.moeda;
+		init();
 	}
 	
-	int t=0;
-	int counter =0;
-	public void draw(Canvas canvas, Paint paint){
-		
-		if(counter==3)
-		{
-			counter=0;
-			if(t==0)
-			{
-				imagem=Imagens.moeda;
-				t=1;
-			}
-			else
-			{
-				t=0;
-				imagem=Imagens.moeda2;
-			}
-			
-		}
-		canvas.drawBitmap(imagem, x * tamanhoCelula+Entidade.dx, y * tamanhoCelula+Entidade.dy, paint);
-		
-		counter++;
-		
-
+	private void init(){
+		imagem=Imagens.gemsvida;
+		sprite= new Sprite(Imagens.moedasSprite,2,4,x,y);
 	}
-
+	
 }

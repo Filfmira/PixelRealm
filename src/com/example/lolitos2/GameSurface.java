@@ -1,33 +1,32 @@
 package com.example.lolitos2;
 
 import java.io.InputStream;
+import java.io.Serializable;
 
 import com.example.lolitos2.R;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.os.Handler;
-import android.os.Vibrator;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
+public class GameSurface extends SurfaceView implements SurfaceHolder.Callback, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6560547391683763921L;
 	private Context _context;
 	private GameThread _thread;
 	private GameControls _controls;
 	private GameJoystick _joystick;
 	private int c=8;
 	private Sprite sprite;
-	private Bitmap teste;
 	
 	//////////////////////////
 	//private static final int INTERVAL = 10; // pausa de 10ms
@@ -61,7 +60,11 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		//initialize our Thread class. A call will be made to start it later
 		_thread = new GameThread(holder, _context, new Handler(),this);
 		setFocusable(true);
+	}
+	
 
+	public void iniciaJogo(Canvas canvas) {
+		Entidade.tamanhoCelula = (int) canvas.getWidth()/c;
 
 		set_joystick(new GameJoystick(getContext().getResources()));
 		//contols
@@ -71,13 +74,6 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		paint = new Paint();
 		
 		
-		teste=BitmapFactory.decodeResource(this.getResources(),R.drawable.tetse);
-		sprite= new Sprite(teste);
-	}
-	
-
-	public void iniciaJogo(Canvas canvas) {
-		Entidade.tamanhoCelula = (int) canvas.getWidth()/c;
 		Imagens.inicializarImagens(this.getResources());
 		Entidade.sw=canvas.getWidth();
 		Entidade.sh=canvas.getHeight();
@@ -130,7 +126,6 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		canvas.drawText("Setas:"+jogo.getSetas().size(), 50, 200, paint);
 		canvas.drawText("ataque:"+jogo.getHeroi().ataque, 50, 250, paint);
 		canvas.drawText("JSID:"+_controls.c, 50, 300, paint);
-		sprite.draw(canvas);
 	}
 
 
@@ -211,6 +206,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		
 		// mexe
 		if (counter == 15) {
+			
 			//_thread.state=_thread.PAUSED;
 			//GameLogic.movimentaHeroi(jogo, x, y, this);
 			// Get instance of Vibrator from current Context
@@ -225,12 +221,27 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		GameLogic.setasUpdate(jogo);
 		GameLogic.apanharGems(jogo);
 		GameLogic.apanharMoedas(jogo);
+		GameLogic.colidePortal(jogo);
 		
 		// lança o metodo draw p/desenhar
 		postInvalidate();
 
 	}
 
+	
+	
+	
+	public void menuPausa()
+	{
+		Intent intent = new Intent(_context, PauseActivity.class);
+		
+		_context.startActivity(intent);
+	}
+	
+	
+	
+	
+	
 	public GameJoystick get_joystick() {
 		return _joystick;
 	}

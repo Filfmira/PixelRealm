@@ -1,24 +1,20 @@
 package com.example.lolitos2;
 
 import java.util.ArrayList;
-import java.util.Vector;
-
-import android.graphics.Color;
 import android.util.Log;
 
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
+import java.io.Serializable;
 
-import javax.imageio.ImageIO;
+public class Jogo  implements Serializable{
 
-public class Jogo {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6340455120385832207L;
 	private Heroi heroi;
 	private ArrayList<Monstro> monstros;
 	// private ArrayList<Parede> paredes;
@@ -27,6 +23,7 @@ public class Jogo {
 	private ArrayList<Projectil> setas;
 	private ArrayList<Moeda> moedas;
 	private Parede[][] paredes = new Parede[200][200];
+	private Portal portal;
 	private InputStream inputStream;
 
 	// inicializa o jogo
@@ -52,6 +49,10 @@ public class Jogo {
 				// se v é uma gem de vida
 				case 'v':
 					getGemsVida().add(new GemsVida(x, y, 5000));
+					break;
+					// se k é o portal
+				case 'k':
+					setPortal(new Portal(x,y));
 					break;
 				default:
 					break;
@@ -175,6 +176,14 @@ public class Jogo {
 
 	public void setGemsAtaque(ArrayList<GemsAtaque> gemsAtaque) {
 		this.gemsAtaque = gemsAtaque;
+	}
+
+	public Portal getPortal() {
+		return portal;
+	}
+
+	public void setPortal(Portal portal) {
+		this.portal = portal;
 	}
 
 }

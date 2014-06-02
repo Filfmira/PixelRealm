@@ -1,19 +1,22 @@
 package com.example.lolitos2;
 
-import java.io.IOException;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
-public class GameThread extends Thread {
+public class GameThread extends Thread implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6424957506243945948L;
 	private SurfaceHolder mSurfaceHolder;
 	private Handler mHandler;
 	private Context mContext;

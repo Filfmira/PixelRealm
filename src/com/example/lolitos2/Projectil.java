@@ -1,11 +1,16 @@
 package com.example.lolitos2;
 
-import android.util.Log;
+import java.io.Serializable;
 
-public class Projectil extends Entidade{
+public class Projectil extends Entidade implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8163520196636070708L;
 	float pdx,pdy;
 	float a, b;
+	int dxI,dyI;
 	int ataque;
 	int xInicial,yInicial;
 	
@@ -21,6 +26,8 @@ public class Projectil extends Entidade{
 		super(x,y,tamanhoCelula,tamanhoCelula);
 		xInicial=x;
 		yInicial=y;
+		dxI=Entidade.dx;
+		dyI=Entidade.dy;
 		imagem=Imagens.seta;
 		this.pdx=pdx;
 		this.pdy=pdy;
@@ -49,14 +56,17 @@ public class Projectil extends Entidade{
 	 * faz update á posicao da seta para que vá "andando" para o seu destino
 	 * @return
 	 */
+	int counter=0;
 	public boolean update()
 	{
-		a+=pdx;
-		b+=pdy;
-		this.x=(int) a;
-		this.y=(int) b;
-		if(Math.sqrt((Math.pow((x-xInicial),2)+Math.pow((y-yInicial),2)))>400)
+		a+=(pdx);
+		b+=(pdy);
+		
+		this.x=(int) a+(Entidade.dx-dxI);
+		this.y=(int) b+(Entidade.dy-dyI);
+		if(counter==20)
 			return false;
+		counter++;
 		return true;
 	}
 	

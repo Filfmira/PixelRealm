@@ -1,13 +1,19 @@
 package com.example.lolitos2;
 
+import java.io.Serializable;
+
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 
-public class GameJoystick implements OnLongClickListener{
+public class GameJoystick implements OnLongClickListener, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2226677249260438920L;
 	private Bitmap _joystick;
 	private Bitmap _joystickBg;
 	private Bitmap _trigger;
@@ -24,9 +30,9 @@ public class GameJoystick implements OnLongClickListener{
 	public GameJoystick(Resources res){
 		
 		_joystick = (Bitmap)BitmapFactory.decodeResource(res, com.example.lolitos2.R.drawable.joystick);
-		this._joystick=Bitmap.createScaledBitmap(_joystick, Entidade.tamanhoCelula/2, Entidade.tamanhoCelula/2, true);
+		this._joystick=Bitmap.createScaledBitmap(_joystick, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
 		_joystickBg = (Bitmap)BitmapFactory.decodeResource(res,com.example.lolitos2.R.drawable.joystick_bg);
-		this._joystickBg=Bitmap.createScaledBitmap(_joystickBg, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
+		this._joystickBg=Bitmap.createScaledBitmap(_joystickBg, Entidade.tamanhoCelula*2, Entidade.tamanhoCelula*2, true);
 
 	}
 

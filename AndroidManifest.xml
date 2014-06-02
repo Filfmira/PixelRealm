@@ -13,7 +13,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" android:allowTaskReparenting="false" android:largeHeap="true">
         <activity
             android:name="com.example.lolitos2.MainActivity"
             android:label="@string/app_name" >
@@ -32,6 +32,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.lolitos2.MainActivity" />
         </activity>
+        <activity android:name="PauseActivity"></activity>
     </application>
 
 </manifest>

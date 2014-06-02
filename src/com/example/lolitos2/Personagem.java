@@ -1,11 +1,13 @@
 package com.example.lolitos2;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
+import java.io.Serializable;
 
-public class Personagem extends Entidade{
+public class Personagem extends Entidade implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4872411336190897159L;
 	private float vida=1000000;
 	float vidaInicial=1000000;
 	float ataque=0;

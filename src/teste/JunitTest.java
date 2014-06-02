@@ -1,14 +1,5 @@
 package teste;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Arrays;
-
-import org.junit.Test;
-
-import com.example.lolitos2.Entidade;
-import com.example.lolitos2.Jogo;
-
 
 public class JunitTest {
 //

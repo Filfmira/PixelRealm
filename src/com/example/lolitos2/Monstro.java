@@ -1,14 +1,17 @@
 package com.example.lolitos2;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import java.io.Serializable;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 
-public class Monstro extends Personagem{
+public class Monstro extends Personagem implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6201805755334726669L;
 	private int originalX;
 	private int originalY;
 	private int transparencia;

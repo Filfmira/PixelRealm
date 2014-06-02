@@ -1,14 +1,18 @@
 package com.example.lolitos2;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import java.io.Serializable;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
 
-public class Heroi extends Personagem{
+public class Heroi extends Personagem implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4483137168303160705L;
 	private int dinheiro;
 	Arma arma;
 	int incAtaque=0;	//incremento de ataque temporario

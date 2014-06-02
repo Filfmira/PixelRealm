@@ -1,53 +1,53 @@
 package com.example.lolitos2;
 
-import java.util.ArrayList;
-
-import jogo.view.GameView;
+import java.io.Serializable;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.os.Vibrator;
-import android.util.Log;
 
-public class GameLogic {
+public class GameLogic implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5148514249177048314L;
 	// trata de lutar o heroi contra os monstros
-	static int t=0;
+	static int t = 0;
+
 	static public void lutar(Jogo jogo, GameSurface gameSurface) {
-		boolean lutar=false;
+		boolean lutar = false;
 		for (int i = 0; i < jogo.getInimigos().size(); i++) {
 
 			if (testaColisao(jogo.getHeroi(), jogo.getInimigos().get(i))) {
-				lutar=true;
+				lutar = true;
 				jogo.getHeroi().lutar(jogo.getInimigos().get(i));
 				// Log.e("lutar", ""+heroi.getVida());
 				if (jogo.getInimigos().get(i).getVida() <= 0) {
-					int x=(int) (Math.random()*4);
-					if(x==1)
-						jogo.getGemsAtaque().add(new GemsAtaque(jogo.getInimigos().get(i)));
+					int x = (int) (Math.random() * 4);
+					if (x == 1)
+						jogo.getGemsAtaque().add(
+								new GemsAtaque(jogo.getInimigos().get(i)));
 					else
-					jogo.getMoedas().add(new Moeda(jogo.getInimigos().get(i)));
+						jogo.getMoedas().add(
+								new Moeda(jogo.getInimigos().get(i)));
 					jogo.getInimigos().remove(i);
 				}
 			}
 		}
-		if(lutar)
-		{
-			Vibrator v = (Vibrator) gameSurface.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+		if (lutar) {
+			Vibrator v = (Vibrator) gameSurface.getContext().getSystemService(
+					Context.VIBRATOR_SERVICE);
 
 			// Vibrate for 400 milliseconds
 			v.vibrate(10);
-			if(t==1)
-			{
-				t=0;
-			Entidade.dx=Entidade.dx-4;
-			}
-			else
-			{
-				t=1;
-				Entidade.dx=Entidade.dx+4;
+			if (t == 1) {
+				t = 0;
+				Entidade.dx = Entidade.dx - 4;
+			} else {
+				t = 1;
+				Entidade.dx = Entidade.dx + 4;
 			}
 		}
 	}
@@ -59,11 +59,13 @@ public class GameLogic {
 						.get(i))) {
 					jogo.getSetas().get(j).atacar(jogo.getInimigos().get(i));
 					if (jogo.getInimigos().get(i).getVida() <= 0) {
-						int x=(int) (Math.random()*4);
-						if(x==1)
-							jogo.getGemsAtaque().add(new GemsAtaque(jogo.getInimigos().get(i)));
+						int x = (int) (Math.random() * 4);
+						if (x == 1)
+							jogo.getGemsAtaque().add(
+									new GemsAtaque(jogo.getInimigos().get(i)));
 						else
-						jogo.getMoedas().add(new Moeda(jogo.getInimigos().get(i)));
+							jogo.getMoedas().add(
+									new Moeda(jogo.getInimigos().get(i)));
 						jogo.getInimigos().remove(i);
 					}
 					jogo.getSetas().remove(j);
@@ -89,7 +91,7 @@ public class GameLogic {
 				jogo.getGemsVida().remove(i);
 			}
 		}
-		
+
 		for (int i = 0; i < jogo.getGemsAtaque().size(); i++) {
 
 			if (testaColisao(jogo.getHeroi(), jogo.getGemsAtaque().get(i))) {
@@ -99,8 +101,7 @@ public class GameLogic {
 		}
 	}
 
-	static public void apanharMoedas(Jogo jogo)
-	{
+	static public void apanharMoedas(Jogo jogo) {
 		for (int i = 0; i < jogo.getMoedas().size(); i++) {
 
 			if (testaColisao(jogo.getHeroi(), jogo.getMoedas().get(i))) {
@@ -109,7 +110,15 @@ public class GameLogic {
 			}
 		}
 	}
-	
+
+	static public void colidePortal(Jogo jogo)
+	{
+		if(testaColisao(jogo.getHeroi(),jogo.getPortal()))
+		{
+			jogo.getPortal().addGems(jogo.getHeroi().getDinheiro());
+			jogo.getHeroi().setDinheiro(0);
+		}
+	}
 	public static boolean testaColisao(Entidade heroi, Entidade objecto) {
 		int tamanho = Entidade.tamanhoCelula;
 		int xHeroi = heroi.getX(), yHeroi = heroi.getY();
@@ -118,12 +127,12 @@ public class GameLogic {
 
 		boolean colideHorDir = xObjecto <= xHeroi + tamanho
 				&& xObjecto >= xHeroi;
-		boolean colideHorEsq = xObjecto + tamanho >= xHeroi
-				&& xObjecto + tamanho <= xHeroi + tamanho;
+		boolean colideHorEsq = xObjecto + objecto.getWidth() >= xHeroi
+				&& xObjecto + objecto.getWidth() <= xHeroi + tamanho;
 		boolean colideVerBaixo = yObjecto <= yHeroi + tamanho
 				&& yObjecto >= yHeroi;
-		boolean colideVerCima = yObjecto + tamanho >= yHeroi
-				&& yObjecto + tamanho <= yHeroi + tamanho;
+		boolean colideVerCima = yObjecto + objecto.getHeight() >= yHeroi
+				&& yObjecto + objecto.getHeight() <= yHeroi + tamanho;
 
 		return ((colideVerCima || colideVerBaixo) && (colideHorEsq || colideHorDir));
 
@@ -248,7 +257,14 @@ public class GameLogic {
 
 	}
 
-	// ///////////////desenhar mini mapa ///////////////////////////////////
+	
+	////////////////////////////////////////
+	///////////   DESENHAR      ////////////
+	////////////////////////////////////////
+	
+	/*
+	 * desenha um minimapa no canto sup direito do mapa para efeitos de testes
+	 */
 	public static void drawMiniMap(Jogo jogo, Canvas canvas, Paint paint) {
 
 		int x1 = jogo.getHeroi().getX();
@@ -285,43 +301,68 @@ public class GameLogic {
 		canvas.drawText(x1 + "-" + y1, 60, 250, paint);
 	}
 
+	/*
+	 * Desenha 
+	 */
 	public static void drawMap(Jogo jogo, Canvas canvas, Paint paint) {
 
 		int x1 = jogo.getHeroi().getX();
 		int y1 = jogo.getHeroi().getY();
 
 		Paint paintMonstros = new Paint();
-		
-		//Paredes
-				for (int i = 0; i < jogo.getParedes().length; i++) {
-					for (int j = 0; j < jogo.getParedes()[i].length; j++) {
-						if (jogo.getParedes()[i][j] != null) {
-							jogo.getParedes()[i][j].draw(canvas, paint);
 
-						}
-					}
+		// Paredes
+		for (int i = 0; i < jogo.getParedes().length; i++) {
+			for (int j = 0; j < jogo.getParedes()[i].length; j++) {
+				if (jogo.getParedes()[i][j] != null) {
+					jogo.getParedes()[i][j].draw(canvas, paint);
+
 				}
+			}
+		}
 		// Monstros
-		for (int i = 0; i < jogo.getInimigos().size(); i++)
-		{
+		for (int i = 0; i < jogo.getInimigos().size(); i++) {
 			jogo.getInimigos().get(i).update();
-			paintMonstros.setAlpha(jogo.getInimigos().get(i).getTransparencia());
+			paintMonstros
+					.setAlpha(jogo.getInimigos().get(i).getTransparencia());
 			jogo.getInimigos().get(i).draw(canvas, paintMonstros);
 		}
 
-		// Gems
-		for (int i = 0; i < jogo.getGemsVida().size(); i++)
-			jogo.getGemsVida().get(i).draw(canvas, paint);
+		jogo.getPortal().draw(canvas, paint);
 		
-		for (int i = 0; i < jogo.getGemsAtaque().size(); i++)
-			jogo.getGemsAtaque().get(i).draw(canvas, paint);
-		
-		//Moedas
-		for (int i = 0; i < jogo.getMoedas().size(); i++)
-			jogo.getMoedas().get(i).draw(canvas, paint);
+		drawCatchables(jogo, canvas, paint);
 
+		jogo.getHeroi().draw(canvas, paint);
+		
+		drawSetas(jogo, canvas, paint);
 		
 
+	}
+
+	private static void drawCatchables(Jogo jogo, Canvas canvas, Paint paint) {
+		// GemsVida
+		for (int i = 0; i < jogo.getGemsVida().size(); i++) {
+			if (jogo.getGemsVida().get(i).update())
+				jogo.getGemsVida().get(i).draw(canvas, paint);
+			else
+				jogo.getGemsVida().remove(i);
+		}
+
+		// GemsAtaque
+		for (int i = 0; i < jogo.getGemsAtaque().size(); i++) {
+			if (jogo.getGemsAtaque().get(i).update())
+				jogo.getGemsAtaque().get(i).draw(canvas, paint);
+			else
+				jogo.getGemsAtaque().remove(i);
+		}
+
+		// Moedas
+		for (int i = 0; i < jogo.getMoedas().size(); i++) {
+			if (jogo.getMoedas().get(i).update())
+				jogo.getMoedas().get(i).draw(canvas, paint);
+			else
+				jogo.getMoedas().remove(i);
+		}
 	}
 
 	private static void drawSetas(Jogo jogo, Canvas canvas, Paint paint) {
@@ -341,28 +382,27 @@ public class GameLogic {
 		drawMap(jogo, canvas, paint);
 		// drawMiniMap(jogo,canvas,paint);
 
-		jogo.getHeroi().draw(canvas, paint);
-
-		drawSetas(jogo, canvas, paint);
-		desenharUpdates(jogo,canvas,paint);
+		desenharUpdates(jogo, canvas, paint);
 	}
 
-	
-	
-	public static void desenharUpdates(Jogo jogo, Canvas canvas, Paint paint)
-	{
-		//Desenhar Barra de ataque++
-		int x=Entidade.tamanhoCelula*2/3;
-		int y=Entidade.tamanhoCelula*4/3;
+	public static void desenharUpdates(Jogo jogo, Canvas canvas, Paint paint) {
+		// Desenhar Barra de ataque++
+		int x = Entidade.tamanhoCelula * 2 / 3;
+		int y = Entidade.tamanhoCelula * 4 / 3;
 		Paint p = new Paint();
 		p.setColor(Color.YELLOW);
-		if(jogo.getHeroi().incAtaque>0)
-		canvas.drawRect(x, y, x+(Entidade.tamanhoCelula*3/2*((float)(jogo.getHeroi().contadorAtaque)/200)), y+Entidade.tamanhoCelula*1/8, p);
-	
-		
-		//desenhar pausa
-		x=Entidade.tamanhoCelula*1/2;
-		y=Entidade.tamanhoCelula*1/2;
+		if (jogo.getHeroi().incAtaque > 0)
+			canvas.drawRect(
+					x,
+					y,
+					x
+							+ (Entidade.tamanhoCelula * 3 / 2 * ((float) (jogo
+									.getHeroi().contadorAtaque) / 200)), y
+							+ Entidade.tamanhoCelula * 1 / 8, p);
+
+		// desenhar pausa
+		x = Entidade.tamanhoCelula * 1 / 2;
+		y = Entidade.tamanhoCelula * 1 / 2;
 		canvas.drawBitmap(Imagens.pausa, x, y, paint);
 	}
 }

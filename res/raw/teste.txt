@@ -1,22 +1,32 @@
 oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
-ooo                                                                         oooooooooo
-ooo         x x   x     o    x                                           v       oooooooooo
-ooo   v    x x         o                      x            v                   oooooooooo
-ooo       x  x x     x o        x                                              oooooooooo
-ooo   x    x    x       o                   x                       v            oooooooooo
-ooo     x   x x   v    o                                                       oooooooooo
-ooo   x  x     x        o                ooooooooo                                     oooooooooo
-ooo     x     x   x     o         x     ooooooooooooo                                      oooooooooo
-ooo  x      x                        oooooo   oooo                                   oooooooooo
-ooo     v      x    x               ooooooo   v  ooooo  v                                oooooooooo
-ooooo                            oooooooo      ooooo         oooo                        oooooooooooo
-ooooooo                           oooooo              oooo     x                  oooo   ooooooooooo
-oooooooo               v                                            v      ooo  oooooooooo
-oooooooo                     x                x                               oooooooooo
-oooooooo                                                   v                 oooooooooo
-oooooooo         oooooo              v                                             oooooooooo
-oooooooo      oooooooooooo                                 x            v              oooooooooo
-oooooooo         ooooo v                                                          oooooooooo
-oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+ooo                             oooooooo
+ooo                             oooooooo
+ooo          v                  oooooooo
+ooo                             oooooooo
+ooo                             oooooooo
+ooo    v                        oooooooo
+ooo                             oooooooo
+ooo       v             v       oooooooo
+ooo                             oooooooo
+ooo                             oooooooo
+ooo                             oooooooo
+ooo                             oooooooo
+ooo                             oooooooo
+ooo    v       k                oooooooo
+ooo                             oooooooo
+ooo                             oooooooo
+ooo                 v           oooooooo
+ooo                             oooooooo
+ooo                             oooooooo
+ooo                             oooooooo
+ooo                             oooooooo
+ooo                             oooooooo
+ooo                             oooooooo
+ooo     v                       oooooooo
+ooo                             oooooooo
+ooo                             oooooooo
+ooo       v                     oooooooo
+ooo                             oooooooo
+ooo                             oooooooo
+oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo

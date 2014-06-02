@@ -1,8 +1,9 @@
 package com.example.lolitos2;
 
+import java.io.Serializable;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.Point;
 import android.util.Log;
 import android.view.Display;
@@ -12,8 +13,12 @@ import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 
 @SuppressLint("NewApi")
-public class GameControls implements OnTouchListener {
+public class GameControls implements OnTouchListener, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4852945977582535988L;
 	int w, h;
 	int xSJ, ySJ; // x e y do small Joystick
 	int tpx, tpy;
@@ -108,10 +113,11 @@ public class GameControls implements OnTouchListener {
 			double angle = Math.atan2(_touchingPoint.y - inity,
 					_touchingPoint.x - initx) / (Math.PI / 180);
 
+			double raio= Math.sqrt(Math.pow(_touchingPoint.y - inity, 2)+Math.pow(_touchingPoint.x - initx, 2))/(sBJ/2);
 			// Move the beetle in proportion to how far
 			// the joystick is dragged from its center
-			int a = (int) (-Math.sin(angle * (Math.PI / 180)) * 20);
-			int b = (int) (-Math.cos(angle * (Math.PI / 180)) * 20);
+			int a = (int) (-Math.sin(angle * (Math.PI / 180)) * raio * 35);
+			int b = (int) (-Math.cos(angle * (Math.PI / 180)) * raio * 35);
 
 			int[] x = { b, a };
 			// Log.e("colide", x[0]+"-"+x[1]);
@@ -166,6 +172,7 @@ public class GameControls implements OnTouchListener {
 			pontoEntidade.x = (int) event.getX();
 			pontoEntidade.y = (int) event.getY();
 			if (pausaEntidade.colide(pontoEntidade)) {
+				parent.menuPausa();
 				break;
 			} 
 			
