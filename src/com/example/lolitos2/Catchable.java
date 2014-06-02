@@ -2,10 +2,11 @@ package com.example.lolitos2;
 
 import java.io.Serializable;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public class Catchable extends Entidade implements Serializable{
+public abstract class Catchable extends Entidade implements Serializable{
 
 	/**
 	 * 
@@ -36,17 +37,17 @@ public class Catchable extends Entidade implements Serializable{
 	
 	public boolean update()
 	{
-		if(tempo==0)
+		/*if(tempo==0)
 			return false;
 		else if(tempo <50)
 			sprite.setDirection(1);
-		tempo--;
+		tempo--;*/
 		return true;
 	}
 
-	public void draw(Canvas canvas, Paint paint){
+	/*public void draw(Canvas canvas, Paint paint){
 		sprite.draw(canvas, x * tamanhoCelula+Entidade.dx, y * tamanhoCelula+Entidade.dy);
-	}
+	}*/
 	
 	
 	
@@ -59,6 +60,9 @@ public class Catchable extends Entidade implements Serializable{
 	public void setCapacidade(int capacidade) {
 		this.capacidade = capacidade;
 	}
+
+	@Override
+	public abstract Bitmap getImagem();
 	
 	
 

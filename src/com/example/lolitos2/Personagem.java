@@ -2,7 +2,7 @@ package com.example.lolitos2;
 
 import java.io.Serializable;
 
-public class Personagem extends Entidade implements Serializable{
+public abstract class Personagem extends Entidade implements Serializable{
 
 	/**
 	 * 

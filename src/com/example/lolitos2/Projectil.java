@@ -2,6 +2,8 @@ package com.example.lolitos2;
 
 import java.io.Serializable;
 
+import android.graphics.Bitmap;
+
 public class Projectil extends Entidade implements Serializable{
 
 	/**
@@ -13,6 +15,7 @@ public class Projectil extends Entidade implements Serializable{
 	int dxI,dyI;
 	int ataque;
 	int xInicial,yInicial;
+	int angulo;
 	
 	/**
 	 * Cria um projectil com determinada posicao
@@ -28,7 +31,7 @@ public class Projectil extends Entidade implements Serializable{
 		yInicial=y;
 		dxI=Entidade.dx;
 		dyI=Entidade.dy;
-		imagem=Imagens.seta;
+		//imagem=Imagens.seta;
 		this.pdx=pdx;
 		this.pdy=pdy;
 		a=x;
@@ -47,7 +50,7 @@ public class Projectil extends Entidade implements Serializable{
 			else
 				angulo=(float) (135-90);
 			}
-		this.imagem=Imagens.RotateBitmap(this.imagem, angulo);
+		//this.imagem=Imagens.RotateBitmap(this.imagem, angulo);
 		/*else
 			this.imagem=Imagens.RotateBitmap(this.imagem, (float) (-45+Math.toDegrees(Math.atan((float)(pdy/pdx)))));*/
 	}
@@ -76,6 +79,11 @@ public class Projectil extends Entidade implements Serializable{
 	 */
 	public void atacar(Monstro m){
 		m.setVida(m.getVida()-this.ataque);
+	}
+
+	@Override
+	public Bitmap getImagem() {
+		return Imagens.RotateBitmap(Imagens.seta, angulo);
 	}
 
 }

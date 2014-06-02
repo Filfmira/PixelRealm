@@ -65,15 +65,15 @@ public class GameControls implements OnTouchListener, Serializable {
 		inity = ySJ;
 		_touchingPoint = new Point(tpx, tpy);
 
-		joystickEntidade = new Entidade(xBJ, yBJ, sBJ, sBJ);
-		pontoEntidade = new Entidade(0, 0, 1, 1);
+		joystickEntidade = new Parede(xBJ, yBJ, sBJ, sBJ);
+		pontoEntidade = new Parede(0, 0, 1, 1);
 
 	}
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		if (pausaEntidade == null)
-			pausaEntidade=new Entidade(Entidade.tamanhoCelula/2,Entidade.tamanhoCelula/2,Entidade.tamanhoCelula/2+Imagens.pausa.getWidth(),Entidade.tamanhoCelula/2+Imagens.pausa.getHeight());
+			pausaEntidade=new Parede(Entidade.tamanhoCelula/2,Entidade.tamanhoCelula/2,Entidade.tamanhoCelula/2+Imagens.pausa.getWidth(),Entidade.tamanhoCelula/2+Imagens.pausa.getHeight());
 
 		handleMultitouch(event);
 		

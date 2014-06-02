@@ -2,6 +2,7 @@ package com.example.lolitos2;
 
 import java.io.Serializable;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -24,7 +25,7 @@ public class Heroi extends Personagem implements Serializable{
 		ataque=200;
 		movimento=2;
 		color=Color.BLUE;
-	 	imagem = Imagens.heroi;
+	 	//imagem = Imagens.heroi;
 	}
 
 	/*
@@ -42,10 +43,7 @@ public class Heroi extends Personagem implements Serializable{
 	public void draw(Canvas canvas, Paint paint){
 		
 		
-		if(this.incAtaque==0)
-		canvas.drawBitmap(imagem, this.getX(), this.getY(), paint);
-		else
-			canvas.drawBitmap(Imagens.heroi2, this.getX(), this.getY(), paint);
+		canvas.drawBitmap(getImagem(), this.getX(), this.getY(), paint);
 
 		
 		//paint.setColor(Color.RED);
@@ -129,6 +127,13 @@ public class Heroi extends Personagem implements Serializable{
 		}
 		else if(contadorAtaque==0)
 			incAtaque=0;
+	}
+
+	@Override
+	public Bitmap getImagem() {
+		if (this.incAtaque > 0)
+			return Imagens.heroi2;
+		else return Imagens.heroi;
 	}
 	
 }

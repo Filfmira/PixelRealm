@@ -2,6 +2,8 @@ package com.example.lolitos2;
 
 import java.io.Serializable;
 
+import android.graphics.Bitmap;
+
 public class Moeda extends Catchable implements Serializable{
 
 	/**
@@ -21,8 +23,13 @@ public class Moeda extends Catchable implements Serializable{
 	}
 	
 	private void init(){
-		imagem=Imagens.gemsvida;
-		sprite= new Sprite(Imagens.moedasSprite,2,4,x,y);
+		//imagem=Imagens.gemsvida;
+		//sprite= new Sprite(Imagens.moedasSprite,2,4,x,y);
+	}
+
+	@Override
+	public Bitmap getImagem() {
+		return Imagens.moeda;
 	}
 	
 }

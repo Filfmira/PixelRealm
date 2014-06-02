@@ -2,6 +2,7 @@ package com.example.lolitos2;
 
 import java.io.Serializable;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -24,7 +25,7 @@ public class Monstro extends Personagem implements Serializable{
 		vidaInicial=5000;
 		ataque=40;
 		movimento=20;
-		imagem=Imagens.monstro;
+		//imagem=Imagens.monstro;
 		setTransparencia((int) ((Math.random()*100)+100));
 		incremento=1;
 		
@@ -91,6 +92,11 @@ public class Monstro extends Personagem implements Serializable{
 
 	public void setTransparencia(int transparencia) {
 		this.transparencia = transparencia;
+	}
+
+	@Override
+	public Bitmap getImagem() {
+		return Imagens.monstro;
 	}
 
 }

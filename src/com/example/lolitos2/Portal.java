@@ -2,6 +2,8 @@ package com.example.lolitos2;
 
 import java.io.Serializable;
 
+import android.graphics.Bitmap;
+
 public class Portal extends Entidade implements Serializable{
 
 	/**
@@ -11,12 +13,17 @@ public class Portal extends Entidade implements Serializable{
 	int numGems;
 	public Portal(int x, int y) {
 		super(x, y, Entidade.tamanhoCelula*2, Entidade.tamanhoCelula*2);
-		imagem=Imagens.portal;
+		//imagem=Imagens.portal;
 		numGems=0;
 	}
 
 	public void addGems(int x)
 	{
 		numGems+=x;
+	}
+
+	@Override
+	public Bitmap getImagem() {
+		return Imagens.portal;
 	}
 }

@@ -6,12 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-public class Sprite  implements Serializable{
+public class Sprite  {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -366547613844788236L;
 	int height,width;
 	int currentFrame=0;
 	private int direction=0;

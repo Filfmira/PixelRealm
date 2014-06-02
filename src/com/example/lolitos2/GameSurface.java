@@ -1,6 +1,12 @@
 package com.example.lolitos2;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import com.example.lolitos2.R;
@@ -80,7 +86,10 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback, 
 		Log.e("tC", Entidade.tamanhoCelula+"");
 		InputStream inputStream = this.getResources().openRawResource(
 				R.raw.teste);
-		setJogo(new Jogo(Entidade.tamanhoCelula, inputStream));
+		Jogo j = loadGame();
+		if (j == null)
+			setJogo(new Jogo(Entidade.tamanhoCelula, inputStream));
+		else setJogo(j);
 	}
 
 	public void doDraw(Canvas canvas) {
@@ -234,12 +243,71 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback, 
 	public void menuPausa()
 	{
 		Intent intent = new Intent(_context, PauseActivity.class);
-		
+		saveGame(jogo);
 		_context.startActivity(intent);
 	}
 	
+	public  void saveGame(Jogo j){
+		FileOutputStream fos = null;
+		try {
+			fos = _context.openFileOutput("file.dat", Context.MODE_PRIVATE);
+		} catch (FileNotFoundException e1) {
+			Log.e("save", "FileNotFoundException");
+			e1.printStackTrace();
+		}
+		ObjectOutputStream os = null;
+		try{
+			os = new ObjectOutputStream (fos);
+			os.writeObject(j);
+		}
+		catch (IOException e){
+			Log.e("save", "IOException while Writing");
+			e.printStackTrace();
+		}
+		finally{
+			if (os != null)
+				try{
+					os.close();
+				}
+			catch (IOException e){
+				Log.e("save", "IOException while writing (closing file)");
+			}
+		}
+	}
 	
-	
+	public static Jogo loadGame(){
+		ObjectInputStream is = null;
+		Jogo jogo = null;
+		try {
+			is = new ObjectInputStream(new FileInputStream("file.dat"));
+			jogo = (Jogo) is.readObject();
+		}
+		catch(FileNotFoundException f){
+			Log.e("load", "FileNotFoundException");
+			return null;
+		}
+		catch (ClassNotFoundException c){
+			Log.e("load", "ClassNotFoundException");
+			return null;
+		}
+		catch (IOException e) {
+			Log.e("load", "IOException");
+			e.printStackTrace();
+			return null; 
+		}
+		finally { 
+			if (is != null){
+				try {
+					is.close();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+				return jogo;
+			}
+		}
+		return null;
+	}
 	
 	
 	public GameJoystick get_joystick() {

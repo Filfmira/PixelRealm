@@ -1,5 +1,7 @@
 package com.example.lolitos2;
 
+import java.io.Serializable;
+
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

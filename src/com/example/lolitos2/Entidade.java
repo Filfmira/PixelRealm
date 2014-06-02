@@ -8,7 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-public class Entidade  implements Serializable{
+public abstract class Entidade  implements Serializable{
 
 	/**
 	 * 
@@ -27,7 +27,7 @@ public class Entidade  implements Serializable{
 	protected static int dy=0;
 	protected static Resources res;
 	protected int color=Color.RED;
-	protected Bitmap imagem;
+	//protected Bitmap imagem;
 	
 	public int getX() {
 		return x;
@@ -115,7 +115,7 @@ public class Entidade  implements Serializable{
 				tamanhoCelula + y * tamanhoCelula+Entidade.dy>Entidade.sh
 				)
 		return;*/
-		canvas.drawBitmap(imagem, x * tamanhoCelula+Entidade.dx, y * tamanhoCelula+Entidade.dy, paint);
+		canvas.drawBitmap(getImagem(), x * tamanhoCelula+Entidade.dx, y * tamanhoCelula+Entidade.dy, paint);
 	}
 	
 	
@@ -124,7 +124,7 @@ public class Entidade  implements Serializable{
 		y=y+deslocY;*/
 		/*paint.setColor(color);
 		canvas.drawRect(x , y , this.getWidth(), this.getHeight(), paint);*/
-		canvas.drawBitmap(imagem, x, y , paint);
+		canvas.drawBitmap(getImagem(), x, y , paint);
 	}
 	
 	public void movimento(int direcao)
@@ -147,6 +147,8 @@ public class Entidade  implements Serializable{
 			break;
 		}
 	}
+	
+	public abstract Bitmap getImagem();
 	
 	
 }
