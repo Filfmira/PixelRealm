@@ -16,6 +16,8 @@ public abstract class Catchable extends Entidade implements Serializable{
 	protected int tempo=200;
 	
 	Sprite sprite;
+	
+	
 	//Construtores 
 	public Catchable(int x, int y) {
 		super(x, y, Entidade.tamanhoCelula, Entidade.tamanhoCelula);
@@ -35,6 +37,8 @@ public abstract class Catchable extends Entidade implements Serializable{
 		this.setCapacidade(capacidade);
 	}
 	
+	
+	/////////////////////////////////A DESCOMENTAR QUANDO O LOAD TIVER A DAR COM SPRITES ///////////////
 	public boolean update()
 	{
 		/*if(tempo==0)

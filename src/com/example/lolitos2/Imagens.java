@@ -25,6 +25,8 @@ public class Imagens {
 	protected static Bitmap gemsAtaqueSprite;
 	protected static Bitmap moedasSprite;
 	protected static Bitmap portal;		//subst por sprite
+	protected static Bitmap relva;
+	protected static Bitmap flor;
 	
 	static void inicializarImagens(Resources res)
 	{
@@ -69,6 +71,12 @@ public class Imagens {
 		
 		portal = BitmapFactory.decodeResource(res, R.drawable.portal);
 		portal = Bitmap.createScaledBitmap(portal, Entidade.tamanhoCelula*2, Entidade.tamanhoCelula*2, true);
+		
+		relva = BitmapFactory.decodeResource(res, R.drawable.relva);
+		relva = Bitmap.createScaledBitmap(relva, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
+		
+		flor = BitmapFactory.decodeResource(res, R.drawable.relvaflor);
+		flor = Bitmap.createScaledBitmap(flor, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
 		
 	}
 	

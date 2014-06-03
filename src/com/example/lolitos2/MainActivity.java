@@ -1,7 +1,6 @@
 package com.example.lolitos2;
 
 
-import jogo.view.GameView;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,7 +13,6 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
-	private GameView game;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +20,11 @@ public class MainActivity extends Activity {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
     	getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,   
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        game=new GameView(this);
       // setContentView(game);	//para mostrar o gameView
        //setContentView(new GameSurface(this));
         setContentView(R.layout.main);
         Button bt = (Button) findViewById(R.id.button1);
-        bt.setBackgroundColor(Color.TRANSPARENT);
+       // bt.setBackgroundColor(Color.TRANSPARENT);
         bt.setOnClickListener(new OnClickListener() {
 			
 			@Override

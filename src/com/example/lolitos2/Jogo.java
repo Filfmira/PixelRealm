@@ -1,6 +1,11 @@
 package com.example.lolitos2;
 
 import java.util.ArrayList;
+
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -22,44 +27,41 @@ public class Jogo  implements Serializable{
 	private ArrayList<GemsAtaque> gemsAtaque;
 	private ArrayList<Projectil> setas;
 	private ArrayList<Moeda> moedas;
-	private Parede[][] paredes = new Parede[200][200];
+	private ArrayList<Passivo> fundo;
+	private Parede[][] paredes = new Parede[100][100];
 	private Portal portal;
-	private InputStream inputStream;
 
 	// inicializa o jogo
-	public Jogo(int tamanhoCelula, InputStream inputStream) {
-		this.inputStream = inputStream;
-		ArrayList<String> tab = readText();
+	public Jogo(int tamanhoCelula, Resources resources) {
 		setSetas(new ArrayList<Projectil>());
 		setInimigos(new ArrayList<Monstro>());
 		setGemsVida(new ArrayList<GemsVida>());
 		setGemsAtaque(new ArrayList<GemsAtaque>());
 		setMoedas(new ArrayList<Moeda>());
+		setFundo(new ArrayList<Passivo>());
 
 		// percorre o ficheiro do mapa
-		for (int i = 0; i < tab.size(); i++) {
-			for (int j = 0; j < tab.get(i).length(); j++) {
+		Bitmap tab=BitmapFactory.decodeResource(resources, com.example.lolitos2.R.drawable.mappixel);
+		Log.e("w", tab.getWidth()+"."+tab.getHeight());
+		for (int i = 0; i < tab.getWidth(); i++) {
+			for (int j = 0; j < tab.getHeight(); j++) {
 				int x = j;
 				int y = i;
-				switch (tab.get(i).charAt(j)) {
+				switch (tab.getPixel(x, y)) {
 				// se o é uma parede
-				case 'o':
+				case Color.BLACK:
 					getParedes()[x][y] = new Parede(x, y);
 					break;
-				// se v é uma gem de vida
-				case 'v':
-					getGemsVida().add(new GemsVida(x, y, 5000));
-					break;
-					// se k é o portal
-				case 'k':
-					setPortal(new Portal(x,y));
+				case Color.YELLOW:
+					fundo.add(new Passivo(x,y,1));
 					break;
 				default:
-					break;
+					fundo.add(new Passivo(x,y,0));
 				}
 
 			}
 		}
+		this.setPortal(new Portal(10,10));
 		// setHeroi(new Heroi(5,7));
 		setHeroi(new Heroi((Entidade.sw / 2) - (Entidade.tamanhoCelula / 2),
 				(Entidade.sh / 2) - (Entidade.tamanhoCelula / 2)));
@@ -71,26 +73,7 @@ public class Jogo  implements Serializable{
 
 	}
 
-	/**
-	 * le o texto para um array list
-	 * @return
-	 */
-	private ArrayList<String> readText() {
-
-		ArrayList<String> s = new ArrayList<String>();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				inputStream));
-		String line;
-		try {
-			while ((line = reader.readLine()) != null) {
-				s.add(line.toString());
-
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return s;
-	}
+	
 
 	
 	/**
@@ -184,6 +167,14 @@ public class Jogo  implements Serializable{
 
 	public void setPortal(Portal portal) {
 		this.portal = portal;
+	}
+
+	public ArrayList<Passivo> getFundo() {
+		return fundo;
+	}
+
+	public void setFundo(ArrayList<Passivo> fundo) {
+		this.fundo = fundo;
 	}
 
 }

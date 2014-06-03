@@ -30,9 +30,9 @@ public class GameJoystick implements OnLongClickListener, Serializable{
 	public GameJoystick(Resources res){
 		
 		_joystick = (Bitmap)BitmapFactory.decodeResource(res, com.example.lolitos2.R.drawable.joystick);
-		this._joystick=Bitmap.createScaledBitmap(_joystick, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
+		this._joystick=Bitmap.createScaledBitmap(_joystick,(int)(( Entidade.sw/11)*1.3), (int)(( Entidade.sw/11)*1.3), true);
 		_joystickBg = (Bitmap)BitmapFactory.decodeResource(res,com.example.lolitos2.R.drawable.joystick_bg);
-		this._joystickBg=Bitmap.createScaledBitmap(_joystickBg, Entidade.tamanhoCelula*2, Entidade.tamanhoCelula*2, true);
+		this._joystickBg=Bitmap.createScaledBitmap(_joystickBg,(int)(( Entidade.sw/11)*2.5), (int)(( Entidade.sw/11)*2.5), true);
 
 	}
 

@@ -130,15 +130,19 @@ public abstract class Entidade  implements Serializable{
 	public void movimento(int direcao)
 	{
 		switch (direcao) {
+		//esq
 		case 0:
 			setX(getX()-1);
 			break;
+			//dir
 		case 1:
 			setX(getX()+1);
 			break;
+			//cima
 		case 2:
 			setY(getY()-1);
 			break;
+			//baixo
 		case 3:
 			setY(getY()+1);
 			break;

@@ -997,16 +997,19 @@ containing a value of this type.
         public static final int joystick_bg=0x7f020064;
         public static final int loading=0x7f020065;
         public static final int mapa=0x7f020066;
-        public static final int moeda=0x7f020067;
-        public static final int moedassprite=0x7f020068;
-        public static final int monstro=0x7f020069;
-        public static final int parede=0x7f02006a;
-        public static final int pausa=0x7f02006b;
-        public static final int portal=0x7f02006c;
-        public static final int seta=0x7f02006d;
-        public static final int teste=0x7f02006e;
-        public static final int tetse=0x7f02006f;
-        public static final int ui3=0x7f020070;
+        public static final int mappixel=0x7f020067;
+        public static final int moeda=0x7f020068;
+        public static final int moedassprite=0x7f020069;
+        public static final int monstro=0x7f02006a;
+        public static final int parede=0x7f02006b;
+        public static final int pausa=0x7f02006c;
+        public static final int portal=0x7f02006d;
+        public static final int relva=0x7f02006e;
+        public static final int relvaflor=0x7f02006f;
+        public static final int seta=0x7f020070;
+        public static final int teste=0x7f020071;
+        public static final int tetse=0x7f020072;
+        public static final int ui3=0x7f020073;
     }
     public static final class id {
         public static final int action_bar=0x7f06001c;

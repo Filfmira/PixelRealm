@@ -15,7 +15,7 @@ public class Projectil extends Entidade implements Serializable{
 	int dxI,dyI;
 	int ataque;
 	int xInicial,yInicial;
-	int angulo;
+	float angulo;
 	
 	/**
 	 * Cria um projectil com determinada posicao
@@ -38,7 +38,6 @@ public class Projectil extends Entidade implements Serializable{
 		b=y;
 		ataque=(int) (heroi.ataque*2);
 		//if(x<=Entidade.sw/2)
-		float angulo=0;
 		//Log.e("tintas", xInicial+"-"+Entidade.sw/2);
 		if(pdx>0)
 			angulo=(float) (135+Math.toDegrees(Math.atan((float)(pdy/pdx))));

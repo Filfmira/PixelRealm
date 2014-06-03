@@ -202,7 +202,6 @@ public class GameControls implements OnTouchListener, Serializable {
 		case MotionEvent.ACTION_POINTER_DOWN:
 			ptrId = action >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
 			// Log.e("gg", 2+"");
-
 			int ptrIdx = event.findPointerIndex(ptrId);
 
 			pontoEntidade.x = (int) event.getX(ptrIdx);

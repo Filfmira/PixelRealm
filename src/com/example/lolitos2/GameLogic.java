@@ -16,6 +16,11 @@ public class GameLogic implements Serializable {
 	// trata de lutar o heroi contra os monstros
 	static int t = 0;
 
+	/**
+	 * Função que trata de lutar o heroi contra todos os monstors
+	 * @param jogo
+	 * @param gameSurface
+	 */
 	static public void lutar(Jogo jogo, GameSurface gameSurface) {
 		boolean lutar = false;
 		for (int i = 0; i < jogo.getInimigos().size(); i++) {
@@ -52,6 +57,11 @@ public class GameLogic implements Serializable {
 		}
 	}
 
+	/**
+	 * Funcao para fazer update a posicao das setas do heroi e se estas devem
+	 * deixar de existir, consoante o tempo decorrido desde que foram lançadas
+	 * @param jogo
+	 */
 	static public void setasUpdate(Jogo jogo) {
 		for (int i = 0; i < jogo.getInimigos().size(); i++) {
 			for (int j = 0; j < jogo.getSetas().size(); j++)
@@ -83,6 +93,10 @@ public class GameLogic implements Serializable {
 				}
 	}
 
+	/**
+	 * Funcao que verifica se o jogador nao apanhou qualquer tipo de Gems
+	 * @param jogo
+	 */
 	static public void apanharGems(Jogo jogo) {
 		for (int i = 0; i < jogo.getGemsVida().size(); i++) {
 
@@ -101,6 +115,10 @@ public class GameLogic implements Serializable {
 		}
 	}
 
+	/**
+	 * Funcao que verifica se o jogador apanhou moedas
+	 * @param jogo
+	 */
 	static public void apanharMoedas(Jogo jogo) {
 		for (int i = 0; i < jogo.getMoedas().size(); i++) {
 
@@ -111,6 +129,10 @@ public class GameLogic implements Serializable {
 		}
 	}
 
+	/**
+	 * Funcao que trata das colisoes entre o heroi e o portal
+	 * @param jogo
+	 */
 	static public void colidePortal(Jogo jogo)
 	{
 		if(testaColisao(jogo.getHeroi(),jogo.getPortal()))
@@ -119,6 +141,13 @@ public class GameLogic implements Serializable {
 			jogo.getHeroi().setDinheiro(0);
 		}
 	}
+	
+	/**
+	 * Funcao que testa a colisao entre um "heroi" e um outro "objeto"
+	 * @param heroi
+	 * @param objecto
+	 * @return
+	 */
 	public static boolean testaColisao(Entidade heroi, Entidade objecto) {
 		int tamanho = Entidade.tamanhoCelula;
 		int xHeroi = heroi.getX(), yHeroi = heroi.getY();
@@ -142,6 +171,13 @@ public class GameLogic implements Serializable {
 
 	}
 
+	/**
+	 * Funcao que testa se o heroi foi contra um objecto, tendo em conta o deslocamento x
+	 * @param heroi
+	 * @param objecto
+	 * @param x array de delocamento, em que x[0] é o dx e x[1] o dy
+	 * @return
+	 */
 	public static boolean testaColisao(Entidade heroi, Entidade objecto, int[] x) {
 		int tamanho = Entidade.tamanhoCelula;
 		int xHeroi = heroi.getX(), yHeroi = heroi.getY();
@@ -161,7 +197,13 @@ public class GameLogic implements Serializable {
 
 	}
 
-	// public static boolean col(int ax1,int ay1, int bx1,int by1, int[] x)
+	/**
+	 * Se um "heroi" colidir com o "objecto" a sua deslocacao "x" sera alterada
+	 * @param heroi
+	 * @param objecto
+	 * @param x	array de delocamento, em que x[0] é o dx e x[1] o dy
+	 * @return	true se colidir e false se nao
+	 */
 	public static boolean col(Entidade heroi, Entidade objecto, int[] x) {
 		int tamanho = Entidade.tamanhoCelula;
 		int xHeroi = heroi.getX(), yHeroi = heroi.getY();
@@ -233,6 +275,13 @@ public class GameLogic implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Precorre todos os objectos do mapa com que o heroi nao pode colidir e , em caso disso,
+	 * processa funcoes como lutar contra monstros
+	 * @param jogo
+	 * @param x	array de delocamento, em que x[0] é o dx e x[1] o dy
+	 * @return
+	 */
 	public static boolean verificaMovimento(Jogo jogo, int[] x) {
 
 		// precorre todas as paredes e compara
@@ -262,8 +311,11 @@ public class GameLogic implements Serializable {
 	///////////   DESENHAR      ////////////
 	////////////////////////////////////////
 	
-	/*
+	/**
 	 * desenha um minimapa no canto sup direito do mapa para efeitos de testes
+	 * @param jogo
+	 * @param canvas
+	 * @param paint
 	 */
 	public static void drawMiniMap(Jogo jogo, Canvas canvas, Paint paint) {
 
@@ -301,8 +353,11 @@ public class GameLogic implements Serializable {
 		canvas.drawText(x1 + "-" + y1, 60, 250, paint);
 	}
 
-	/*
-	 * Desenha 
+	/**
+	 * Desenhar o mapa todo
+	 * @param jogo
+	 * @param canvas
+	 * @param paint
 	 */
 	public static void drawMap(Jogo jogo, Canvas canvas, Paint paint) {
 
@@ -320,6 +375,8 @@ public class GameLogic implements Serializable {
 				}
 			}
 		}
+		for(int i=0;i<jogo.getFundo().size();i++)
+			jogo.getFundo().get(i).draw(canvas, paint);
 		// Monstros
 		for (int i = 0; i < jogo.getInimigos().size(); i++) {
 			jogo.getInimigos().get(i).update();
@@ -339,6 +396,12 @@ public class GameLogic implements Serializable {
 
 	}
 
+	/**
+	 * desenha todos os catchables em jogo
+	 * @param jogo
+	 * @param canvas
+	 * @param paint
+	 */
 	private static void drawCatchables(Jogo jogo, Canvas canvas, Paint paint) {
 		// GemsVida
 		for (int i = 0; i < jogo.getGemsVida().size(); i++) {
@@ -365,6 +428,12 @@ public class GameLogic implements Serializable {
 		}
 	}
 
+	/**
+	 * desenha todas as setas em jogo
+	 * @param jogo
+	 * @param canvas
+	 * @param paint
+	 */
 	private static void drawSetas(Jogo jogo, Canvas canvas, Paint paint) {
 		paint.setColor(Color.YELLOW);
 		for (int i = 0; i < jogo.getSetas().size(); i++) {
@@ -376,7 +445,12 @@ public class GameLogic implements Serializable {
 		}
 	}
 
-	// desenha tudo no mapa
+	/**
+	 * desenha todo o ecra
+	 * @param jogo
+	 * @param canvas
+	 * @param paint
+	 */
 	public static void desenharEntidades(Jogo jogo, Canvas canvas, Paint paint) {
 		// desenhar mini mapa
 		drawMap(jogo, canvas, paint);
@@ -385,6 +459,12 @@ public class GameLogic implements Serializable {
 		desenharUpdates(jogo, canvas, paint);
 	}
 
+	/** coisas como pause, barras de estado, etc
+	 * desenha 
+	 * @param jogo
+	 * @param canvas
+	 * @param paint
+	 */
 	public static void desenharUpdates(Jogo jogo, Canvas canvas, Paint paint) {
 		// Desenhar Barra de ataque++
 		int x = Entidade.tamanhoCelula * 2 / 3;
