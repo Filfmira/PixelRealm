@@ -17,11 +17,13 @@ public class Heroi extends Personagem implements Serializable{
 	private int dinheiro;
 //	Arma arma;
 	int incAtaque=0;	//incremento de ataque temporario
+	int nivel=1;
 	
 	public Heroi(int x, int y) {
 		super(x, y);
-		setVida(20000);
-		vidaInicial=20000;
+		setVida(10000);
+		
+		setVidaInicial(1000);
 		ataque=200;
 		movimento=2;
 		//color=Color.BLUE;
@@ -135,6 +137,15 @@ public class Heroi extends Personagem implements Serializable{
 		if (this.incAtaque > 0)
 			return Imagens.heroi2;
 		else return Imagens.heroi;
+	}
+
+	public void setAtaqueNormal() {
+		if(incAtaque!=0)
+		{
+		this.ataque-=this.incAtaque;
+		this.incAtaque=0;
+		}
+		
 	}
 	
 }

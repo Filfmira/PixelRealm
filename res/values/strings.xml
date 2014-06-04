@@ -6,5 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="play">Play</string>
     <string name="title_activity_game">GameActivity</string>
+    <string name="title_activity_lost">LostActivity</string>
+    <string name="titleText">Pixel Realm</string>
 
 </resources>

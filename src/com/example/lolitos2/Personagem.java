@@ -9,7 +9,7 @@ public abstract class Personagem extends Entidade implements Serializable{
 	 */
 	private static final long serialVersionUID = -2527421795633542694L;
 	private float vida=1000000;
-	float vidaInicial=1000000;
+	private float vidaInicial=1000000;
 	float ataque=0;
 	protected int movimento= 0;
 	
@@ -89,6 +89,14 @@ public abstract class Personagem extends Entidade implements Serializable{
 
 	public void setVida(float vida) {
 		this.vida = vida;
+	}
+
+	public float getVidaInicial() {
+		return vidaInicial;
+	}
+
+	public void setVidaInicial(float vidaInicial) {
+		this.vidaInicial = vidaInicial;
 	}
 	
 	

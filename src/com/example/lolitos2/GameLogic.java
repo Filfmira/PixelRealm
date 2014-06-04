@@ -1,11 +1,13 @@
 package com.example.lolitos2;
 
 import java.io.Serializable;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Vibrator;
+import android.util.Log;
 
 public class GameLogic implements Serializable {
 
@@ -37,7 +39,14 @@ public class GameLogic implements Serializable {
 					else
 						jogo.getMoedas().add(
 								new Moeda(jogo.getInimigos().get(i)));
-					jogo.getInimigos().remove(i);
+					jogo.matarMonstro(i);
+					if(jogo.getHeroi().getVida()<=0)
+					{
+						gameSurface.menuPerder();
+						return;
+					}
+					
+						
 				}
 			}
 		}
@@ -76,7 +85,7 @@ public class GameLogic implements Serializable {
 						else
 							jogo.getMoedas().add(
 									new Moeda(jogo.getInimigos().get(i)));
-						jogo.getInimigos().remove(i);
+						jogo.matarMonstro(i);
 					}
 					jogo.getSetas().remove(j);
 				}
@@ -133,15 +142,23 @@ public class GameLogic implements Serializable {
 	 * Funcao que trata das colisoes entre o heroi e o portal
 	 * @param jogo
 	 */
-	static public void colidePortal(Jogo jogo)
+	static public void colidePortal(Jogo jogo, GameSurface c)
 	{
 		if(testaColisao(jogo.getHeroi(),jogo.getPortal()))
 		{
-			jogo.getPortal().addGems(jogo.getHeroi().getDinheiro());
-			jogo.getHeroi().setDinheiro(0);
+			if(jogo.getMonstrosMortos()>=jogo.getPortalNum())
+			{
+				aumentarNivel(c);
+			}
 		}
 	}
 	
+	
+	static public void aumentarNivel(GameSurface c)
+	{
+		c.setJogo(new Jogo(c.getJogo().getHeroi()));
+		c.getJogo().getHeroi().nivel++;
+	}
 	/**
 	 * Funcao que testa a colisao entre um "heroi" e um outro "objeto"
 	 * @param heroi
@@ -299,7 +316,7 @@ public class GameLogic implements Serializable {
 			if (col(jogo.getHeroi(), jogo.getInimigos().get(i), x)) {
 				jogo.getHeroi().lutar(jogo.getInimigos().get(i));
 				if (jogo.getInimigos().get(i).getVida() < 0)
-					jogo.getInimigos().remove(i);
+					jogo.matarMonstro(i);
 			}
 
 		}
@@ -384,10 +401,14 @@ public class GameLogic implements Serializable {
 			jogo.getInimigos().get(i).update();
 			paintMonstros
 					.setAlpha(jogo.getInimigos().get(i).getTransparencia());
+			if(jogo.getInimigos().get(i).ataque<=40)
 			jogo.getInimigos().get(i).draw(canvas, paintMonstros);
+			else
+				jogo.getInimigos().get(i).draw(canvas, paint);
+				
 		}
 
-		jogo.getPortal().draw(canvas, paint);
+		jogo.getPortal().draw(canvas, paint,jogo);
 		
 		drawCatchables(jogo, canvas, paint);
 
@@ -470,7 +491,7 @@ public class GameLogic implements Serializable {
 	public static void desenharUpdates(Jogo jogo, Canvas canvas, Paint paint) {
 		// Desenhar Barra de ataque++
 		int x = Entidade.tamanhoCelula * 2 / 3;
-		int y = Entidade.tamanhoCelula * 4 / 3;
+		int y = Entidade.tamanhoCelula * 2;
 		Paint p = new Paint();
 		p.setColor(Color.YELLOW);
 		if (jogo.getHeroi().incAtaque > 0)
@@ -481,6 +502,39 @@ public class GameLogic implements Serializable {
 							+ (Entidade.tamanhoCelula * 3 / 2 * ((float) (jogo
 									.getHeroi().contadorAtaque) / 200)), y
 							+ Entidade.tamanhoCelula * 1 / 8, p);
+		
+		
+		//vida
+		y = (int) (Entidade.tamanhoCelula * 1.6);
+		p.setColor(Color.BLACK);
+		canvas.drawRect(x,y,x+ (Entidade.tamanhoCelula * 3 / 2) , y+ Entidade.tamanhoCelula * 1 / 8, p);
+		float temp=((float) jogo.getHeroi().getVida() / jogo.getHeroi().getVidaInicial());
+		if(temp>=0)
+		{
+		p.setColor(Color.CYAN);
+			canvas.drawRect(x,y,
+					x+ (Entidade.tamanhoCelula * 3 / 2 * temp), 
+					y+ Entidade.tamanhoCelula * 1 / 8, p);
+		}
+		
+		
+		//desenhar monstros mortos
+		x=Entidade.sw/4;
+		y=Entidade.tamanhoCelula * 1 / 2;
+		p.setColor(Color.MAGENTA);
+		canvas.drawRect(x,y,x+ x*2, y+ Entidade.tamanhoCelula * 1 / 8, p);
+		p.setColor(Color.WHITE);
+
+		
+		if(jogo.getMonstrosMortos()>0)
+		{
+			temp=(int) ((float)(((float)(jogo.getMonstrosMortos()/20.0))*(x*2)));
+			if(temp>x*2)
+				temp=x*2;
+				
+			canvas.drawRect(x,y,x+ temp, y+ Entidade.tamanhoCelula * 1 / 8, p);
+
+		}
 
 		// desenhar pausa
 		x = Entidade.tamanhoCelula * 1 / 2;

@@ -31,7 +31,6 @@ public class GameControls implements OnTouchListener {
 	public Entidade joystickEntidade;
 	public Entidade pausaEntidade = null;
 	public Entidade heroiEntidade = null;
-	private Jogo jogo;
 
 	public GameControls(GameSurface gameSurface) {
 		this.parent = gameSurface;
@@ -145,10 +144,10 @@ public class GameControls implements OnTouchListener {
 	}
 
 	public void Sup(int a, int b) {
-		if (jogo.getSetas().size() < 20) {
+		if (parent.getJogo().getSetas().size() < 20) {
 			int c1 = Entidade.sw / 2 - Entidade.tamanhoCelula / 2;
 			int c2 = Entidade.sh / 2 - Entidade.tamanhoCelula / 2;
-			jogo.getSetas().add(
+			parent.getJogo().getSetas().add(
 					new Projectil(c1, c2, (a - c1) / 10, (b - c2) / 10, parent
 							.getJogo().getHeroi()));
 		}
@@ -245,12 +244,5 @@ public class GameControls implements OnTouchListener {
 		}
 	}
 
-	public Jogo getJogo() {
-		return jogo;
-	}
-
-	public void setJogo(Jogo jogo) {
-		this.jogo = jogo;
-	}
 
 }

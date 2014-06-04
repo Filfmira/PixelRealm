@@ -16,10 +16,12 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.TextView;
 
 public class GameSurface extends SurfaceView implements SurfaceHolder.Callback{
 
@@ -53,6 +55,8 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback{
 		
 	}
 
+	
+	Intent intent1;
 	private void init(){
 		//initialize our screen holder
 		SurfaceHolder holder = getHolder();
@@ -63,47 +67,43 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback{
 		//initialize our Thread class. A call will be made to start it later
 		_thread = new GameThread(holder, _context, new Handler(),this);
 		setFocusable(true);
+		 intent1 = new Intent(_context, LostActivity.class);
 	}
 	
 
 	public void iniciaJogo(Canvas canvas) {
-		Entidade.tamanhoCelula = (int) canvas.getWidth()/c;
-
+			Entidade.sw=canvas.getWidth();
+			Entidade.sh=canvas.getHeight();
+		Entidade.tamanhoCelula = Entidade.sw/c;
+		if(Entidade.sw>Entidade.sh)
+			Entidade.tamanhoCelula = Entidade.sw/16;
 		set_joystick(new GameJoystick(getContext().getResources()));
 		//contols
 		_controls = new GameControls(this);
 		setOnTouchListener(_controls);
-		
 		paint = new Paint();
-		
-		
 		Imagens.inicializarImagens(this.getResources());
-		Entidade.sw=canvas.getWidth();
-		Entidade.sh=canvas.getHeight();
-		Log.e("tC", Entidade.tamanhoCelula+"");
-		InputStream inputStream = this.getResources().openRawResource(
-				R.raw.teste);
-		/*Jogo j = Jogo.loadGame();
-		if (j == null)
-			setJogo(new Jogo(Entidade.tamanhoCelula, inputStream));
-		else setJogo(j);*/
+		
+		Entidade.dx=0;
+		Entidade.dy=0;
 		Jogo j = new Jogo (Entidade.tamanhoCelula, this.getResources());
 		Heroi h = Statistics.loadHeroi(this);
 		if (h != null){
-			Log.e("load", "heroi nao null"+h.getDinheiro());
-			j.setHeroi(h);
+			if(h.getVida()>0)
+			j= new Jogo(h);
 		}
 		setJogo(j);
 	}
 
+	GameActivity myActivity = (GameActivity) getContext();
+	
 	public void doDraw(Canvas canvas) {
 
 		canvas.drawColor(Color.rgb(50, 100, 10));
-		//canvas.drawBitmap(Imagens.mapa, 2, 2, null);
+		
 		// //////////////////////////
 		if (getJogo() == null) {
 			this.iniciaJogo(canvas);
-			_controls.setJogo(jogo);
 		}
 		
 		///////////////////////////////
@@ -131,14 +131,18 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback{
 		
 		/*paint.setColor(Color.YELLOW);
 		canvas.drawCircle(_controls.jsx, _controls.jsy, 50, paint);*/
-		paint.setColor(Color.WHITE);
+		/*paint.setColor(Color.WHITE);
+		paint.setTextSize(50);
+		Typeface face=Typeface.createFromAsset(_context.getAssets(),
+                "fonts/Fixedsys500c.ttf");
+		paint.setTypeface(face);
 		paint.setTextSize(50);
 		canvas.drawText("life:"+jogo.getHeroi().getVida(), 50, 50, paint);
 		canvas.drawText("points:"+jogo.getHeroi().getDinheiro(), 50, 100, paint);
 		
-		canvas.drawText("Setas:"+jogo.getSetas().size(), 50, 200, paint);
+		canvas.drawText("nivel:"+jogo.getHeroi().nivel, 50, 200, paint);
 		canvas.drawText("ataque:"+jogo.getHeroi().ataque, 50, 250, paint);
-		canvas.drawText("JSID:"+_controls.c, 50, 300, paint);
+		canvas.drawText("ataque+:"+jogo.getHeroi().incAtaque, 50, 300, paint);*/
 	}
 
 
@@ -215,6 +219,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback{
 		}
 
 		
+		
 		counter++;
 		
 		// mexe
@@ -224,7 +229,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback{
 			//GameLogic.movimentaHeroi(jogo, x, y, this);
 			// Get instance of Vibrator from current Context
 			for (int i = 0; i < getJogo().getInimigos().size(); i++) {
-				jogo.getInimigos().get(i).movimento(jogo.getHeroi());
+				jogo.getInimigos().get(i).movimento(jogo);
 			}
 			counter = 0;
 		}
@@ -234,7 +239,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback{
 		GameLogic.setasUpdate(jogo);
 		GameLogic.apanharGems(jogo);
 		GameLogic.apanharMoedas(jogo);
-		GameLogic.colidePortal(jogo);
+		GameLogic.colidePortal(jogo,this);
 		
 		// lança o metodo draw p/desenhar
 		postInvalidate();
@@ -252,6 +257,14 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback{
 	}
 	
 	
+	public void menuPerder()
+	{
+		Log.e("entrou","2");
+		this._thread.state=_thread.STOPED;
+		_context.startActivity(intent1);
+		myActivity.finish();
+		Log.e("entrou","3");
+	}
 	
 	
 	public GameJoystick get_joystick() {

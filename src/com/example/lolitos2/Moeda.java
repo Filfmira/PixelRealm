@@ -15,7 +15,7 @@ public class Moeda extends Catchable{
 	
 	public Moeda(Monstro m)
 	{
-		super(m,(int) (m.vidaInicial/500));
+		super(m,(int) (m.getVidaInicial()/500));
 		init();
 	}
 	

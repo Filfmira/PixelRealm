@@ -15,6 +15,7 @@ public class Imagens {
 	protected static Bitmap heroi2;		//subst por srpite
 	protected static Bitmap gemsvida;	//a elimniar
 	protected static Bitmap monstro;	//subst por sprite
+	protected static Bitmap monstro2;	//subst por sprite
 	protected static Bitmap seta;		//subst por sprtie
 	protected static Bitmap moeda;		//a eliminar
 	protected static Bitmap moeda2;		//a eliminar
@@ -24,12 +25,12 @@ public class Imagens {
 	protected static Bitmap gemsVidaSprite;
 	protected static Bitmap gemsAtaqueSprite;
 	protected static Bitmap moedasSprite;
-	protected static Bitmap setasSprite;
 	protected static Bitmap portalSprite;
-	protected static Bitmap portal;		//subst por sprite
 	protected static Bitmap relva;
 	protected static Bitmap flor;
 	protected static Bitmap chao;
+	protected static Bitmap nivel1;
+	protected static Bitmap nivel2;
 	
 	static void inicializarImagens(Resources res)
 	{
@@ -50,6 +51,9 @@ public class Imagens {
 		
 		monstro = BitmapFactory.decodeResource(res, R.drawable.monstro);
 		monstro = Bitmap.createScaledBitmap(monstro, Entidade.tamanhoCelula, Entidade.tamanhoCelula, false);
+		
+		monstro2= BitmapFactory.decodeResource(res, R.drawable.monstro2);
+		monstro2 = Bitmap.createScaledBitmap(monstro2, Entidade.tamanhoCelula, Entidade.tamanhoCelula, false);
 		
 		seta = BitmapFactory.decodeResource(res, R.drawable.seta);
 		seta = Bitmap.createScaledBitmap(seta, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
@@ -72,12 +76,9 @@ public class Imagens {
 		
 		moedasSprite= BitmapFactory.decodeResource(res, R.drawable.moedassprite);
 		
-		setasSprite=BitmapFactory.decodeResource(res, R.drawable.setassprite);
 		
 		portalSprite=BitmapFactory.decodeResource(res, R.drawable.portalsprite);
 		
-		portal = BitmapFactory.decodeResource(res, R.drawable.portal);
-		portal = Bitmap.createScaledBitmap(portal, Entidade.tamanhoCelula*2, Entidade.tamanhoCelula*2, false);
 		
 		relva = BitmapFactory.decodeResource(res, R.drawable.relva);
 		relva = Bitmap.createScaledBitmap(relva, Entidade.tamanhoCelula, Entidade.tamanhoCelula, false);
@@ -87,6 +88,9 @@ public class Imagens {
 		
 		chao = BitmapFactory.decodeResource(res, R.drawable.chao);
 		chao = Bitmap.createScaledBitmap(chao, Entidade.tamanhoCelula, Entidade.tamanhoCelula, false);
+		
+		nivel1=BitmapFactory.decodeResource(res, R.drawable.mappixel1);
+		nivel2=BitmapFactory.decodeResource(res, R.drawable.mappixel2);
 		
 	}
 	

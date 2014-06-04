@@ -19,7 +19,9 @@ public class Portal extends Entidade {
 	}
 
 	
-	public void draw(Canvas canvas, Paint paint){
+	public void draw(Canvas canvas, Paint paint, Jogo jogo){
+		if(jogo.getMonstrosMortos()>=jogo.getPortalNum())
+			sprite.setDirection(1);
 		sprite.draw(canvas, x * tamanhoCelula+Entidade.dx, y * tamanhoCelula+Entidade.dy,tamanhoCelula*2,tamanhoCelula*2 );
 	}
 	public void addGems(int x)

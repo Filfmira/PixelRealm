@@ -20,7 +20,9 @@ public class Jogo  implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -6340455120385832207L;
-	private Heroi heroi;
+	private Heroi heroi=null;
+	private int monstrosMortos=0;
+	private int portalNum=20;
 	private ArrayList<Monstro> monstros;
 	// private ArrayList<Parede> paredes;
 	private ArrayList<GemsVida> gemsVida;
@@ -28,21 +30,117 @@ public class Jogo  implements Serializable{
 	private ArrayList<Projectil> setas;
 	private ArrayList<Moeda> moedas;
 	private ArrayList<Passivo> fundo;
-	private Parede[][] paredes = new Parede[100][100];
+	private Parede[][] paredes = new Parede[50][50];
 	private Portal portal;
 
 	// inicializa o jogo
 	public Jogo(int tamanhoCelula, Resources resources) {
+		iniciarHeroi();
+
+		loadMapa(1);
+		gerarMonstros();
+	}
+
+
+	
+	public Jogo(Heroi heroi2) {
+		this.setHeroi(heroi2);
+		iniciarHeroi();
+		loadMapa(heroi2.nivel);
+		gerarMonstros();
+	}
+
+	/**
+	 * gera monstros aleatoriamente
+	 */
+	public void gerarMonstros()
+	{
+		for(int x=0;x<50;x++)
+		{
+			gerarMonstro(heroi.nivel);
+		}
+	}
+	
+	public void gerarMonstro(int nivel)
+	{
+		int rL,rC;
+		do {
+			rL=(int) (Math.random()*(paredes.length));
+			rC= (int) (Math.random()*paredes[rL].length);
+		} while (paredes[rL][rC]!=null);
+		if(nivel==2)
+		{
+			int m=(int) (Math.random()*5);
+			if(m==4)
+			{Log.e("lorion", "lorion");
+				
+				monstros.add(new Monstro(rL,rC,Imagens.monstro2,500,5000));
+			}
+			else
+				monstros.add(new Monstro(rL,rC));
+				
+		}
+		else
+			monstros.add(new Monstro(rL,rC));
+	}
+
+	// ////////////////A IMPLEMTENTAR PARA OS TESTES //////////////////////////
+	public void movimentarHeroi(int x, int y) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void matarMonstro(int index)
+	{
+		this.monstros.remove(index);
+		setMonstrosMortos(getMonstrosMortos() + 1);
+		this.gerarMonstro(heroi.nivel);
+	}
+	
+	public void iniciarHeroi()
+	{
+		Entidade.dx=0;
+		Entidade.dy=0;
+		Log.e("display", "w"+Entidade.sw+" h"+Entidade.sh);
+		if(heroi==null)
+		{
+				setHeroi(new Heroi((Entidade.sw / 2) - (Entidade.tamanhoCelula / 2),
+						(Entidade.sh / 2) - (Entidade.tamanhoCelula / 2)));
+				
+		}
+		
+		else
+		{
+				heroi.setX((Entidade.sw / 2) - (Entidade.tamanhoCelula / 2));
+				heroi.setY((Entidade.sh / 2) - (Entidade.tamanhoCelula / 2));
+		}
+		
+		Log.e("herooooooooooi",heroi.getX()+"."+heroi.getY());
+	}
+	
+	public void loadMapa(int nivel)
+	{
 		setSetas(new ArrayList<Projectil>());
 		setInimigos(new ArrayList<Monstro>());
 		setGemsVida(new ArrayList<GemsVida>());
 		setGemsAtaque(new ArrayList<GemsAtaque>());
 		setMoedas(new ArrayList<Moeda>());
 		setFundo(new ArrayList<Passivo>());
+		
+		Log.e("nivel", "niv:"+nivel);
+		Bitmap tab = null;
+		switch (nivel) {
+		case 1:
+			tab=Imagens.nivel1;
+			break;
+		case 2:
+			tab=Imagens.nivel2;
+			break;
 
-		// percorre o ficheiro do mapa
-		Bitmap tab=BitmapFactory.decodeResource(resources, com.example.lolitos2.R.drawable.mappixel);
-		Log.e("w", tab.getWidth()+"."+tab.getHeight());
+		default:
+			tab=Imagens.nivel2;;
+		}
+		
 		for (int i = 0; i < tab.getWidth(); i++) {
 			for (int j = 0; j < tab.getHeight(); j++) {
 				int x = j;
@@ -64,48 +162,9 @@ public class Jogo  implements Serializable{
 				default:
 					fundo.add(new Passivo(x,y,0));
 				}
-
 			}
 		}
-		//this.setPortal(new Portal(10,10));
-		// setHeroi(new Heroi(5,7));
-		setHeroi(new Heroi((Entidade.sw / 2) - (Entidade.tamanhoCelula / 2),
-				(Entidade.sh / 2) - (Entidade.tamanhoCelula / 2)));
-		// if(getInimigos().isEmpty())getHeroi().color=Color.GREEN;
-		gerarMonstros();
 	}
-
-	public Jogo(int i) {
-
-	}
-
-	
-
-	
-	/**
-	 * gera monstros aleatoriamente
-	 */
-	public void gerarMonstros()
-	{
-		for(int x=0;x<300;x++)
-		{
-			int rL,rC;
-			do {
-				rL=(int) (Math.random()*(paredes.length/4));
-				rC= (int) (Math.random()*paredes[rL].length);
-			} while (paredes[rL][rC]!=null);
-			Log.e("monstro", rL+"."+rC);
-			monstros.add(new Monstro(rL,rC));
-		}
-	}
-
-	// ////////////////A IMPLEMTENTAR PARA OS TESTES //////////////////////////
-	public void movimentarHeroi(int x, int y) {
-		// TODO Auto-generated method stub
-
-	}
-
-	
 	
 	// ////////////////GETS e SETS //////////////////
 
@@ -181,6 +240,22 @@ public class Jogo  implements Serializable{
 
 	public void setFundo(ArrayList<Passivo> fundo) {
 		this.fundo = fundo;
+	}
+
+	public int getMonstrosMortos() {
+		return monstrosMortos;
+	}
+
+	public void setMonstrosMortos(int monstrosMortos) {
+		this.monstrosMortos = monstrosMortos;
+	}
+
+	public int getPortalNum() {
+		return portalNum;
+	}
+
+	public void setPortalNum(int portalNum) {
+		this.portalNum = portalNum;
 	}
 
 }
