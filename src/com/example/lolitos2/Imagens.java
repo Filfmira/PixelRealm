@@ -24,9 +24,12 @@ public class Imagens {
 	protected static Bitmap gemsVidaSprite;
 	protected static Bitmap gemsAtaqueSprite;
 	protected static Bitmap moedasSprite;
+	protected static Bitmap setasSprite;
+	protected static Bitmap portalSprite;
 	protected static Bitmap portal;		//subst por sprite
 	protected static Bitmap relva;
 	protected static Bitmap flor;
+	protected static Bitmap chao;
 	
 	static void inicializarImagens(Resources res)
 	{
@@ -34,7 +37,7 @@ public class Imagens {
 		mapa = Bitmap.createScaledBitmap(mapa, Entidade.tamanhoCelula*32, Entidade.tamanhoCelula*32, true);
 		
 		parede = BitmapFactory.decodeResource(res, R.drawable.parede);
-		parede = Bitmap.createScaledBitmap(parede, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
+		parede = Bitmap.createScaledBitmap(parede, Entidade.tamanhoCelula, Entidade.tamanhoCelula, false);
 		
 		heroi = BitmapFactory.decodeResource(res, R.drawable.heroi);
 		heroi = Bitmap.createScaledBitmap(heroi, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
@@ -46,7 +49,7 @@ public class Imagens {
 		gemsvida = Bitmap.createScaledBitmap(gemsvida, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
 		
 		monstro = BitmapFactory.decodeResource(res, R.drawable.monstro);
-		monstro = Bitmap.createScaledBitmap(monstro, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
+		monstro = Bitmap.createScaledBitmap(monstro, Entidade.tamanhoCelula, Entidade.tamanhoCelula, false);
 		
 		seta = BitmapFactory.decodeResource(res, R.drawable.seta);
 		seta = Bitmap.createScaledBitmap(seta, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
@@ -69,14 +72,21 @@ public class Imagens {
 		
 		moedasSprite= BitmapFactory.decodeResource(res, R.drawable.moedassprite);
 		
+		setasSprite=BitmapFactory.decodeResource(res, R.drawable.setassprite);
+		
+		portalSprite=BitmapFactory.decodeResource(res, R.drawable.portalsprite);
+		
 		portal = BitmapFactory.decodeResource(res, R.drawable.portal);
-		portal = Bitmap.createScaledBitmap(portal, Entidade.tamanhoCelula*2, Entidade.tamanhoCelula*2, true);
+		portal = Bitmap.createScaledBitmap(portal, Entidade.tamanhoCelula*2, Entidade.tamanhoCelula*2, false);
 		
 		relva = BitmapFactory.decodeResource(res, R.drawable.relva);
-		relva = Bitmap.createScaledBitmap(relva, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
+		relva = Bitmap.createScaledBitmap(relva, Entidade.tamanhoCelula, Entidade.tamanhoCelula, false);
 		
 		flor = BitmapFactory.decodeResource(res, R.drawable.relvaflor);
-		flor = Bitmap.createScaledBitmap(flor, Entidade.tamanhoCelula, Entidade.tamanhoCelula, true);
+		flor = Bitmap.createScaledBitmap(flor, Entidade.tamanhoCelula, Entidade.tamanhoCelula, false);
+		
+		chao = BitmapFactory.decodeResource(res, R.drawable.chao);
+		chao = Bitmap.createScaledBitmap(chao, Entidade.tamanhoCelula, Entidade.tamanhoCelula, false);
 		
 	}
 	

@@ -55,13 +55,19 @@ public class Jogo  implements Serializable{
 				case Color.YELLOW:
 					fundo.add(new Passivo(x,y,1));
 					break;
+				case Color.CYAN:
+					fundo.add(new Passivo(x,y,2));
+					break;
+				case Color.RED:
+					this.setPortal(new Portal(x,y));
+					break;
 				default:
 					fundo.add(new Passivo(x,y,0));
 				}
 
 			}
 		}
-		this.setPortal(new Portal(10,10));
+		//this.setPortal(new Portal(10,10));
 		// setHeroi(new Heroi(5,7));
 		setHeroi(new Heroi((Entidade.sw / 2) - (Entidade.tamanhoCelula / 2),
 				(Entidade.sh / 2) - (Entidade.tamanhoCelula / 2)));

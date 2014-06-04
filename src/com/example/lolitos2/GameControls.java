@@ -13,12 +13,8 @@ import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 
 @SuppressLint("NewApi")
-public class GameControls implements OnTouchListener, Serializable {
+public class GameControls implements OnTouchListener {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4852945977582535988L;
 	int w, h;
 	int xSJ, ySJ; // x e y do small Joystick
 	int tpx, tpy;
@@ -202,6 +198,7 @@ public class GameControls implements OnTouchListener, Serializable {
 		case MotionEvent.ACTION_POINTER_DOWN:
 			ptrId = action >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
 			// Log.e("gg", 2+"");
+
 			int ptrIdx = event.findPointerIndex(ptrId);
 
 			pontoEntidade.x = (int) event.getX(ptrIdx);

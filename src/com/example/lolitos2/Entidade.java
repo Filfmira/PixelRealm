@@ -2,18 +2,17 @@ package com.example.lolitos2;
 
 import java.io.Serializable;
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 
-public abstract class Entidade  implements Serializable{
+public abstract class Entidade implements Serializable{
+
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1298143729161602601L;
+	private static final long serialVersionUID = 452594602610883689L;
 	protected int x;
 	protected int y;
 	protected static int deslocX=0;
@@ -25,8 +24,8 @@ public abstract class Entidade  implements Serializable{
 	protected static int sh=0;//screenheight
 	protected static int dx=0;
 	protected static int dy=0;
-	protected static Resources res;
-	protected int color=Color.RED;
+	//protected static Resources res;
+	//protected int color=Color.RED;
 	//protected Bitmap imagem;
 	
 	public int getX() {
@@ -130,19 +129,15 @@ public abstract class Entidade  implements Serializable{
 	public void movimento(int direcao)
 	{
 		switch (direcao) {
-		//esq
 		case 0:
 			setX(getX()-1);
 			break;
-			//dir
 		case 1:
 			setX(getX()+1);
 			break;
-			//cima
 		case 2:
 			setY(getY()-1);
 			break;
-			//baixo
 		case 3:
 			setY(getY()+1);
 			break;

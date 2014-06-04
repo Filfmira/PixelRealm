@@ -6,18 +6,12 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public abstract class Catchable extends Entidade implements Serializable{
+public abstract class Catchable extends Entidade{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4174858591749112083L;
 	protected int capacidade=0;
 	protected int tempo=200;
 	
 	Sprite sprite;
-	
-	
 	//Construtores 
 	public Catchable(int x, int y) {
 		super(x, y, Entidade.tamanhoCelula, Entidade.tamanhoCelula);
@@ -37,21 +31,19 @@ public abstract class Catchable extends Entidade implements Serializable{
 		this.setCapacidade(capacidade);
 	}
 	
-	
-	/////////////////////////////////A DESCOMENTAR QUANDO O LOAD TIVER A DAR COM SPRITES ///////////////
 	public boolean update()
 	{
-		/*if(tempo==0)
+		if(tempo==0)
 			return false;
 		else if(tempo <50)
 			sprite.setDirection(1);
-		tempo--;*/
+		tempo--;
 		return true;
 	}
 
-	/*public void draw(Canvas canvas, Paint paint){
+	public void draw(Canvas canvas, Paint paint){
 		sprite.draw(canvas, x * tamanhoCelula+Entidade.dx, y * tamanhoCelula+Entidade.dy);
-	}*/
+	}
 	
 	
 	

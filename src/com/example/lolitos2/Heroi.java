@@ -13,9 +13,9 @@ public class Heroi extends Personagem implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4483137168303160705L;
+	private static final long serialVersionUID = -7166431857474447193L;
 	private int dinheiro;
-	Arma arma;
+//	Arma arma;
 	int incAtaque=0;	//incremento de ataque temporario
 	
 	public Heroi(int x, int y) {
@@ -24,7 +24,7 @@ public class Heroi extends Personagem implements Serializable{
 		vidaInicial=20000;
 		ataque=200;
 		movimento=2;
-		color=Color.BLUE;
+		//color=Color.BLUE;
 	 	//imagem = Imagens.heroi;
 	}
 
@@ -89,8 +89,9 @@ public class Heroi extends Personagem implements Serializable{
 	public void apanharGemsAtaque(GemsAtaque gm)
 	{
 		if(incAtaque==0)
-		{incAtaque=gm.getCapacidade();
-		ataque+=gm.getCapacidade();
+		{
+			incAtaque=gm.getCapacidade();
+			ataque+=gm.getCapacidade();
 		}
 	}
 	

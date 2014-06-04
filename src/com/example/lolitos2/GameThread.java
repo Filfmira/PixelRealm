@@ -11,12 +11,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
-public class GameThread extends Thread implements Serializable {
+public class GameThread extends Thread  {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6424957506243945948L;
 	private SurfaceHolder mSurfaceHolder;
 	private Handler mHandler;
 	private Context mContext;

@@ -4,12 +4,9 @@ import java.io.Serializable;
 
 import android.graphics.Bitmap;
 
-public class Moeda extends Catchable implements Serializable{
+public class Moeda extends Catchable{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -999092554446903040L;
+	
 
 	public Moeda(int x, int y, int capacidade) {
 		super(x,y,capacidade);
@@ -24,7 +21,7 @@ public class Moeda extends Catchable implements Serializable{
 	
 	private void init(){
 		//imagem=Imagens.gemsvida;
-		//sprite= new Sprite(Imagens.moedasSprite,2,4,x,y);
+		sprite= new Sprite(Imagens.moedasSprite,2,4,x,y);
 	}
 
 	@Override

@@ -39,12 +39,12 @@ public class Sprite  {
 		default:
 			break;
 		}
+		counter++;
 		if(counter==2)
 		{
 			counter=0;
 		currentFrame=++currentFrame%colums; //4 collums
 		}
-		counter++;
 	}
 	
 	
@@ -61,6 +61,16 @@ public class Sprite  {
 		Rect dst= new Rect(x,y,x+Entidade.tamanhoCelula,y+Entidade.tamanhoCelula);
 		canvas.drawBitmap(b,src,dst,null);
 	}
+	
+	public void draw(Canvas canvas,int x,int y,int w,int h)
+	{
+		update();
+		int srcY=getDirection()*height;
+		int srcX=currentFrame*width;
+		Rect src= new Rect(srcX,srcY,srcX+width,srcY+height);
+		Rect dst= new Rect(x,y,x+w,y+h);
+		canvas.drawBitmap(b,src,dst,null);
+	}
 
 	public int getDirection() {
 		return direction;
@@ -69,5 +79,16 @@ public class Sprite  {
 	public void setDirection(int direction) {
 		this.direction = direction;
 	}
+
+
+	/*public void draw(Canvas canvas, int x, int y, float angulo) {
+		update();
+		int srcY=getDirection()*height;
+		int srcX=currentFrame*width;
+		Rect src= new Rect(srcX,srcY,srcX+width,srcY+height);
+		Rect dst= new Rect(x,y,x+Entidade.tamanhoCelula,y+Entidade.tamanhoCelula);
+		canvas.drawBitmap(b,src,dst,null);
+		
+	}*/
 	
 }

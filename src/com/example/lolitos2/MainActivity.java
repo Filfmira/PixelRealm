@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
        //setContentView(new GameSurface(this));
         setContentView(R.layout.main);
         Button bt = (Button) findViewById(R.id.button1);
-       // bt.setBackgroundColor(Color.TRANSPARENT);
+        bt.setBackgroundColor(Color.TRANSPARENT);
         bt.setOnClickListener(new OnClickListener() {
 			
 			@Override

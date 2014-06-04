@@ -31,6 +31,9 @@ public class Passivo extends Entidade implements Serializable{
 
 		case 1:
 			return Imagens.flor;
+			
+		case 2:
+			return Imagens.chao;
 		default:
 			break;
 		}

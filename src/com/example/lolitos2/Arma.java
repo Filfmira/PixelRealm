@@ -5,13 +5,8 @@ import java.io.Serializable;
 import android.graphics.Bitmap;
 
 
-public class Arma extends Entidade implements Serializable{
+public class Arma extends Entidade{
 
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1237312866085569271L;
 	//varios tipos?
 		//Armas
 		//Vida

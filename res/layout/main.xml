@@ -6,17 +6,17 @@
     android:gravity="top"
     android:orientation="horizontal"
      >
-
+     
     <Button
         android:id="@+id/button1"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="151dp"
-        android:background="@drawable/coin"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="169dp"
         android:minHeight="70dp"
         android:minWidth="130dp"
-        android:text=" " />
+        android:text=" "
+       />
 
 </RelativeLayout>

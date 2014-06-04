@@ -3,20 +3,18 @@ package com.example.lolitos2;
 import java.io.Serializable;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 
-public class Projectil extends Entidade implements Serializable{
+public class Projectil extends Entidade{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8163520196636070708L;
 	float pdx,pdy;
 	float a, b;
 	int dxI,dyI;
 	int ataque;
 	int xInicial,yInicial;
 	float angulo;
-	
+	//Sprite sprite;
 	/**
 	 * Cria um projectil com determinada posicao
 	 * @param x	posicao do projetil
@@ -49,6 +47,7 @@ public class Projectil extends Entidade implements Serializable{
 			else
 				angulo=(float) (135-90);
 			}
+		//sprite= new Sprite( Imagens.setasSprite,2,2,Entidade.tamanhoCelula,Entidade.tamanhoCelula);
 		//this.imagem=Imagens.RotateBitmap(this.imagem, angulo);
 		/*else
 			this.imagem=Imagens.RotateBitmap(this.imagem, (float) (-45+Math.toDegrees(Math.atan((float)(pdy/pdx)))));*/
@@ -72,6 +71,10 @@ public class Projectil extends Entidade implements Serializable{
 		return true;
 	}
 	
+	
+	/*public void draw(Canvas canvas, Paint paint){
+		sprite.draw(canvas, x , y,angulo);
+	}*/
 	/**
 	 * função para atacar um inimigo
 	 * @param m

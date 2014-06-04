@@ -7,7 +7,7 @@ public abstract class Personagem extends Entidade implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4872411336190897159L;
+	private static final long serialVersionUID = -2527421795633542694L;
 	private float vida=1000000;
 	float vidaInicial=1000000;
 	float ataque=0;

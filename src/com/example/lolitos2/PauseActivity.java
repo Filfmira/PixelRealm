@@ -10,12 +10,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class PauseActivity extends Activity implements Serializable{
+public class PauseActivity extends Activity {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -9060245061496839545L;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

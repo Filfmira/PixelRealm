@@ -289,7 +289,9 @@ public class GameLogic implements Serializable {
 			for (int j = 0; j < jogo.getParedes()[i].length; j++) {
 				if (jogo.getParedes()[i][j] != null) {
 					if (col(jogo.getHeroi(), jogo.getParedes()[i][j], x))
-						jogo.getParedes()[i][j].color = Color.CYAN;
+					{
+						
+					}
 
 				}
 			}
