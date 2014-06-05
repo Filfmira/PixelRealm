@@ -85,11 +85,13 @@ public class Heroi extends Personagem implements Serializable{
 	
 	public void apanharGemsVida(GemsVida gm)
 	{
+		GameActivity.instance.gem.start();
 		this.setVida(this.getVida()+gm.getCapacidade());
 	}
 	
 	public void apanharGemsAtaque(GemsAtaque gm)
 	{
+		GameActivity.instance.gem.start();
 		if(incAtaque==0)
 		{
 			incAtaque=gm.getCapacidade();
@@ -99,6 +101,7 @@ public class Heroi extends Personagem implements Serializable{
 	
 	public void apanharMoeda(Moeda m)
 	{
+		GameActivity.instance.gem.start();
 		this.setDinheiro(this.getDinheiro() + m.getCapacidade());
 	}
 

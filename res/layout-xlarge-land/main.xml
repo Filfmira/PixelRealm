@@ -7,23 +7,23 @@
     android:orientation="horizontal" >
 
     <Button
+        android:id="@+id/button1"
+        android:layout_width="277dp"
+        android:layout_height="265dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="49dp"
+        android:background="@drawable/placa"
+        android:text=" " />
+
+    <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="49dp"
+        android:layout_marginTop="109dp"
         android:background="@drawable/mainactivitytitle"
-        android:text=" " />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="29dp"
-        android:background="@drawable/placa"
         android:text=" " />
 
 </RelativeLayout>

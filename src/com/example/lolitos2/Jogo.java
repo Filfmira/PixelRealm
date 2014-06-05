@@ -39,6 +39,7 @@ public class Jogo  implements Serializable{
 
 		loadMapa(1);
 		gerarMonstros();
+		GameActivity.instance.start.start();
 	}
 
 
@@ -48,6 +49,7 @@ public class Jogo  implements Serializable{
 		iniciarHeroi();
 		loadMapa(heroi2.nivel);
 		gerarMonstros();
+		GameActivity.instance.start.start();
 	}
 
 	/**

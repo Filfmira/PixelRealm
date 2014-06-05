@@ -107,9 +107,11 @@ public class GameLogic implements Serializable {
 	 * @param jogo
 	 */
 	static public void apanharGems(Jogo jogo) {
+		boolean apanhou=false;
 		for (int i = 0; i < jogo.getGemsVida().size(); i++) {
 
 			if (testaColisao(jogo.getHeroi(), jogo.getGemsVida().get(i))) {
+				apanhou=true;
 				jogo.getHeroi().apanharGemsVida(jogo.getGemsVida().get(i));
 				jogo.getGemsVida().remove(i);
 			}
@@ -118,10 +120,14 @@ public class GameLogic implements Serializable {
 		for (int i = 0; i < jogo.getGemsAtaque().size(); i++) {
 
 			if (testaColisao(jogo.getHeroi(), jogo.getGemsAtaque().get(i))) {
+				apanhou=true;
 				jogo.getHeroi().apanharGemsAtaque(jogo.getGemsAtaque().get(i));
 				jogo.getGemsAtaque().remove(i);
 			}
 		}
+		
+		if(apanhou)
+			GameActivity.instance.gem.start();
 	}
 
 	/**
@@ -129,13 +135,17 @@ public class GameLogic implements Serializable {
 	 * @param jogo
 	 */
 	static public void apanharMoedas(Jogo jogo) {
+		boolean apanhou=false;
 		for (int i = 0; i < jogo.getMoedas().size(); i++) {
 
 			if (testaColisao(jogo.getHeroi(), jogo.getMoedas().get(i))) {
+				apanhou=true;
 				jogo.getHeroi().apanharMoeda(jogo.getMoedas().get(i));
 				jogo.getMoedas().remove(i);
 			}
 		}
+		if(apanhou)
+		GameActivity.instance.gem.start();
 	}
 
 	/**

@@ -1203,24 +1203,25 @@ containing a value of this type.
         public static final int loading=0x7f020067;
         public static final int mainactivity=0x7f020068;
         public static final int mainactivitytitle=0x7f020069;
-        public static final int mapa=0x7f02006a;
-        public static final int mappixel1=0x7f02006b;
-        public static final int mappixel2=0x7f02006c;
-        public static final int moeda=0x7f02006d;
-        public static final int moedassprite=0x7f02006e;
-        public static final int monstro=0x7f02006f;
-        public static final int monstro2=0x7f020070;
-        public static final int parede=0x7f020071;
-        public static final int pausa=0x7f020072;
-        public static final int placa=0x7f020073;
-        public static final int portal=0x7f020074;
-        public static final int portalsprite=0x7f020075;
-        public static final int relva=0x7f020076;
-        public static final int relvaflor=0x7f020077;
-        public static final int seta=0x7f020078;
-        public static final int t=0x7f020079;
-        public static final int teste=0x7f02007a;
-        public static final int ui3=0x7f02007b;
+        public static final int mainlandscape=0x7f02006a;
+        public static final int mapa=0x7f02006b;
+        public static final int mappixel1=0x7f02006c;
+        public static final int mappixel2=0x7f02006d;
+        public static final int moeda=0x7f02006e;
+        public static final int moedassprite=0x7f02006f;
+        public static final int monstro=0x7f020070;
+        public static final int monstro2=0x7f020071;
+        public static final int parede=0x7f020072;
+        public static final int pausa=0x7f020073;
+        public static final int placa=0x7f020074;
+        public static final int portal=0x7f020075;
+        public static final int portalsprite=0x7f020076;
+        public static final int relva=0x7f020077;
+        public static final int relvaflor=0x7f020078;
+        public static final int seta=0x7f020079;
+        public static final int t=0x7f02007a;
+        public static final int teste=0x7f02007b;
+        public static final int ui3=0x7f02007c;
     }
     public static final class id {
         public static final int action_bar=0x7f06002d;
@@ -1369,7 +1370,11 @@ containing a value of this type.
         public static final int main=0x7f0d0002;
     }
     public static final class raw {
-        public static final int teste=0x7f050000;
+        public static final int dragao=0x7f050000;
+        public static final int gem=0x7f050001;
+        public static final int hithurt=0x7f050002;
+        public static final int start=0x7f050003;
+        public static final int teste=0x7f050004;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
