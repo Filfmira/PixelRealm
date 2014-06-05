@@ -11,6 +11,7 @@ import android.view.WindowManager;
 public class GameActivity extends Activity{
 
 	static GameActivity instance;
+	GameSurface game;
 	MediaPlayer gem;
 	MediaPlayer start;
 	@Override
@@ -33,7 +34,7 @@ public class GameActivity extends Activity{
     	start=MediaPlayer.create(this, R.raw.start);
 
     	//setContentView(R.layout.game_game);
-    	GameSurface game= new GameSurface(this);
+    	game= new GameSurface(this);
     	//setContentView(R.layout.game_game);
 		setContentView(game);
 	}

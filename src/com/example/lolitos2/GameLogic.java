@@ -519,6 +519,7 @@ public class GameLogic implements Serializable {
 		p.setColor(Color.BLACK);
 		canvas.drawRect(x,y,x+ (Entidade.tamanhoCelula * 3 / 2) , y+ Entidade.tamanhoCelula * 1 / 8, p);
 		float temp=((float) jogo.getHeroi().getVida() / jogo.getHeroi().getVidaInicial());
+		Log.e("vida", jogo.getHeroi().getVida()+"##"+jogo.getHeroi().getVidaInicial()+".."+temp);
 		if(temp>=0)
 		{
 		p.setColor(Color.CYAN);

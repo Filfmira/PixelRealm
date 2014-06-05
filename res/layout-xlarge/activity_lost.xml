@@ -8,9 +8,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="92dp"
-        android:layout_marginLeft="55dp"
+        android:layout_marginBottom="185dp"
+        android:layout_toLeftOf="@+id/btnRecomecar"
         android:background="@drawable/mainmenuplaca"
         android:text=" " />
 
@@ -18,20 +17,19 @@
         android:id="@+id/btnQ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btnMenu"
-        android:layout_alignBottom="@+id/btnMenu"
-        android:layout_marginLeft="38dp"
-        android:layout_toRightOf="@+id/btnMenu"
+        android:layout_below="@+id/btnRecomecar"
+        android:layout_marginLeft="36dp"
+        android:layout_toRightOf="@+id/btnRecomecar"
         android:background="@drawable/quitplaca"
         android:text=" " />
 
     <Button
         android:id="@+id/btnRecomecar"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_below="@+id/title"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/btnMenu"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="83dp"
+        android:layout_marginBottom="225dp"
         android:background="@drawable/restart"
         android:text=" " />
 
@@ -41,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="93dp"
+        android:layout_marginTop="204dp"
         android:background="@drawable/losttittle"
         android:text=" "
         android:textAppearance="?android:attr/textAppearanceLarge"

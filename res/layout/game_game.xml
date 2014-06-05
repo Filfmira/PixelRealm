@@ -5,5 +5,16 @@
     android:layout_height="match_parent"
     android:background="@drawable/loading"
     tools:context="com.example.lolitos2.GameActivity"
-    tools:ignore="MergeRootFrame" />
+    tools:ignore="MergeRootFrame" 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    />
 

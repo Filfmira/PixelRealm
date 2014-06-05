@@ -25,16 +25,46 @@ public class LostActivity extends ActionBarActivity {
     	getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,   
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
     	setContentView(R.layout.activity_lost);
+    	Statistics.saveHeroi(new Heroi(0,0), GameActivity.instance.game);
     	
     	Button backButton = (Button)this.findViewById(R.id.btnMenu);
   	  backButton.setOnClickListener(new OnClickListener() {
   	    @Override
   	    public void onClick(View v) {
-  	    	Intent intent = new Intent(getBaseContext(), MainActivity.class);
-			startActivity(intent);
   	      finish();
   	    }
   	  });
+  	  
+  	  Button bq = (Button)this.findViewById(R.id.btnQ);
+  	  bq.setOnClickListener(new OnClickListener()
+  	  
+  	  {
+
+			@Override
+			public void onClick(View v) {
+				GameActivity.instance.finish();
+    	    	MainActivity.instance.finish();
+    	    	finish();
+    	      System.exit(0);
+				
+			}
+  		  
+  	  }  );
+  	  
+  	 Button br = (Button)this.findViewById(R.id.btnRecomecar);
+  	br.setOnClickListener(new OnClickListener()
+ 	  
+ 	  {
+
+			@Override
+			public void onClick(View v) {
+				GameActivity.instance.finish();
+				Intent intent = new Intent(getBaseContext(), GameActivity.class);
+				startActivity(intent);
+				finish();
+			}
+ 		  
+ 	  }  );
 
 	}
 

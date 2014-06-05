@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backlandscape" >
+
+    <Button
+        android:id="@+id/btnQ"
+        android:layout_width="250dp"
+        android:layout_height="240dp"
+        android:layout_alignParentBottom="true"
+         android:layout_marginBottom="49dp"
+        android:layout_marginLeft="46dp"
+        android:layout_toRightOf="@+id/btnRecomecar"
+        android:background="@drawable/quitplaca"
+        android:text=" " />
+
+    <Button
+        android:id="@+id/btnRecomecar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/btnQ"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="154dp"
+        android:background="@drawable/restart"
+        android:text=" " />
+
+    <Button
+        android:id="@+id/btnMenu"
+        android:layout_width="250dp"
+        android:layout_height="240dp"
+        android:layout_alignBaseline="@+id/btnQ"
+        android:layout_alignBottom="@+id/btnQ"
+        android:layout_marginRight="23dp"
+        android:layout_toLeftOf="@+id/btnRecomecar"
+        android:background="@drawable/mainmenuplaca"
+        android:text=" " />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:layout_above="@+id/btnRecomecar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="61dp"
+        android:background="@drawable/losttittle"
+        android:text=" "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:typeface="monospace" />
+
+</RelativeLayout>

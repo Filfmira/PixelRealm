@@ -13,17 +13,18 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
-	
+	static MainActivity instance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
     	getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,   
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-      // setContentView(game);	//para mostrar o gameView
-       //setContentView(new GameSurface(this));
+    	
+    	instance=this;
+    	
         setContentView(R.layout.main);
-        Button bt = (Button) findViewById(R.id.button1);
+        Button bt = (Button) findViewById(R.id.btnQ);
        // bt.setBackgroundColor(Color.TRANSPARENT);
         bt.setOnClickListener(new OnClickListener() {
 			
@@ -33,7 +34,7 @@ public class MainActivity extends Activity {
 				//setContentView(R.layout.game_game);
 				Intent intent = new Intent(getBaseContext(), GameActivity.class);
 				startActivity(intent);
-				finish();
+				//finish();
 				
 			}
 		});

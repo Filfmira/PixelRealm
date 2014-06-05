@@ -2,26 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backportrait" >
-
-    <Button
-        android:id="@+id/btnm2"
-        android:layout_width="120dp"
-        android:layout_height="110dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="44dp"
-        android:layout_toLeftOf="@+id/btnPausa"
-        android:background="@drawable/mainmenuplaca"
-        android:text=" " />
+    android:background="@drawable/backlandscape" >
 
     <Button
         android:id="@+id/btnq2"
         android:layout_width="120dp"
         android:layout_height="110dp"
-        android:layout_alignBaseline="@+id/btnm2"
-        android:layout_alignBottom="@+id/btnm2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="14dp"
         android:layout_toRightOf="@+id/btnPausa"
         android:background="@drawable/quitplaca"
+        android:text=" " />
+
+    <Button
+        android:id="@+id/btnm2"
+        android:layout_width="120dp"
+        android:layout_height="110dp"
+        android:layout_alignBaseline="@+id/btnq2"
+        android:layout_alignBottom="@+id/btnq2"
+        android:layout_toLeftOf="@+id/btnPausa"
+        android:background="@drawable/mainmenuplaca"
         android:text=" " />
 
     <Button
@@ -30,7 +30,7 @@
         android:layout_height="50dp"
         android:layout_above="@+id/btnq2"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/pausa"
         android:text=" " />
 
@@ -38,9 +38,9 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnPausa"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="59dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/pausetitle"
         android:text=" " />
 

@@ -3,6 +3,7 @@ package com.example.lolitos2;
 import java.io.Serializable;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,7 +22,6 @@ public class PauseActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
     	
     	  setContentView(R.layout.game_pause);
-    	  
     	  Button backButton = (Button)this.findViewById(R.id.btnPausa);
     	  backButton.setOnClickListener(new OnClickListener() {
     	    @Override
@@ -29,6 +29,32 @@ public class PauseActivity extends Activity {
     	      finish();
     	    }
     	  });
+    	  
+    	  
+    	  Button btq = (Button)this.findViewById(R.id.btnq2);
+    	  btq.setOnClickListener(new OnClickListener() {
+    	    @Override
+    	    public void onClick(View v) {
+    	    	Statistics.saveHeroi(GameActivity.instance.game.getJogo().getHeroi(), GameActivity.instance.game);
+    	    	GameActivity.instance.finish();
+    	    	MainActivity.instance.finish();
+    	      System.exit(0);
+    	    }
+    	  });
+    	  
+    	  
+    	  Button btm = (Button)this.findViewById(R.id.btnm2);
+    	  btm.setOnClickListener(new OnClickListener() {
+    	    @Override
+    	    public void onClick(View v) {
+    	    	//Intent intent = new Intent(getBaseContext(), MainActivity.class);
+    	    	Statistics.saveHeroi(GameActivity.instance.game.getJogo().getHeroi(), GameActivity.instance.game);
+    	    	GameActivity.instance.finish();
+				//startActivity(intent);
+				finish();
+    	    }
+    	  });
+    	  
 	}
 	
 }

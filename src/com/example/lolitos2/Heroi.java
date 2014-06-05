@@ -23,7 +23,7 @@ public class Heroi extends Personagem implements Serializable{
 		super(x, y);
 		setVida(10000);
 		
-		setVidaInicial(1000);
+		setVidaInicial(10000);
 		ataque=200;
 		movimento=2;
 		//color=Color.BLUE;
