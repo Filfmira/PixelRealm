@@ -14,6 +14,15 @@ public class Sprite  {
 	int counter=0;
 	int lines,colums;
 	Bitmap b;
+	
+	/**
+	 * Inicialização de uma sprite
+	 * @param bitmap source do sprite
+	 * @param lines	n de linhas que tem a sprite(imagens)
+	 * @param colums n de colunas que tem a sprite(colunas)
+	 * @param w	largura da sprite
+	 * @param h comprimento da sprite
+	 */
 	public Sprite(Bitmap bitmap, int lines , int colums, int w, int h)
 	{
 		b=bitmap;
@@ -25,20 +34,11 @@ public class Sprite  {
 		height=b.getHeight()/lines;
 		width=b.getWidth()/colums;
 	}
-	int lol=0;
 	
+	/**
+	 * Faz update ao frame que o sprite deve mostrar na linha
+	 */
 	public void update(){
-		switch (lol) {
-		case 0:
-			
-			break;
-		case 1:
-			
-			break;
-
-		default:
-			break;
-		}
 		counter++;
 		if(counter==2)
 		{
@@ -47,11 +47,12 @@ public class Sprite  {
 		}
 	}
 	
-	
-	////////////////////////////////////////////////////////////////////////////
-	////ATENCAO, TEMOS DE MUDAR O DST PARA O TAMNHO SER VARIAVEL ///////////////
-	////////////////////////////////////////////////////////////////////////////
-	
+	/**
+	 * Desenha a sprite em x,y
+	 * @param canvas
+	 * @param x
+	 * @param y
+	 */
 	public void draw(Canvas canvas,int x,int y)
 	{
 		update();
@@ -62,6 +63,14 @@ public class Sprite  {
 		canvas.drawBitmap(b,src,dst,null);
 	}
 	
+	/**
+	 * Desenha em x,y com tamanho w,h
+	 * @param canvas
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 */
 	public void draw(Canvas canvas,int x,int y,int w,int h)
 	{
 		update();
@@ -72,6 +81,9 @@ public class Sprite  {
 		canvas.drawBitmap(b,src,dst,null);
 	}
 
+	
+	
+	
 	public int getDirection() {
 		return direction;
 	}
@@ -80,15 +92,5 @@ public class Sprite  {
 		this.direction = direction;
 	}
 
-
-	/*public void draw(Canvas canvas, int x, int y, float angulo) {
-		update();
-		int srcY=getDirection()*height;
-		int srcX=currentFrame*width;
-		Rect src= new Rect(srcX,srcY,srcX+width,srcY+height);
-		Rect dst= new Rect(x,y,x+Entidade.tamanhoCelula,y+Entidade.tamanhoCelula);
-		canvas.drawBitmap(b,src,dst,null);
-		
-	}*/
 	
 }

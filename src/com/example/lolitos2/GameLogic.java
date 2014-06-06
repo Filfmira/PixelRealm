@@ -11,9 +11,6 @@ import android.util.Log;
 
 public class GameLogic implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5148514249177048314L;
 	// trata de lutar o heroi contra os monstros
 	static int t = 0;
@@ -112,7 +109,7 @@ public class GameLogic implements Serializable {
 
 			if (testaColisao(jogo.getHeroi(), jogo.getGemsVida().get(i))) {
 				apanhou=true;
-				jogo.getHeroi().apanharGemsVida(jogo.getGemsVida().get(i));
+				jogo.getHeroi().apanharCatchable(jogo.getGemsVida().get(i));
 				jogo.getGemsVida().remove(i);
 			}
 		}
@@ -121,7 +118,7 @@ public class GameLogic implements Serializable {
 
 			if (testaColisao(jogo.getHeroi(), jogo.getGemsAtaque().get(i))) {
 				apanhou=true;
-				jogo.getHeroi().apanharGemsAtaque(jogo.getGemsAtaque().get(i));
+				jogo.getHeroi().apanharCatchable(jogo.getGemsAtaque().get(i));
 				jogo.getGemsAtaque().remove(i);
 			}
 		}
@@ -140,7 +137,7 @@ public class GameLogic implements Serializable {
 
 			if (testaColisao(jogo.getHeroi(), jogo.getMoedas().get(i))) {
 				apanhou=true;
-				jogo.getHeroi().apanharMoeda(jogo.getMoedas().get(i));
+				jogo.getHeroi().apanharCatchable(jogo.getMoedas().get(i));
 				jogo.getMoedas().remove(i);
 			}
 		}
@@ -519,7 +516,6 @@ public class GameLogic implements Serializable {
 		p.setColor(Color.BLACK);
 		canvas.drawRect(x,y,x+ (Entidade.tamanhoCelula * 3 / 2) , y+ Entidade.tamanhoCelula * 1 / 8, p);
 		float temp=((float) jogo.getHeroi().getVida() / jogo.getHeroi().getVidaInicial());
-		Log.e("vida", jogo.getHeroi().getVida()+"##"+jogo.getHeroi().getVidaInicial()+".."+temp);
 		if(temp>=0)
 		{
 		p.setColor(Color.CYAN);

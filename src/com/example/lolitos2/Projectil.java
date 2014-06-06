@@ -14,7 +14,8 @@ public class Projectil extends Entidade{
 	int ataque;
 	int xInicial,yInicial;
 	float angulo;
-	//Sprite sprite;
+	int counter=0;
+
 	/**
 	 * Cria um projectil com determinada posicao
 	 * @param x	posicao do projetil
@@ -54,10 +55,9 @@ public class Projectil extends Entidade{
 	}
 	
 	/**
-	 * faz update á posicao da seta para que vá "andando" para o seu destino
+	 * Faz update á posicao da seta para que vá "andando" para o seu destino
 	 * @return
 	 */
-	int counter=0;
 	public boolean update()
 	{
 		a+=(pdx);
@@ -71,10 +71,6 @@ public class Projectil extends Entidade{
 		return true;
 	}
 	
-	
-	/*public void draw(Canvas canvas, Paint paint){
-		sprite.draw(canvas, x , y,angulo);
-	}*/
 	/**
 	 * função para atacar um inimigo
 	 * @param m

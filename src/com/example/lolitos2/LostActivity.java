@@ -25,7 +25,7 @@ public class LostActivity extends ActionBarActivity {
     	getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,   
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
     	setContentView(R.layout.activity_lost);
-    	Statistics.saveHeroi(new Heroi(0,0), GameActivity.instance.game);
+    	Statistics.saveHeroi(new Heroi(0,0), GameActivity.instance.getGame());
     	
     	Button backButton = (Button)this.findViewById(R.id.btnMenu);
   	  backButton.setOnClickListener(new OnClickListener() {

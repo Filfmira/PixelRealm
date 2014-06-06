@@ -10,28 +10,39 @@ import android.util.Log;
 
 public class Heroi extends Personagem implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7166431857474447193L;
+	
+	
 	private int dinheiro;
-//	Arma arma;
 	int incAtaque=0;	//incremento de ataque temporario
 	int nivel=1;
-	
+	/**
+	 * Construtor do heroi, inicializa-o em x,y com vidaInicial e vida determinadas
+	 * @param x
+	 * @param y
+	 */
 	public Heroi(int x, int y) {
 		super(x, y);
 		setVida(10000);
 		
 		setVidaInicial(10000);
 		ataque=200;
-		movimento=2;
-		//color=Color.BLUE;
-	 	//imagem = Imagens.heroi;
+	}
+	
+	/**
+	 * Inicializa um heroi, não sendo necessário referir-lhe uma localização
+	 */
+	public Heroi()
+	{
+		super(0, 0);
+		setVida(10000);
+		setVidaInicial(10000);
+		ataque=200;
 	}
 
-	/*
-	 * luta contra um monstro perdendoe  tirando vida
+	/**
+	 * Luta contra um monstro, tiranto e perdendo vida
+	 * @param m
 	 */
 	public void lutar (Monstro m)
 	{
@@ -39,57 +50,28 @@ public class Heroi extends Personagem implements Serializable{
 		m.setVida(m.getVida() - ataque);
 	}
 	
-	/*
-	 * desenha o heroi no centro do ecra
+	/**
+	 * Desenha o heroi no centro do ecra
 	 */
 	public void draw(Canvas canvas, Paint paint){
-		
-		
 		canvas.drawBitmap(getImagem(), this.getX(), this.getY(), paint);
-
-		
-		//paint.setColor(Color.RED);
-		//canvas.drawRect(x, y+tamanhoCelula*7/8, x+Entidade.tamanhoCelula, y+Entidade.tamanhoCelula, paint);
-		//paint.setColor(Color.CYAN);
-		//canvas.drawRect(x , y  +tamanhoCelula*7/8, x+Entidade.tamanhoCelula*(this.getVida()/this.vidaInicial), y  +Entidade.tamanhoCelula, paint);
 	}
 	
-	
-	/*
-	 * movimenta o heroi
+	/**
+	 * Apanha uma GemsVida
+	 * @param gm
 	 */
-	public void movimento(int direcao,Jogo jogo)
-	{
-		deslocX=0;
-		deslocY=0;
-		switch (direcao) {
-		
-		case 0:
-			x+=	-1;
-			break;
-		case 1:
-			x+=	+1;
-			break;
-		case 2:
-			y+=	-1;
-			break;
-		case 3:
-			y+=	+1;
-			break;
-		}
-		Log.v("heroi", x+".."+y);
-		
-	}
-	//Arma??
-	
-	
-	public void apanharGemsVida(GemsVida gm)
+	public void apanharCatchable(GemsVida gm)
 	{
 		GameActivity.instance.gem.start();
 		this.setVida(this.getVida()+gm.getCapacidade());
 	}
 	
-	public void apanharGemsAtaque(GemsAtaque gm)
+	/**
+	 * Apanha uma GemsAtaque
+	 * @param gm
+	 */
+	public void apanharCatchable(GemsAtaque gm)
 	{
 		GameActivity.instance.gem.start();
 		if(incAtaque==0)
@@ -99,21 +81,16 @@ public class Heroi extends Personagem implements Serializable{
 		}
 	}
 	
-	public void apanharMoeda(Moeda m)
+	/**
+	 * Apanha uma Moeda
+	 * @param gm
+	 */
+	public void apanharCatchable(Moeda m)
 	{
 		GameActivity.instance.gem.start();
 		this.setDinheiro(this.getDinheiro() + m.getCapacidade());
 	}
 
-	public int getDinheiro() {
-		return dinheiro;
-	}
-
-	public void setDinheiro(int dinheiro) {
-		this.dinheiro = dinheiro;
-	}
-	
-	
 	int contadorAtaque=0;
 	public void update()
 	{
@@ -135,13 +112,9 @@ public class Heroi extends Personagem implements Serializable{
 			incAtaque=0;
 	}
 
-	@Override
-	public Bitmap getImagem() {
-		if (this.incAtaque > 0)
-			return Imagens.heroi2;
-		else return Imagens.heroi;
-	}
-
+	/**
+	 * Volta a por o ataque do heroi sem o "plus" que tem de apanhar GemsAtaque
+	 */
 	public void setAtaqueNormal() {
 		if(incAtaque!=0)
 		{
@@ -150,5 +123,24 @@ public class Heroi extends Personagem implements Serializable{
 		}
 		
 	}
+	
+	
+
+	@Override
+	public Bitmap getImagem() {
+		if (this.incAtaque > 0)
+			return Imagens.heroi2;
+		else return Imagens.heroi;
+	}
+
+	public int getDinheiro() {
+		return dinheiro;
+	}
+
+	public void setDinheiro(int dinheiro) {
+		this.dinheiro = dinheiro;
+	}
+	
+	
 	
 }

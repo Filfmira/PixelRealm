@@ -24,14 +24,23 @@ public class GameControls implements OnTouchListener {
 	public int xBJ, yBJ;
 	public Point _touchingPoint;
 	private Boolean _dragging = false;
-	private Boolean _draggingSeta = false;
 	private int sBJ;// size big joystick
 	private int sSJ;// size small joystick
 	Entidade pontoEntidade;
 	public Entidade joystickEntidade;
 	public Entidade pausaEntidade = null;
 	public Entidade heroiEntidade = null;
+	
+	int jsx = 0;
+	int jsy = 0;
+	int idJoystick = -1;
+	int c = 0;
 
+	
+	/**
+	 * Onde todas a variaveis sao iniciadas,como por exemplo o koystick
+	 * @param gameSurface Game Surface para ter acesso ao Jogo para poder interagir com ele
+	 */
 	public GameControls(GameSurface gameSurface) {
 		this.parent = gameSurface;
 
@@ -45,8 +54,8 @@ public class GameControls implements OnTouchListener {
 		h = size.y;
 
 		// tamanho dos joysticks
-		sBJ = parent.get_joystick().get_joystickBg().getWidth();
-		sSJ = parent.get_joystick().get_joystick().getWidth();
+		sBJ = Imagens.joystickBig.getWidth();
+		sSJ = Imagens.joystickSmall.getWidth();
 
 		// mudar estes dois para mudar o sitio onde estao os joysticks
 		xBJ = (int) (sBJ) / 2;
@@ -76,7 +85,12 @@ public class GameControls implements OnTouchListener {
 
 	}
 
-	public void JSdown(int i, int l) {
+	/**
+	 * Função que trata de processar os toques quando se carrega com o dedo no JoyStick
+	 * @param i X onde carregou
+	 * @param l	Y onde carregou
+	 */
+	public void joystickDown(int i, int l) {
 		jsx = i;
 		jsy = l;
 		_touchingPoint.x = (int) i - sSJ / 2;
@@ -127,23 +141,23 @@ public class GameControls implements OnTouchListener {
 
 	}
 
-	public void JSup(MotionEvent event) {
-		// largar
-		if (event.getAction() == MotionEvent.ACTION_UP && _dragging) {
+	/**
+	 * Função que trata de processar os toques quando se larga o dedo do JoyStick
+	 * @param event
+	 */
+	public void joystickUp(MotionEvent event) {
 			_dragging = false;
-		}
-
-		if (!_dragging) {
-			// Snap back to center when the joystick is released
-			// Log.e("dragging false", ""+_touchingPoint.x);
 			_touchingPoint.x = (int) initx;
 			_touchingPoint.y = (int) inity;
 
-			// shaft.alpha = 0;
-		}
 	}
 
-	public void Sup(int a, int b) {
+	/**
+	 * Função que trata de processar os toques quando se carrega no mapa para lançar setas
+	 * @param a	X onde carregou
+	 * @param b	Y onde carregou
+	 */
+	public void setaUp(int a, int b) {
 		if (parent.getJogo().getSetas().size() < 20) {
 			int c1 = Entidade.sw / 2 - Entidade.tamanhoCelula / 2;
 			int c2 = Entidade.sh / 2 - Entidade.tamanhoCelula / 2;
@@ -153,11 +167,13 @@ public class GameControls implements OnTouchListener {
 		}
 	}
 
-	int jsx = 0;
-	int jsy = 0;
-	int idJoystick = -1;
-	int c = 0;
+	
 
+
+	/**
+	 * Função que trata de todos os toques registados no ecra
+	 * @param event
+	 */
 	public void handleMultitouch(MotionEvent event) {
 		int ptrId = -1;
 		int action = event.getAction();
@@ -175,7 +191,7 @@ public class GameControls implements OnTouchListener {
 				c++;
 				Log.e("down", event.getPointerId(0) + "");
 				idJoystick = action;
-				JSdown(pontoEntidade.x, pontoEntidade.y);
+				joystickDown(pontoEntidade.x, pontoEntidade.y);
 			}
 			break;
 
@@ -186,17 +202,16 @@ public class GameControls implements OnTouchListener {
 			break;
 			} else if (event.getPointerId(0) == idJoystick) {
 				c = 0;
-				JSup(event);
+				joystickUp(event);
 				idJoystick = -1;
 			}
 			
-			 else Sup(pontoEntidade.x,pontoEntidade.y);
+			 else setaUp(pontoEntidade.x,pontoEntidade.y);
 			 
 			break;
 
 		case MotionEvent.ACTION_POINTER_DOWN:
 			ptrId = action >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
-			// Log.e("gg", 2+"");
 
 			int ptrIdx = event.findPointerIndex(ptrId);
 
@@ -204,28 +219,18 @@ public class GameControls implements OnTouchListener {
 			pontoEntidade.y = (int) event.getY(ptrIdx);
 			if (joystickEntidade.colide(pontoEntidade)) {
 				idJoystick = ptrId;
-				JSdown(pontoEntidade.x, pontoEntidade.y);
+				joystickDown(pontoEntidade.x, pontoEntidade.y);
 			} else
-				Sup(pontoEntidade.x, pontoEntidade.y);
-			/*
-			 * Log.e("gg", 3+""); //Log.e("APD",
-			 * (int)event.getX(ptrIdx)+"-"+(int)event.getY(ptrIdx)); for(int i =
-			 * 0; i < event.getPointerCount(); ++i) { Log.e("APD",
-			 * event.getPointerId(i)+""); }
-			 */
+				setaUp(pontoEntidade.x, pontoEntidade.y);
 			break;
 
 		case MotionEvent.ACTION_POINTER_UP:
 			ptrId = action >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
-			/*
-			 * if (joystickEntidade.colide(pontoEntidade)) JSup(event); else
-			 */
 			pontoEntidade.x = (int) event.getX(ptrId);
 			pontoEntidade.y = (int) event.getY(ptrId);
 			if (idJoystick == ptrId) {
-				JSdown(pontoEntidade.x, pontoEntidade.y);
+				joystickDown(pontoEntidade.x, pontoEntidade.y);
 			}
-			/* Log.e("APU", (int)event.getX(ptrId)+"-"+(int)event.getY(ptrId)); */
 			break;
 
 		case MotionEvent.ACTION_MOVE:
@@ -236,7 +241,6 @@ public class GameControls implements OnTouchListener {
 					c--;
 					this.jsx=pontoEntidade.x;
 					this.jsy=pontoEntidade.y;
-					//JSdown(pontoEntidade.x, pontoEntidade.y);
 				}
 			break;
 		default:

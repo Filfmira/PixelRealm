@@ -13,7 +13,11 @@ import android.util.Log;
 public class Statistics {
 	
 	
-	
+	/**
+	 * Guarda um Heroi h , atraves do context de gs
+	 * @param h
+	 * @param gs
+	 */
 	public static void saveHeroi(Heroi h, GameSurface gs){
 		FileOutputStream fos = null;
 		try {
@@ -51,7 +55,11 @@ public class Statistics {
 		Log.e("save", "deve tger guardado o heroi");
 	}
 	
-	
+	/**
+	 * Faz Load de um Heroi que esteja no context de gs
+	 * @param gs
+	 * @return	Heroi guardado
+	 */
 	public static Heroi loadHeroi(GameSurface gs){
 		FileInputStream fis = null;
 		

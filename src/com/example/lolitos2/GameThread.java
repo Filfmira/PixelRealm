@@ -31,25 +31,31 @@ public class GameThread extends Thread  {
 
 	GameSurface gEngine;
 
+	
+	/**
+	 * Inicializa a thread com informacoes do ecra
+	 * @param surfaceHolder
+	 * @param context
+	 * @param handler
+	 * @param gEngineS
+	 */
 	public GameThread(SurfaceHolder surfaceHolder, Context context, Handler handler,GameSurface gEngineS){
 
-		//data about the screen
 		mSurfaceHolder = surfaceHolder;
 		mHandler = handler;
 		mContext = context;
 		gEngine=gEngineS;
 	}
 
-	//This is the most important part of the code. It is invoked when the call to start() is
-	//made from the SurfaceView class. It loops continuously until the game is finished or
-	//the application is suspended.
+	//Invocado quando a chamada de start() é feita na SurfaceView.
+	//entra em Loop continuo até o Jogo acabar ou a aplicação ser suspensa
 	private long beforeTime;
 	@Override
 	public void run() {
 
 		//UPDATE
 		while (state==RUNNING) {
-			Log.d("State","Thread is runnig");
+			//Log.d("State","Thread is runnig");
 			//time before update
 			beforeTime = System.nanoTime();
 			//This is where we update the game engine

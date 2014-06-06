@@ -11,12 +11,25 @@ public class Passivo extends Entidade implements Serializable{
 	
 	private int tipo;
 
+	/**
+	 * Inicializa um Passivo em x,y
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param tipo	de passivo(icon)
+	 */
 	public Passivo(int x, int y, int width, int height, int tipo) {
 		super(x, y, width, height);
 		this.tipo=tipo;
 	}
 
-
+	/**
+	 * Inicializa o passivo em x,y
+	 * @param x
+	 * @param y
+	 * @param tipo de passivo(icon)
+	 */
 	public Passivo(int x, int y, int tipo) {
 		super(x, y, Entidade.tamanhoCelula, Entidade.tamanhoCelula);
 		this.tipo=tipo;
