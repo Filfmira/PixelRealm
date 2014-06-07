@@ -1,6 +1,9 @@
-package com.example.lolitos2;
+package com.pixelrealm.entities;
 
 import java.io.Serializable;
+
+import com.pixelrealm.game.Jogo;
+import com.pixelrealm.graphics.Imagens;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -159,9 +162,9 @@ public class Monstro extends Personagem implements Serializable {
 	@Override
 	public Bitmap getImagem() {
 		if(getAtaque()<=40)
-		return Imagens.monstro;
+		return Imagens.getMonstro();
 		else
-			return Imagens.monstro2;
+			return Imagens.getMonstro2();
 	}
 
 

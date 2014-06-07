@@ -1,4 +1,6 @@
-package com.example.lolitos2;
+package com.pixelrealm.entities;
+
+import com.pixelrealm.graphics.Sprite;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

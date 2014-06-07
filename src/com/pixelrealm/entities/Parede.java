@@ -1,6 +1,8 @@
-package com.example.lolitos2;
+package com.pixelrealm.entities;
 
 import java.io.Serializable;
+
+import com.pixelrealm.graphics.Imagens;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -37,9 +39,9 @@ public class Parede extends Entidade {
 	@Override
 	public Bitmap getImagem() {
 		if(tipo==0)
-		return Imagens.parede;
+		return Imagens.getParede();
 		else
-			return Imagens.arvore;
+			return Imagens.getArvore();
 	}
 
 }

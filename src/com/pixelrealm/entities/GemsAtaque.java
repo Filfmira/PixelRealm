@@ -1,6 +1,9 @@
-package com.example.lolitos2;
+package com.pixelrealm.entities;
 
 import java.io.Serializable;
+
+import com.pixelrealm.graphics.Imagens;
+import com.pixelrealm.graphics.Sprite;
 
 import android.graphics.Bitmap;
 
@@ -25,7 +28,7 @@ public class GemsAtaque extends Catchable{
 
 	@Override
 	public Bitmap getImagem() {
-		return Imagens.gemsAtaqueSprite;
+		return Imagens.getGemsAtaqueSprite();
 	}
 
 }

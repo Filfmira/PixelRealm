@@ -1,6 +1,8 @@
-package com.example.lolitos2;
+package com.pixelrealm.entities;
 
 import java.io.Serializable;
+
+import com.pixelrealm.graphics.Imagens;
 
 import android.graphics.Bitmap;
 
@@ -40,13 +42,13 @@ public class Passivo extends Entidade implements Serializable{
 	public Bitmap getImagem() {
 		switch (tipo) {
 		case 0:
-			return Imagens.relva;
+			return Imagens.getRelva();
 
 		case 1:
-			return Imagens.flor;
+			return Imagens.getFlor();
 			
 		case 2:
-			return Imagens.chao;
+			return Imagens.getChao();
 		default:
 			break;
 		}

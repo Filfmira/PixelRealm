@@ -1,6 +1,8 @@
-package com.example.lolitos2;
+package com.pixelrealm.graphics;
 
 import java.io.Serializable;
+
+import com.pixelrealm.entities.Entidade;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

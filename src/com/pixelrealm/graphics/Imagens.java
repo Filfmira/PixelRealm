@@ -1,6 +1,10 @@
-package com.example.lolitos2;
+package com.pixelrealm.graphics;
 
 import java.io.Serializable;
+
+import com.example.lolitos2.R;
+import com.example.lolitos2.R.drawable;
+import com.pixelrealm.entities.Entidade;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -9,8 +13,6 @@ import android.graphics.Matrix;
 import android.util.Log;
 
 public class Imagens {
-	
-	
 	protected static Bitmap parede;	
 	protected static Bitmap heroi;		//sbust por sprite
 	protected static Bitmap heroi2;		//subst por srpite
@@ -115,4 +117,225 @@ public class Imagens {
 	      return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
 	}
 
+
+	public static Bitmap getParede() {
+		return parede;
+	}
+
+
+	public static Bitmap getHeroi() {
+		return heroi;
+	}
+
+
+	public static Bitmap getHeroi2() {
+		return heroi2;
+	}
+
+
+	public static Bitmap getGemsvida() {
+		return gemsvida;
+	}
+
+
+	public static Bitmap getMonstro() {
+		return monstro;
+	}
+
+
+	public static Bitmap getMonstro2() {
+		return monstro2;
+	}
+
+
+	public static Bitmap getSeta() {
+		return seta;
+	}
+
+
+	public static Bitmap getPausa() {
+		return pausa;
+	}
+
+
+	public static Bitmap getMapa() {
+		return mapa;
+	}
+
+
+	public static Bitmap getGemsVidaSprite() {
+		return gemsVidaSprite;
+	}
+
+
+	public static Bitmap getGemsAtaqueSprite() {
+		return gemsAtaqueSprite;
+	}
+
+
+	public static Bitmap getMoedasSprite() {
+		return moedasSprite;
+	}
+
+
+	public static Bitmap getPortalSprite() {
+		return portalSprite;
+	}
+
+
+	public static Bitmap getRelva() {
+		return relva;
+	}
+
+
+	public static Bitmap getFlor() {
+		return flor;
+	}
+
+
+	public static Bitmap getChao() {
+		return chao;
+	}
+
+
+	public static Bitmap getNivel1() {
+		return nivel1;
+	}
+
+
+	public static Bitmap getNivel2() {
+		return nivel2;
+	}
+
+
+	public static Bitmap getJoystickBig() {
+		return joystickBig;
+	}
+
+
+	public static Bitmap getJoystickSmall() {
+		return joystickSmall;
+	}
+
+
+	public static Bitmap getSombraMapa() {
+		return sombraMapa;
+	}
+
+
+	public static Bitmap getArvore() {
+		return arvore;
+	}
+
+
+	public static void setParede(Bitmap parede) {
+		Imagens.parede = parede;
+	}
+
+
+	public static void setHeroi(Bitmap heroi) {
+		Imagens.heroi = heroi;
+	}
+
+
+	public static void setHeroi2(Bitmap heroi2) {
+		Imagens.heroi2 = heroi2;
+	}
+
+
+	public static void setGemsvida(Bitmap gemsvida) {
+		Imagens.gemsvida = gemsvida;
+	}
+
+
+	public static void setMonstro(Bitmap monstro) {
+		Imagens.monstro = monstro;
+	}
+
+
+	public static void setMonstro2(Bitmap monstro2) {
+		Imagens.monstro2 = monstro2;
+	}
+
+
+	public static void setSeta(Bitmap seta) {
+		Imagens.seta = seta;
+	}
+
+
+	public static void setPausa(Bitmap pausa) {
+		Imagens.pausa = pausa;
+	}
+
+
+	public static void setMapa(Bitmap mapa) {
+		Imagens.mapa = mapa;
+	}
+
+
+	public static void setGemsVidaSprite(Bitmap gemsVidaSprite) {
+		Imagens.gemsVidaSprite = gemsVidaSprite;
+	}
+
+
+	public static void setGemsAtaqueSprite(Bitmap gemsAtaqueSprite) {
+		Imagens.gemsAtaqueSprite = gemsAtaqueSprite;
+	}
+
+
+	public static void setMoedasSprite(Bitmap moedasSprite) {
+		Imagens.moedasSprite = moedasSprite;
+	}
+
+
+	public static void setPortalSprite(Bitmap portalSprite) {
+		Imagens.portalSprite = portalSprite;
+	}
+
+
+	public static void setRelva(Bitmap relva) {
+		Imagens.relva = relva;
+	}
+
+
+	public static void setFlor(Bitmap flor) {
+		Imagens.flor = flor;
+	}
+
+
+	public static void setChao(Bitmap chao) {
+		Imagens.chao = chao;
+	}
+
+
+	public static void setNivel1(Bitmap nivel1) {
+		Imagens.nivel1 = nivel1;
+	}
+
+
+	public static void setNivel2(Bitmap nivel2) {
+		Imagens.nivel2 = nivel2;
+	}
+
+
+	public static void setJoystickBig(Bitmap joystickBig) {
+		Imagens.joystickBig = joystickBig;
+	}
+
+
+	public static void setJoystickSmall(Bitmap joystickSmall) {
+		Imagens.joystickSmall = joystickSmall;
+	}
+
+
+	public static void setSombraMapa(Bitmap sombraMapa) {
+		Imagens.sombraMapa = sombraMapa;
+	}
+
+
+	public static void setArvore(Bitmap arvore) {
+		Imagens.arvore = arvore;
+	}
+
+	
 }

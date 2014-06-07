@@ -1,5 +1,7 @@
-package com.example.lolitos2;
+package com.pixelrealm.states;
 
+
+import com.example.lolitos2.R;
 
 import android.app.Activity;
 import android.content.Intent;

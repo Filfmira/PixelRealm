@@ -1,6 +1,14 @@
-package com.example.lolitos2;
+package com.pixelrealm.logic;
 
 import java.io.Serializable;
+
+import com.pixelrealm.entities.Entidade;
+import com.pixelrealm.entities.GemsAtaque;
+import com.pixelrealm.entities.GemsVida;
+import com.pixelrealm.entities.Moeda;
+import com.pixelrealm.game.GameSurface;
+import com.pixelrealm.game.Jogo;
+import com.pixelrealm.graphics.Imagens;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -509,9 +517,9 @@ public class GameLogic implements Serializable {
 		drawMap(jogo, canvas, paint);
 		// drawMiniMap(jogo,canvas,paint);
 
-		Rect src= new Rect(0,0,Imagens.sombraMapa.getWidth(),Imagens.sombraMapa.getHeight());
+		Rect src= new Rect(0,0,Imagens.getSombraMapa().getWidth(),Imagens.getSombraMapa().getHeight());
 		Rect dst= new Rect(Entidade.dx,Entidade.dy,Entidade.dx+Entidade.tamanhoCelula*50,Entidade.dy+Entidade.tamanhoCelula*50);
-		canvas.drawBitmap(Imagens.sombraMapa, src, dst, paint);
+		canvas.drawBitmap(Imagens.getSombraMapa(), src, dst, paint);
 		
 		desenharUpdates(a,jogo, canvas, paint);
 	}
@@ -534,7 +542,7 @@ public class GameLogic implements Serializable {
 					y,
 					x
 							+ (Entidade.tamanhoCelula * 3 / 2 * ((float) (jogo
-									.getHeroi().contadorAtaque) / 200)), y
+									.getHeroi().getContadorAtaque()) / 200)), y
 							+ Entidade.tamanhoCelula * 1 / 8, p);
 		
 		
@@ -573,7 +581,7 @@ public class GameLogic implements Serializable {
 		// desenhar pausa
 		x = Entidade.tamanhoCelula * 1 / 2;
 		y = Entidade.tamanhoCelula * 1 / 2;
-		canvas.drawBitmap(Imagens.pausa, x, y, paint);
+		canvas.drawBitmap(Imagens.getPausa(), x, y, paint);
 		
 		
 		//desenhar nivel

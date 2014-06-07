@@ -1,4 +1,8 @@
-package com.example.lolitos2;
+package com.pixelrealm.entities;
+
+import com.pixelrealm.game.Jogo;
+import com.pixelrealm.graphics.Imagens;
+import com.pixelrealm.graphics.Sprite;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -46,6 +50,6 @@ public class Portal extends Entidade {
 
 	@Override
 	public Bitmap getImagem() {
-		return Imagens.portalSprite;
+		return Imagens.getPortalSprite();
 	}
 }

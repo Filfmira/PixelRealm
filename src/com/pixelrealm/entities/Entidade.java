@@ -1,4 +1,4 @@
-package com.example.lolitos2;
+package com.pixelrealm.entities;
 
 import java.io.Serializable;
 
@@ -15,9 +15,10 @@ public abstract class Entidade implements Serializable{
 	private int width;
 	private int height;
 	public static int tamanhoCelula=200;
+	
 	public static int sw=0;//screenwidth
 	public static int sh=0;//screenheight
-	protected static int dx=0;
+	public static int dx=0;
 	public static int dy=0;
 	
 	/**
@@ -156,5 +157,53 @@ public abstract class Entidade implements Serializable{
 	}
 	public void setHeight(int height) {
 		this.height = height;
+	}
+	public static int getTamanhoCelula() {
+		return tamanhoCelula;
+	}
+
+
+	public static void setTamanhoCelula(int tamanhoCelula) {
+		Entidade.tamanhoCelula = tamanhoCelula;
+	}
+
+
+	public static int getSw() {
+		return sw;
+	}
+
+
+	public static void setSw(int sw) {
+		Entidade.sw = sw;
+	}
+
+
+	public static int getSh() {
+		return sh;
+	}
+
+
+	public static void setSh(int sh) {
+		Entidade.sh = sh;
+	}
+
+
+	public static int getDx() {
+		return dx;
+	}
+
+
+	public static void setDx(int dx) {
+		Entidade.dx = dx;
+	}
+
+
+	public static int getDy() {
+		return dy;
+	}
+
+
+	public static void setDy(int dy) {
+		Entidade.dy = dy;
 	}
 }

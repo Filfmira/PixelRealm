@@ -1,4 +1,4 @@
-package com.example.lolitos2;
+package com.pixelrealm.game;
 
 import java.io.Serializable;
 import java.util.logging.Level;

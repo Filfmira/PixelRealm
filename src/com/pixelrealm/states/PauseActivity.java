@@ -1,6 +1,9 @@
-package com.example.lolitos2;
+package com.pixelrealm.states;
 
 import java.io.Serializable;
+
+import com.example.lolitos2.R;
+import com.pixelrealm.game.Statistics;
 
 import android.app.Activity;
 import android.content.Intent;

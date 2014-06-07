@@ -1,4 +1,4 @@
-package com.example.lolitos2;
+package com.pixelrealm.game;
 
 import java.util.ArrayList;
 
@@ -13,6 +13,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+
+import com.pixelrealm.entities.Entidade;
+import com.pixelrealm.entities.GemsAtaque;
+import com.pixelrealm.entities.GemsVida;
+import com.pixelrealm.entities.Heroi;
+import com.pixelrealm.entities.Moeda;
+import com.pixelrealm.entities.Monstro;
+import com.pixelrealm.entities.Parede;
+import com.pixelrealm.entities.Passivo;
+import com.pixelrealm.entities.Portal;
+import com.pixelrealm.entities.Projectil;
+import com.pixelrealm.graphics.Imagens;
+import com.pixelrealm.states.GameActivity;
 
 import junit.framework.TestCase;
 
@@ -102,7 +115,7 @@ public class Jogo extends TestCase  implements Serializable{
 			if(m==4)
 			{Log.e("lorion", "lorion");
 				
-				monstros.add(new Monstro(rL,rC,Imagens.monstro2,500,5000));
+				monstros.add(new Monstro(rL,rC,Imagens.getMonstro2(),500,5000));
 			}
 			else
 				monstros.add(new Monstro(rL,rC));
@@ -158,14 +171,14 @@ public class Jogo extends TestCase  implements Serializable{
 		Bitmap tab = null;
 		switch (nivel) {
 		case 1:
-			tab=Imagens.nivel1;
+			tab=Imagens.getNivel1();
 			break;
 		case 2:
-			tab=Imagens.nivel2;
+			tab=Imagens.getNivel2();
 			break;
 
 		default:
-			tab=Imagens.nivel2;;
+			tab=Imagens.getNivel2();;
 		}
 		
 		for (int i = 0; i < tab.getWidth(); i++) {
@@ -175,7 +188,7 @@ public class Jogo extends TestCase  implements Serializable{
 				switch (tab.getPixel(x, y)) {
 				// se o é uma parede
 				case Color.BLACK:
-					if(tab==Imagens.nivel2)
+					if(tab==Imagens.getNivel2())
 						getParedes()[x][y]= new Parede(x,y,1);
 						else
 							getParedes()[x][y] = new Parede(x, y);

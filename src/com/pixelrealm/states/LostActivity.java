@@ -1,8 +1,13 @@
-package com.example.lolitos2;
+package com.pixelrealm.states;
+
+import com.example.lolitos2.R;
+import com.pixelrealm.entities.Heroi;
+import com.pixelrealm.game.Statistics;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.os.Build;
 
-public class LostActivity extends ActionBarActivity {
+public class LostActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

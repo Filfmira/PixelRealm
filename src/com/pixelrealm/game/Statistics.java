@@ -1,4 +1,4 @@
-package com.example.lolitos2;
+package com.pixelrealm.game;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import com.pixelrealm.entities.Heroi;
 
 import android.content.Context;
 import android.util.Log;

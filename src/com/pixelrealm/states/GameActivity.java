@@ -1,6 +1,9 @@
-package com.example.lolitos2;
+package com.pixelrealm.states;
 
 import java.io.IOException;
+
+import com.example.lolitos2.R;
+import com.pixelrealm.game.GameSurface;
 
 import android.app.Activity;
 import android.media.MediaPlayer;
@@ -12,8 +15,8 @@ public class GameActivity extends Activity{
 
 	private static GameActivity instance;
 	private GameSurface game;
-	MediaPlayer gem;
-	MediaPlayer start;
+	public MediaPlayer gem;
+	public MediaPlayer start;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

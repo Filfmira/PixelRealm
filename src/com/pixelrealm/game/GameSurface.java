@@ -1,4 +1,4 @@
-package com.example.lolitos2;
+package com.pixelrealm.game;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,6 +10,14 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import com.example.lolitos2.R;
+import com.pixelrealm.controls.GameControls;
+import com.pixelrealm.entities.Entidade;
+import com.pixelrealm.entities.Heroi;
+import com.pixelrealm.graphics.Imagens;
+import com.pixelrealm.logic.GameLogic;
+import com.pixelrealm.states.GameActivity;
+import com.pixelrealm.states.LostActivity;
+import com.pixelrealm.states.PauseActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -122,19 +130,19 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 			this.iniciaJogo(canvas);
 		}
 
-		if (_controls.idJoystick != -1) {
-			int x2 = _controls.jsx;
-			int x3 = _controls.jsy;
+		if (_controls.getIdJoystick() != -1) {
+			int x2 = _controls.getJsx();
+			int x3 = _controls.getJsy();
 			_controls.joystickDown(x2, x3);
 		}
 
-		canvas.drawBitmap(Imagens.mapa, Entidade.dx, Entidade.dy, null);
+		canvas.drawBitmap(Imagens.getMapa(), Entidade.dx, Entidade.dy, null);
 		GameLogic.desenharEntidades(_context.getAssets(),getJogo(), canvas, paint);
 
-		canvas.drawBitmap(Imagens.joystickBig, _controls.xBJ,
+		canvas.drawBitmap(Imagens.getJoystickBig(), _controls.xBJ,
 				_controls.yBJ, null);
 		
-		canvas.drawBitmap(Imagens.joystickSmall,
+		canvas.drawBitmap(Imagens.getJoystickSmall(),
 				_controls._touchingPoint.x, _controls._touchingPoint.y, null);
 		
 		

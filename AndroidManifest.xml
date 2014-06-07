@@ -18,7 +18,7 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.lolitos2.MainActivity"
+            android:name="com.pixelrealm.states.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,17 +28,17 @@
             //android:theme="@android:style/Theme.NoTitleBar"
         </activity>
         <activity
-            android:name="com.example.lolitos2.GameActivity"
+            android:name="com.pixelrealm.states.GameActivity"
             android:label="@string/title_activity_game"
-            android:parentActivityName="com.example.lolitos2.MainActivity" >
+            android:parentActivityName="com.pixelrealm.states.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.lolitos2.MainActivity" />
         </activity>
-        <activity android:name="com.example.lolitos2.PauseActivity" >
+        <activity android:name="com.pixelrealm.states.PauseActivity" >
         </activity>
         <activity
-            android:name="com.example.lolitos2.LostActivity"
+            android:name="com.pixelrealm.states.LostActivity"
             android:label="@string/title_activity_lost" >
             
         </activity>

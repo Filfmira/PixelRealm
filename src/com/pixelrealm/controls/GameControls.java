@@ -1,6 +1,13 @@
-package com.example.lolitos2;
+package com.pixelrealm.controls;
 
 import java.io.Serializable;
+
+import com.pixelrealm.entities.Entidade;
+import com.pixelrealm.entities.Parede;
+import com.pixelrealm.entities.Projectil;
+import com.pixelrealm.game.GameSurface;
+import com.pixelrealm.graphics.Imagens;
+import com.pixelrealm.logic.GameLogic;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -32,9 +39,9 @@ public class GameControls implements OnTouchListener {
 	public Entidade pausaEntidade = null;
 	public Entidade heroiEntidade = null;
 	
-	int jsx = 0;
-	int jsy = 0;
-	int idJoystick = -1;
+	private int jsx = 0;
+	private int jsy = 0;
+	private int idJoystick = -1;
 	int c = 0;
 
 	
@@ -55,8 +62,8 @@ public class GameControls implements OnTouchListener {
 		h = size.y;
 
 		// tamanho dos joysticks
-		sBJ = Imagens.joystickBig.getWidth();
-		sSJ = Imagens.joystickSmall.getWidth();
+		sBJ = Imagens.getJoystickBig().getWidth();
+		sSJ = Imagens.getJoystickSmall().getWidth();
 
 		// mudar estes dois para mudar o sitio onde estao os joysticks
 		xBJ = (int) (sBJ) / 2;
@@ -79,7 +86,7 @@ public class GameControls implements OnTouchListener {
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		if (pausaEntidade == null)
-			pausaEntidade=new Parede(Entidade.tamanhoCelula/2,Entidade.tamanhoCelula/2,Entidade.tamanhoCelula/2+Imagens.pausa.getWidth(),Entidade.tamanhoCelula/2+Imagens.pausa.getHeight());
+			pausaEntidade=new Parede(Entidade.tamanhoCelula/2,Entidade.tamanhoCelula/2,Entidade.tamanhoCelula/2+Imagens.getPausa().getWidth(),Entidade.tamanhoCelula/2+Imagens.getPausa().getHeight());
 
 		handleMultitouch(event);
 		
@@ -93,8 +100,8 @@ public class GameControls implements OnTouchListener {
 	 * @param l	Y onde carregou
 	 */
 	public void joystickDown(int i, int l) {
-		jsx = i;
-		jsy = l;
+		setJsx(i);
+		setJsy(l);
 		_touchingPoint.x = (int) i - sSJ / 2;
 		_touchingPoint.y = (int) l - sSJ / 2;
 		pontoEntidade.setX((int) i - sSJ / 2);
@@ -135,8 +142,8 @@ public class GameControls implements OnTouchListener {
 			if (!GameLogic.verificaMovimento(parent.getJogo(), x)) {
 				// ?
 			}
-			Entidade.dy += x[1];
-			Entidade.dx += x[0];
+			Entidade.setDy(Entidade.getDy() + x[1]);
+			Entidade.setDx(Entidade.getDx() + x[0]);
 
 		}
 		parent.postInvalidate();
@@ -182,8 +189,8 @@ public class GameControls implements OnTouchListener {
 
 		switch (action & MotionEvent.ACTION_MASK) {
 		case MotionEvent.ACTION_DOWN:
-			pontoEntidade.x = (int) event.getX();
-			pontoEntidade.y = (int) event.getY();
+			pontoEntidade.setX((int) event.getX());
+			pontoEntidade.setY((int) event.getY());
 			if (pausaEntidade.colide(pontoEntidade)) {
 				parent.menuPausa();
 				break;
@@ -192,23 +199,23 @@ public class GameControls implements OnTouchListener {
 			if (joystickEntidadePequeno.colide(pontoEntidade)) {
 				c++;
 				Log.e("down", event.getPointerId(0) + "");
-				idJoystick = action;
-				joystickDown(pontoEntidade.x, pontoEntidade.y);
+				setIdJoystick(action);
+				joystickDown(pontoEntidade.getX(), pontoEntidade.getY());
 			}
 			break;
 
 		case MotionEvent.ACTION_UP:
-			pontoEntidade.x = (int) event.getX();
-			pontoEntidade.y = (int) event.getY();
+			pontoEntidade.setX((int) event.getX());
+			pontoEntidade.setY((int) event.getY());
 			if (pausaEntidade.colide(pontoEntidade)) {
 			break;
-			} else if (event.getPointerId(0) == idJoystick) {
+			} else if (event.getPointerId(0) == getIdJoystick()) {
 				c = 0;
 				joystickUp(event);
-				idJoystick = -1;
+				setIdJoystick(-1);
 			}
 			
-			 else setaUp(pontoEntidade.x,pontoEntidade.y);
+			 else setaUp(pontoEntidade.getX(),pontoEntidade.getY());
 			 
 			break;
 
@@ -217,37 +224,61 @@ public class GameControls implements OnTouchListener {
 
 			int ptrIdx = event.findPointerIndex(ptrId);
 
-			pontoEntidade.x = (int) event.getX(ptrIdx);
-			pontoEntidade.y = (int) event.getY(ptrIdx);
+			pontoEntidade.setX((int) event.getX(ptrIdx));
+			pontoEntidade.setY((int) event.getY(ptrIdx));
 			if (joystickEntidade.colide(pontoEntidade)) {
-				idJoystick = ptrId;
-				joystickDown(pontoEntidade.x, pontoEntidade.y);
+				setIdJoystick(ptrId);
+				joystickDown(pontoEntidade.getX(), pontoEntidade.getY());
 			} else
-				setaUp(pontoEntidade.x, pontoEntidade.y);
+				setaUp(pontoEntidade.getX(), pontoEntidade.getY());
 			break;
 
 		case MotionEvent.ACTION_POINTER_UP:
 			ptrId = action >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
-			pontoEntidade.x = (int) event.getX(ptrId);
-			pontoEntidade.y = (int) event.getY(ptrId);
-			if (idJoystick == ptrId) {
-				joystickDown(pontoEntidade.x, pontoEntidade.y);
+			pontoEntidade.setX((int) event.getX(ptrId));
+			pontoEntidade.setY((int) event.getY(ptrId));
+			if (getIdJoystick() == ptrId) {
+				joystickDown(pontoEntidade.getX(), pontoEntidade.getY());
 			}
 			break;
 
 		case MotionEvent.ACTION_MOVE:
-			pontoEntidade.x = (int) event.getX();
-			pontoEntidade.y = (int) event.getY();
+			pontoEntidade.setX((int) event.getX());
+			pontoEntidade.setY((int) event.getY());
 			for (int i = 0; i < event.getPointerCount(); ++i)
-				if (event.getPointerId(i) == idJoystick) {
+				if (event.getPointerId(i) == getIdJoystick()) {
 					c--;
-					this.jsx=pontoEntidade.x;
-					this.jsy=pontoEntidade.y;
+					this.setJsx(pontoEntidade.getX());
+					this.setJsy(pontoEntidade.getY());
 				}
 			break;
 		default:
 			break;
 		}
+	}
+
+	public int getJsx() {
+		return jsx;
+	}
+
+	public void setJsx(int jsx) {
+		this.jsx = jsx;
+	}
+
+	public int getJsy() {
+		return jsy;
+	}
+
+	public void setJsy(int jsy) {
+		this.jsy = jsy;
+	}
+
+	public int getIdJoystick() {
+		return idJoystick;
+	}
+
+	public void setIdJoystick(int idJoystick) {
+		this.idJoystick = idJoystick;
 	}
 
 

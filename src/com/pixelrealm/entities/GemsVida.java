@@ -1,6 +1,9 @@
-package com.example.lolitos2;
+package com.pixelrealm.entities;
 
 import java.io.Serializable;
+
+import com.pixelrealm.graphics.Imagens;
+import com.pixelrealm.graphics.Sprite;
 
 import android.graphics.Bitmap;
 
@@ -27,7 +30,7 @@ public class GemsVida extends Catchable implements 	Serializable{
 
 	@Override
 	public Bitmap getImagem() {
-		return Imagens.gemsVidaSprite;
+		return Imagens.getGemsVidaSprite();
 	}
 	
 	

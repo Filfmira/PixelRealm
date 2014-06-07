@@ -1,6 +1,8 @@
-package com.example.lolitos2;
+package com.pixelrealm.entities;
 
 import java.io.Serializable;
+
+import com.pixelrealm.graphics.Imagens;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -16,6 +18,7 @@ public class Heroi extends Personagem implements Serializable{
 	private int dinheiro;
 	private int incAtaque=0;	//incremento de ataque temporario
 	private int nivel=1;
+	private int contadorAtaque=0;
 	/**
 	 * Construtor do heroi, inicializa-o em x,y com vidaInicial e vida determinadas
 	 * @param x
@@ -90,24 +93,24 @@ public class Heroi extends Personagem implements Serializable{
 		this.setDinheiro(this.getDinheiro() + m.getCapacidade());
 	}
 
-	int contadorAtaque=0;
+	
 	public void update()
 	{
 		//trata de retirar os incremntos de ataques temporarios
 		
 		if(getIncAtaque()>0)
 		{
-			if(contadorAtaque==0)
-				contadorAtaque=200;
-			contadorAtaque--;
-			if(contadorAtaque==1)
+			if(getContadorAtaque()==0)
+				setContadorAtaque(200);
+			setContadorAtaque(getContadorAtaque() - 1);
+			if(getContadorAtaque()==1)
 			{
 				this.setAtaque(this.getAtaque() - this.getIncAtaque());
 				this.setIncAtaque(0);
-				this.contadorAtaque=0;
+				this.setContadorAtaque(0);
 			}
 		}
-		else if(contadorAtaque==0)
+		else if(getContadorAtaque()==0)
 			setIncAtaque(0);
 	}
 
@@ -136,8 +139,8 @@ public class Heroi extends Personagem implements Serializable{
 	@Override
 	public Bitmap getImagem() {
 		if (this.getIncAtaque() > 0)
-			return Imagens.heroi2;
-		else return Imagens.heroi;
+			return Imagens.getHeroi2();
+		else return Imagens.getHeroi();
 	}
 
 	public int getDinheiro() {
@@ -162,6 +165,14 @@ public class Heroi extends Personagem implements Serializable{
 
 	public void setNivel(int nivel) {
 		this.nivel = nivel;
+	}
+
+	public int getContadorAtaque() {
+		return contadorAtaque;
+	}
+
+	public void setContadorAtaque(int contadorAtaque) {
+		this.contadorAtaque = contadorAtaque;
 	}
 
 

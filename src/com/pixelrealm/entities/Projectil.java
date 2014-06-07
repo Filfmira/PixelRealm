@@ -1,6 +1,8 @@
-package com.example.lolitos2;
+package com.pixelrealm.entities;
 
 import java.io.Serializable;
+
+import com.pixelrealm.graphics.Imagens;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -83,7 +85,7 @@ public class Projectil extends Entidade{
 
 	@Override
 	public Bitmap getImagem() {
-		return Imagens.RotateBitmap(Imagens.seta, angulo);
+		return Imagens.RotateBitmap(Imagens.getSeta(), angulo);
 	}
 
 	
