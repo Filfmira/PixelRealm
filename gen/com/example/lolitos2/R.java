@@ -1228,8 +1228,9 @@ containing a value of this type.
         public static final int seta=0x7f020080;
         public static final int sombra=0x7f020081;
         public static final int t=0x7f020082;
-        public static final int teste=0x7f020083;
-        public static final int ui3=0x7f020084;
+        public static final int terra=0x7f020083;
+        public static final int teste=0x7f020084;
+        public static final int ui3=0x7f020085;
     }
     public static final class id {
         public static final int action_bar=0x7f06002d;

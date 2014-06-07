@@ -175,7 +175,10 @@ public class Jogo extends TestCase  implements Serializable{
 				switch (tab.getPixel(x, y)) {
 				// se o é uma parede
 				case Color.BLACK:
-					getParedes()[x][y] = new Parede(x, y);
+					if(tab==Imagens.nivel2)
+						getParedes()[x][y]= new Parede(x,y,1);
+						else
+							getParedes()[x][y] = new Parede(x, y);
 					break;
 				case Color.YELLOW:
 					fundo.add(new Passivo(x,y,1));

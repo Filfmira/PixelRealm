@@ -32,6 +32,7 @@ public class Imagens {
 	protected static Bitmap joystickBig;
 	protected static Bitmap joystickSmall;
 	protected static Bitmap sombraMapa;
+	protected static Bitmap arvore;
 
 	
 	public static void inicializarImagens(Resources res)
@@ -76,6 +77,11 @@ public class Imagens {
 		flor = BitmapFactory.decodeResource(res, R.drawable.relvaflor);
 		flor = Bitmap.createScaledBitmap(flor, Entidade.tamanhoCelula, Entidade.tamanhoCelula, false);
 		
+
+		arvore = BitmapFactory.decodeResource(res, R.drawable.arvore);
+		arvore = Bitmap.createScaledBitmap(arvore, Entidade.tamanhoCelula, Entidade.tamanhoCelula, false);
+
+		
 		chao = BitmapFactory.decodeResource(res, R.drawable.chao);
 		chao = Bitmap.createScaledBitmap(chao, Entidade.tamanhoCelula, Entidade.tamanhoCelula, false);
 		
@@ -91,6 +97,7 @@ public class Imagens {
 	
 		sombraMapa=BitmapFactory.decodeResource(res, R.drawable.sombra);
 		//sombraMapa = Bitmap.createScaledBitmap(sombraMapa, Entidade.tamanhoCelula*mapa.getWidth(), Entidade.tamanhoCelula*mapa.getHeight(), false);		
+		
 		
 	}
 	

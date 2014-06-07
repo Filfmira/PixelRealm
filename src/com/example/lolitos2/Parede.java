@@ -7,6 +7,8 @@ import android.graphics.Color;
 
 public class Parede extends Entidade {
 
+	
+	int tipo=0;
 	/**
 	 * Inicializa uma Parede em x,y
 	 * @param x
@@ -26,9 +28,18 @@ public class Parede extends Entidade {
 
 	}
 
+	public Parede(int x, int y, int tipo) {
+		super(x, y, Entidade.tamanhoCelula, Entidade.tamanhoCelula);
+		this.tipo=tipo;
+		
+	}
+
 	@Override
 	public Bitmap getImagem() {
+		if(tipo==0)
 		return Imagens.parede;
+		else
+			return Imagens.arvore;
 	}
 
 }
