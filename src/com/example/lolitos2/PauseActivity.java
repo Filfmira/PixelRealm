@@ -35,8 +35,8 @@ public class PauseActivity extends Activity {
     	  btq.setOnClickListener(new OnClickListener() {
     	    @Override
     	    public void onClick(View v) {
-    	    	Statistics.saveHeroi(GameActivity.instance.getGame().getJogo().getHeroi(), GameActivity.instance.getGame());
-    	    	GameActivity.instance.finish();
+    	    	Statistics.saveHeroi(GameActivity.getInstance().getGame().getJogo().getHeroi(), GameActivity.getInstance().getGame());
+    	    	GameActivity.getInstance().finish();
     	    	MainActivity.instance.finish();
     	      System.exit(0);
     	    }
@@ -48,8 +48,8 @@ public class PauseActivity extends Activity {
     	    @Override
     	    public void onClick(View v) {
     	    	//Intent intent = new Intent(getBaseContext(), MainActivity.class);
-    	    	Statistics.saveHeroi(GameActivity.instance.getGame().getJogo().getHeroi(), GameActivity.instance.getGame());
-    	    	GameActivity.instance.finish();
+    	    	Statistics.saveHeroi(GameActivity.getInstance().getGame().getJogo().getHeroi(), GameActivity.getInstance().getGame());
+    	    	GameActivity.getInstance().finish();
 				//startActivity(intent);
 				finish();
     	    }

@@ -10,6 +10,8 @@ public class Projectil extends Entidade{
 
 	float pdx,pdy;
 	float a, b;
+
+
 	int dxI,dyI;
 	int ataque;
 	int xInicial,yInicial;
@@ -35,7 +37,7 @@ public class Projectil extends Entidade{
 		this.pdy=pdy;
 		a=x;
 		b=y;
-		ataque=(int) (heroi.ataque*2);
+		ataque=(int) (heroi.getAtaque()*2);
 		//if(x<=Entidade.sw/2)
 		//Log.e("tintas", xInicial+"-"+Entidade.sw/2);
 		if(pdx>0)
@@ -84,4 +86,12 @@ public class Projectil extends Entidade{
 		return Imagens.RotateBitmap(Imagens.seta, angulo);
 	}
 
+	
+	public int getAtaque() {
+		return ataque;
+	}
+
+	public void setAtaque(int ataque) {
+		this.ataque = ataque;
+	}
 }

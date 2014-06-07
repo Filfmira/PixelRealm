@@ -17,13 +17,17 @@ public class GemsVida extends Catchable implements 	Serializable{
 	 */
 	public GemsVida(int x, int y,int capacidade) {
 		super(x,y,capacidade);
-		//imagem=Imagens.gemsvida;
+		sprite= new Sprite(getImagem(),2,4,x,y);
+	}
+
+	public GemsVida(Monstro monstro) {
+		super(monstro, 2000);
 		sprite= new Sprite(getImagem(),2,4,x,y);
 	}
 
 	@Override
 	public Bitmap getImagem() {
-		return Imagens.gemsvida;
+		return Imagens.gemsVidaSprite;
 	}
 	
 	

@@ -15,10 +15,10 @@ public abstract class Entidade implements Serializable{
 	private int width;
 	private int height;
 	public static int tamanhoCelula=200;
-	protected static int sw=0;//screenwidth
-	protected static int sh=0;//screenheight
+	public static int sw=0;//screenwidth
+	public static int sh=0;//screenheight
 	protected static int dx=0;
-	protected static int dy=0;
+	public static int dy=0;
 	
 	/**
 	 * Construtor da classe Entidade

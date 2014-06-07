@@ -31,9 +31,10 @@ public class Imagens {
 	protected static Bitmap nivel2;
 	protected static Bitmap joystickBig;
 	protected static Bitmap joystickSmall;
+	protected static Bitmap sombraMapa;
 
 	
-	static void inicializarImagens(Resources res)
+	public static void inicializarImagens(Resources res)
 	{
 		mapa = BitmapFactory.decodeResource(res, R.drawable.mapa);
 		mapa = Bitmap.createScaledBitmap(mapa, Entidade.tamanhoCelula*32, Entidade.tamanhoCelula*32, true);
@@ -86,6 +87,11 @@ public class Imagens {
 		joystickBig = Bitmap.createScaledBitmap(joystickBig, Entidade.tamanhoCelula*2, Entidade.tamanhoCelula*2, false);		
 		joystickSmall=BitmapFactory.decodeResource(res, R.drawable.joystick);
 		joystickSmall=Bitmap.createScaledBitmap(joystickSmall, Entidade.tamanhoCelula, Entidade.tamanhoCelula, false);
+	
+	
+		sombraMapa=BitmapFactory.decodeResource(res, R.drawable.sombra);
+		//sombraMapa = Bitmap.createScaledBitmap(sombraMapa, Entidade.tamanhoCelula*mapa.getWidth(), Entidade.tamanhoCelula*mapa.getHeight(), false);		
+		
 	}
 	
 	

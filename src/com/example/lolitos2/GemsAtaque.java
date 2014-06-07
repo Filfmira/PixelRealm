@@ -16,6 +16,12 @@ public class GemsAtaque extends Catchable{
 		//imagem=Imagens.gemsataque;
 		sprite= new Sprite(getImagem(),2,4,x,y);
 	}
+	
+
+	public GemsAtaque(int x, int y, int capacidade) {
+		super(x,y,capacidade);
+	}
+
 
 	@Override
 	public Bitmap getImagem() {

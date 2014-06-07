@@ -25,7 +25,7 @@ public class LostActivity extends ActionBarActivity {
     	getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,   
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
     	setContentView(R.layout.activity_lost);
-    	Statistics.saveHeroi(new Heroi(0,0), GameActivity.instance.getGame());
+    	Statistics.saveHeroi(new Heroi(0,0), GameActivity.getInstance().getGame());
     	
     	Button backButton = (Button)this.findViewById(R.id.btnMenu);
   	  backButton.setOnClickListener(new OnClickListener() {
@@ -42,7 +42,7 @@ public class LostActivity extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
-				GameActivity.instance.finish();
+				GameActivity.getInstance().finish();
     	    	MainActivity.instance.finish();
     	    	finish();
     	      System.exit(0);
@@ -58,7 +58,7 @@ public class LostActivity extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
-				GameActivity.instance.finish();
+				GameActivity.getInstance().finish();
 				Intent intent = new Intent(getBaseContext(), GameActivity.class);
 				startActivity(intent);
 				finish();

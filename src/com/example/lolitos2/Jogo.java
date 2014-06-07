@@ -23,7 +23,7 @@ public class Jogo extends TestCase  implements Serializable{
 	 */
 	private static final long serialVersionUID = -6340455120385832207L;
 	private Heroi heroi=null;
-	private int monstrosMortos=0;
+	private int moedasApanhadas=0;
 	private int portalNum=20;
 	private ArrayList<Monstro> monstros;
 	// private ArrayList<Parede> paredes;
@@ -35,24 +35,48 @@ public class Jogo extends TestCase  implements Serializable{
 	private Parede[][] paredes = new Parede[50][50];
 	private Portal portal;
 
-	// inicializa o jogo
+	/**
+	 * Inicializa o Jogo
+	 * @param tamanhoCelula	tamanho da celula unitaria 
+	 * @param resources	para ter acesso as imagens
+	 */
 	public Jogo(int tamanhoCelula, Resources resources) {
 		iniciarHeroi();
 
 		loadMapa(1);
 		gerarMonstros();
-		GameActivity.instance.start.start();
+		GameActivity.getInstance().start.start();
 	}
 
 
-	
-	public Jogo(Heroi heroi2) {
-		this.setHeroi(heroi2);
+	/**
+	 * Inicializa o Jogo com recurso a um Heroi
+	 * @param heroi
+	 */
+	public Jogo(Heroi heroi) {
+		this.setHeroi(heroi);
 		iniciarHeroi();
-		loadMapa(heroi2.nivel);
+		loadMapa(heroi.getNivel());
 		gerarMonstros();
-		GameActivity.instance.start.start();
+		GameActivity.getInstance().start.start();
 	}
+
+
+
+	/**
+	 * Inicizalizador do Jogo para efeitos de teste
+	 */
+	public Jogo() {
+		iniciarHeroi();
+		setSetas(new ArrayList<Projectil>());
+		setInimigos(new ArrayList<Monstro>());
+		setGemsVida(new ArrayList<GemsVida>());
+		setGemsAtaque(new ArrayList<GemsAtaque>());
+		setMoedas(new ArrayList<Moeda>());
+		setFundo(new ArrayList<Passivo>());
+	}
+
+
 
 	/**
 	 * gera monstros aleatoriamente
@@ -61,7 +85,7 @@ public class Jogo extends TestCase  implements Serializable{
 	{
 		for(int x=0;x<50;x++)
 		{
-			gerarMonstro(heroi.nivel);
+			gerarMonstro(heroi.getNivel());
 		}
 	}
 	
@@ -97,8 +121,7 @@ public class Jogo extends TestCase  implements Serializable{
 	public void matarMonstro(int index)
 	{
 		this.monstros.remove(index);
-		setMonstrosMortos(getMonstrosMortos() + 1);
-		this.gerarMonstro(heroi.nivel);
+		this.gerarMonstro(heroi.getNivel());
 	}
 	
 	public void iniciarHeroi()
@@ -246,20 +269,22 @@ public class Jogo extends TestCase  implements Serializable{
 		this.fundo = fundo;
 	}
 
-	public int getMonstrosMortos() {
-		return monstrosMortos;
-	}
-
-	public void setMonstrosMortos(int monstrosMortos) {
-		this.monstrosMortos = monstrosMortos;
-	}
-
 	public int getPortalNum() {
 		return portalNum;
 	}
 
 	public void setPortalNum(int portalNum) {
 		this.portalNum = portalNum;
+	}
+
+
+	public int getMoedasApanhadas() {
+		return moedasApanhadas;
+	}
+
+
+	public void setMoedasApanhadas(int moedasApanhadas) {
+		this.moedasApanhadas = moedasApanhadas;
 	}
 
 }

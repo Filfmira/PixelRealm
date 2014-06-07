@@ -14,8 +14,8 @@ public class Heroi extends Personagem implements Serializable{
 	
 	
 	private int dinheiro;
-	int incAtaque=0;	//incremento de ataque temporario
-	int nivel=1;
+	private int incAtaque=0;	//incremento de ataque temporario
+	private int nivel=1;
 	/**
 	 * Construtor do heroi, inicializa-o em x,y com vidaInicial e vida determinadas
 	 * @param x
@@ -26,7 +26,7 @@ public class Heroi extends Personagem implements Serializable{
 		setVida(10000);
 		
 		setVidaInicial(10000);
-		ataque=200;
+		setAtaque(200);
 	}
 	
 	/**
@@ -37,7 +37,7 @@ public class Heroi extends Personagem implements Serializable{
 		super(0, 0);
 		setVida(10000);
 		setVidaInicial(10000);
-		ataque=200;
+		setAtaque(200);
 	}
 
 	/**
@@ -46,8 +46,8 @@ public class Heroi extends Personagem implements Serializable{
 	 */
 	public void lutar (Monstro m)
 	{
-		setVida(getVida() - m.ataque);
-		m.setVida(m.getVida() - ataque);
+		setVida(getVida() - m.getAtaque());
+		m.setVida(m.getVida() - getAtaque());
 	}
 	
 	/**
@@ -63,8 +63,9 @@ public class Heroi extends Personagem implements Serializable{
 	 */
 	public void apanharCatchable(GemsVida gm)
 	{
-		GameActivity.instance.gem.start();
 		this.setVida(this.getVida()+gm.getCapacidade());
+		if(this.getVida()>this.getVidaInicial())
+			this.setVida(this.getVidaInicial());
 	}
 	
 	/**
@@ -73,11 +74,10 @@ public class Heroi extends Personagem implements Serializable{
 	 */
 	public void apanharCatchable(GemsAtaque gm)
 	{
-		GameActivity.instance.gem.start();
-		if(incAtaque==0)
+		if(getIncAtaque()==0)
 		{
-			incAtaque=gm.getCapacidade();
-			ataque+=gm.getCapacidade();
+			setIncAtaque(gm.getCapacidade());
+			setAtaque(getAtaque() + gm.getCapacidade());
 		}
 	}
 	
@@ -87,7 +87,6 @@ public class Heroi extends Personagem implements Serializable{
 	 */
 	public void apanharCatchable(Moeda m)
 	{
-		GameActivity.instance.gem.start();
 		this.setDinheiro(this.getDinheiro() + m.getCapacidade());
 	}
 
@@ -96,31 +95,39 @@ public class Heroi extends Personagem implements Serializable{
 	{
 		//trata de retirar os incremntos de ataques temporarios
 		
-		if(incAtaque>0)
+		if(getIncAtaque()>0)
 		{
 			if(contadorAtaque==0)
 				contadorAtaque=200;
 			contadorAtaque--;
 			if(contadorAtaque==1)
 			{
-				this.ataque-=this.incAtaque;
-				this.incAtaque=0;
+				this.setAtaque(this.getAtaque() - this.getIncAtaque());
+				this.setIncAtaque(0);
 				this.contadorAtaque=0;
 			}
 		}
 		else if(contadorAtaque==0)
-			incAtaque=0;
+			setIncAtaque(0);
 	}
 
 	/**
 	 * Volta a por o ataque do heroi sem o "plus" que tem de apanhar GemsAtaque
 	 */
 	public void setAtaqueNormal() {
-		if(incAtaque!=0)
+		if(getIncAtaque()!=0)
 		{
-		this.ataque-=this.incAtaque;
-		this.incAtaque=0;
+		this.setAtaque(this.getAtaque() - this.getIncAtaque());
+		this.setIncAtaque(0);
 		}
+		
+	}
+	
+	/**
+	 * Aumentar nivel do heroi
+	 */
+	public void aumentarNivel() {
+		this.nivel++;
 		
 	}
 	
@@ -128,7 +135,7 @@ public class Heroi extends Personagem implements Serializable{
 
 	@Override
 	public Bitmap getImagem() {
-		if (this.incAtaque > 0)
+		if (this.getIncAtaque() > 0)
 			return Imagens.heroi2;
 		else return Imagens.heroi;
 	}
@@ -140,6 +147,24 @@ public class Heroi extends Personagem implements Serializable{
 	public void setDinheiro(int dinheiro) {
 		this.dinheiro = dinheiro;
 	}
+
+	public int getIncAtaque() {
+		return incAtaque;
+	}
+
+	public void setIncAtaque(int incAtaque) {
+		this.incAtaque = incAtaque;
+	}
+
+	public int getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
+
+
 	
 	
 	

@@ -10,7 +10,7 @@ import android.view.WindowManager;
 
 public class GameActivity extends Activity{
 
-	static GameActivity instance;
+	private static GameActivity instance;
 	private GameSurface game;
 	MediaPlayer gem;
 	MediaPlayer start;
@@ -20,7 +20,7 @@ public class GameActivity extends Activity{
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
     	getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,   
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    	instance=this;
+    	setInstance(this);
     	gem=MediaPlayer.create(this, R.raw.gem);
     	try {
 			gem.prepare();
@@ -38,10 +38,19 @@ public class GameActivity extends Activity{
     	//setContentView(R.layout.game_game);
 		setContentView(getGame());
 	}
+	
+	
+	
 	public GameSurface getGame() {
 		return game;
 	}
 	public void setGame(GameSurface game) {
 		this.game = game;
+	}
+	public static GameActivity getInstance() {
+		return instance;
+	}
+	public static void setInstance(GameActivity instance) {
+		GameActivity.instance = instance;
 	}
 }

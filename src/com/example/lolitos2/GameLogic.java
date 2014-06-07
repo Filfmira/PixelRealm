@@ -3,9 +3,12 @@ package com.example.lolitos2;
 import java.io.Serializable;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.Vibrator;
 import android.util.Log;
 
@@ -20,7 +23,7 @@ public class GameLogic implements Serializable {
 	 * @param jogo
 	 * @param gameSurface
 	 */
-	static public void lutar(Jogo jogo, GameSurface gameSurface) {
+	static public boolean lutar(Jogo jogo) {
 		boolean lutar = false;
 		for (int i = 0; i < jogo.getInimigos().size(); i++) {
 
@@ -29,39 +32,61 @@ public class GameLogic implements Serializable {
 				jogo.getHeroi().lutar(jogo.getInimigos().get(i));
 				// Log.e("lutar", ""+heroi.getVida());
 				if (jogo.getInimigos().get(i).getVida() <= 0) {
-					int x = (int) (Math.random() * 4);
-					if (x == 1)
-						jogo.getGemsAtaque().add(
-								new GemsAtaque(jogo.getInimigos().get(i)));
-					else
-						jogo.getMoedas().add(
-								new Moeda(jogo.getInimigos().get(i)));
-					jogo.matarMonstro(i);
-					if(jogo.getHeroi().getVida()<=0)
-					{
-						gameSurface.menuPerder();
-						return;
-					}
 					
+					gerarGem(jogo,i);
+					jogo.matarMonstro(i);
 						
 				}
 			}
 		}
-		if (lutar) {
-			Vibrator v = (Vibrator) gameSurface.getContext().getSystemService(
-					Context.VIBRATOR_SERVICE);
-
-			// Vibrate for 400 milliseconds
-			v.vibrate(10);
-			if (t == 1) {
-				t = 0;
-				Entidade.dx = Entidade.dx - 4;
-			} else {
-				t = 1;
-				Entidade.dx = Entidade.dx + 4;
-			}
+		
+		return lutar;
+	}
+	
+	static public void gerarGem(Jogo jogo, int i)
+	{
+		switch ((int) (Math.random() * 10)) {
+		case 1:
+			jogo.getGemsAtaque().add(
+					new GemsAtaque(jogo.getInimigos().get(i)));
+			break;
+		case 2:
+			jogo.getGemsVida().add(new GemsVida(jogo.getInimigos().get(i)));
+			break;	
+		default:
+			jogo.getMoedas().add(
+					new Moeda(jogo.getInimigos().get(i)));
+			break;
 		}
 	}
+	
+	
+	static public void lutar(Jogo jogo, GameSurface gameSurface) {
+
+		if(GameLogic.lutar(jogo))
+		{
+		if(jogo.getHeroi().getVida()<=0)
+		{
+			gameSurface.menuPerder();
+			return;
+		}
+		
+		Vibrator v = (Vibrator) gameSurface.getContext().getSystemService(
+				Context.VIBRATOR_SERVICE);
+
+		// Vibrate for 400 milliseconds
+		v.vibrate(10);
+		if (t == 1) {
+			t = 0;
+			Entidade.dx = Entidade.dx - 4;
+		} else {
+			t = 1;
+			Entidade.dx = Entidade.dx + 4;
+		}
+		
+		}
+	}
+	
 
 	/**
 	 * Funcao para fazer update a posicao das setas do heroi e se estas devem
@@ -75,13 +100,7 @@ public class GameLogic implements Serializable {
 						.get(i))) {
 					jogo.getSetas().get(j).atacar(jogo.getInimigos().get(i));
 					if (jogo.getInimigos().get(i).getVida() <= 0) {
-						int x = (int) (Math.random() * 4);
-						if (x == 1)
-							jogo.getGemsAtaque().add(
-									new GemsAtaque(jogo.getInimigos().get(i)));
-						else
-							jogo.getMoedas().add(
-									new Moeda(jogo.getInimigos().get(i)));
+						gerarGem(jogo,i);
 						jogo.matarMonstro(i);
 					}
 					jogo.getSetas().remove(j);
@@ -102,8 +121,9 @@ public class GameLogic implements Serializable {
 	/**
 	 * Funcao que verifica se o jogador nao apanhou qualquer tipo de Gems
 	 * @param jogo
+	 * @return true se tiver apanhado ou false se nao
 	 */
-	static public void apanharGems(Jogo jogo) {
+	static public boolean apanharGems(Jogo jogo) {
 		boolean apanhou=false;
 		for (int i = 0; i < jogo.getGemsVida().size(); i++) {
 
@@ -123,48 +143,51 @@ public class GameLogic implements Serializable {
 			}
 		}
 		
-		if(apanhou)
-			GameActivity.instance.gem.start();
+		
+		return apanhou;
 	}
 
 	/**
 	 * Funcao que verifica se o jogador apanhou moedas
 	 * @param jogo
+	 * @return true se apanhou alguma moeda ou false se nao
 	 */
-	static public void apanharMoedas(Jogo jogo) {
+	static public boolean apanharMoedas(Jogo jogo) {
 		boolean apanhou=false;
 		for (int i = 0; i < jogo.getMoedas().size(); i++) {
 
 			if (testaColisao(jogo.getHeroi(), jogo.getMoedas().get(i))) {
 				apanhou=true;
 				jogo.getHeroi().apanharCatchable(jogo.getMoedas().get(i));
+				jogo.setMoedasApanhadas(jogo.getMoedasApanhadas() + 1);
 				jogo.getMoedas().remove(i);
 			}
 		}
-		if(apanhou)
-		GameActivity.instance.gem.start();
+		
+		return apanhou;
 	}
 
 	/**
 	 * Funcao que trata das colisoes entre o heroi e o portal
 	 * @param jogo
 	 */
-	static public void colidePortal(Jogo jogo, GameSurface c)
+	static public boolean colidePortal(Jogo jogo)
 	{
 		if(testaColisao(jogo.getHeroi(),jogo.getPortal()))
 		{
-			if(jogo.getMonstrosMortos()>=jogo.getPortalNum())
+			if(jogo.getMoedasApanhadas()>=jogo.getPortalNum())
 			{
-				aumentarNivel(c);
+				jogo.getHeroi().aumentarNivel();
+				return true;
 			}
 		}
+		return false;
 	}
 	
 	
 	static public void aumentarNivel(GameSurface c)
 	{
 		c.setJogo(new Jogo(c.getJogo().getHeroi()));
-		c.getJogo().getHeroi().nivel++;
 	}
 	/**
 	 * Funcao que testa a colisao entre um "heroi" e um outro "objeto"
@@ -408,7 +431,7 @@ public class GameLogic implements Serializable {
 			jogo.getInimigos().get(i).update();
 			paintMonstros
 					.setAlpha(jogo.getInimigos().get(i).getTransparencia());
-			if(jogo.getInimigos().get(i).ataque<=40)
+			if(jogo.getInimigos().get(i).getAtaque()<=40)
 			jogo.getInimigos().get(i).draw(canvas, paintMonstros);
 			else
 				jogo.getInimigos().get(i).draw(canvas, paint);
@@ -481,12 +504,16 @@ public class GameLogic implements Serializable {
 	 * @param canvas
 	 * @param paint
 	 */
-	public static void desenharEntidades(Jogo jogo, Canvas canvas, Paint paint) {
+	public static void desenharEntidades(AssetManager a,Jogo jogo, Canvas canvas, Paint paint) {
 		// desenhar mini mapa
 		drawMap(jogo, canvas, paint);
 		// drawMiniMap(jogo,canvas,paint);
 
-		desenharUpdates(jogo, canvas, paint);
+		Rect src= new Rect(0,0,Imagens.sombraMapa.getWidth(),Imagens.sombraMapa.getHeight());
+		Rect dst= new Rect(Entidade.dx,Entidade.dy,Entidade.dx+Entidade.tamanhoCelula*50,Entidade.dy+Entidade.tamanhoCelula*50);
+		canvas.drawBitmap(Imagens.sombraMapa, src, dst, paint);
+		
+		desenharUpdates(a,jogo, canvas, paint);
 	}
 
 	/** coisas como pause, barras de estado, etc
@@ -495,13 +522,13 @@ public class GameLogic implements Serializable {
 	 * @param canvas
 	 * @param paint
 	 */
-	public static void desenharUpdates(Jogo jogo, Canvas canvas, Paint paint) {
+	public static void desenharUpdates(AssetManager a,Jogo jogo, Canvas canvas, Paint paint) {
 		// Desenhar Barra de ataque++
-		int x = Entidade.tamanhoCelula * 2 / 3;
-		int y = Entidade.tamanhoCelula * 2;
+		int x = (int)(Entidade.tamanhoCelula * 0.6);
+		int y = (int) (Entidade.tamanhoCelula * 2.2);
 		Paint p = new Paint();
 		p.setColor(Color.YELLOW);
-		if (jogo.getHeroi().incAtaque > 0)
+		if (jogo.getHeroi().getIncAtaque() > 0)
 			canvas.drawRect(
 					x,
 					y,
@@ -512,8 +539,8 @@ public class GameLogic implements Serializable {
 		
 		
 		//vida
-		y = (int) (Entidade.tamanhoCelula * 1.6);
-		p.setColor(Color.BLACK);
+		y = (int) (Entidade.tamanhoCelula * 1.8);
+		p.setColor(Color.RED);
 		canvas.drawRect(x,y,x+ (Entidade.tamanhoCelula * 3 / 2) , y+ Entidade.tamanhoCelula * 1 / 8, p);
 		float temp=((float) jogo.getHeroi().getVida() / jogo.getHeroi().getVidaInicial());
 		if(temp>=0)
@@ -533,9 +560,9 @@ public class GameLogic implements Serializable {
 		p.setColor(Color.WHITE);
 
 		
-		if(jogo.getMonstrosMortos()>0)
+		if(jogo.getMoedasApanhadas()>0)
 		{
-			temp=(int) ((float)(((float)(jogo.getMonstrosMortos()/20.0))*(x*2)));
+			temp=(int) ((float)(((float)(jogo.getMoedasApanhadas()/20.0))*(x*2)));
 			if(temp>x*2)
 				temp=x*2;
 				
@@ -547,5 +574,16 @@ public class GameLogic implements Serializable {
 		x = Entidade.tamanhoCelula * 1 / 2;
 		y = Entidade.tamanhoCelula * 1 / 2;
 		canvas.drawBitmap(Imagens.pausa, x, y, paint);
+		
+		
+		//desenhar nivel
+		Typeface face=Typeface.createFromAsset(a, "fonts/Fixedsys500c.ttf");
+		paint.setTypeface(face);
+		paint.setTextSize(Entidade.tamanhoCelula/2);
+		paint.setColor(Color.WHITE);
+		canvas.drawText("Lvl:"+jogo.getHeroi().getNivel(), Entidade.sw-(Entidade.tamanhoCelula/2)*3, (int)(Entidade.tamanhoCelula*0.7), paint);
+
 	}
+
+
 }

@@ -8,7 +8,7 @@ public abstract class Personagem extends Entidade implements Serializable{
 	
 	private float vida=1000000;
 	private float vidaInicial=1000000;
-	float ataque=0;
+	private float ataque=0;
 	protected int movimento= 0;
 	
 	/**
@@ -23,7 +23,7 @@ public abstract class Personagem extends Entidade implements Serializable{
 	
 	
 
-	float getVida() {
+	public float getVida() {
 		return vida;
 	}
 
@@ -37,6 +37,20 @@ public abstract class Personagem extends Entidade implements Serializable{
 
 	public void setVidaInicial(float vidaInicial) {
 		this.vidaInicial = vidaInicial;
+	}
+
+
+
+
+	public float getAtaque() {
+		return ataque;
+	}
+
+
+
+
+	public void setAtaque(float ataque) {
+		this.ataque = ataque;
 	}
 	
 	

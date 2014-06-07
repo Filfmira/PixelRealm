@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.util.Log;
@@ -54,7 +55,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 	/**
 	 * Função que inicializa o screen holder e a thread
 	 */
-	private void init() {
+	public void init() {
 		// inicializa o screen holder
 		SurfaceHolder holder = getHolder();
 		holder.addCallback(this);
@@ -115,7 +116,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 	 */
 	public void doDraw(Canvas canvas) {
 
-		canvas.drawColor(Color.rgb(50, 100, 10));
+		canvas.drawColor(Color.BLACK);
 		
 		if (getJogo() == null) {
 			this.iniciaJogo(canvas);
@@ -128,15 +129,15 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		}
 
 		canvas.drawBitmap(Imagens.mapa, Entidade.dx, Entidade.dy, null);
-		GameLogic.desenharEntidades(getJogo(), canvas, paint);
+		GameLogic.desenharEntidades(_context.getAssets(),getJogo(), canvas, paint);
 
 		canvas.drawBitmap(Imagens.joystickBig, _controls.xBJ,
 				_controls.yBJ, null);
 		
-		Log.e("imagens.-----",Imagens.joystickBig.getWidth()+"."+Imagens.joystickSmall.getWidth()+"."+Entidade.tamanhoCelula);
-
 		canvas.drawBitmap(Imagens.joystickSmall,
 				_controls._touchingPoint.x, _controls._touchingPoint.y, null);
+		
+		
 
 	}
 
@@ -226,9 +227,10 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 		jogo.getHeroi().update();
 		GameLogic.lutar(jogo, this);
 		GameLogic.setasUpdate(jogo);
-		GameLogic.apanharGems(jogo);
-		GameLogic.apanharMoedas(jogo);
-		GameLogic.colidePortal(jogo, this);
+		if(GameLogic.apanharMoedas(jogo) || GameLogic.apanharGems(jogo))
+			GameActivity.getInstance().gem.start();
+		if(GameLogic.colidePortal(jogo))
+			GameLogic.aumentarNivel(this);
 
 		// lança o metodo draw p/desenhar
 		postInvalidate();

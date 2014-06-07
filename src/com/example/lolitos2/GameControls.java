@@ -28,6 +28,7 @@ public class GameControls implements OnTouchListener {
 	private int sSJ;// size small joystick
 	Entidade pontoEntidade;
 	public Entidade joystickEntidade;
+	public Entidade joystickEntidadePequeno;
 	public Entidade pausaEntidade = null;
 	public Entidade heroiEntidade = null;
 	
@@ -70,6 +71,7 @@ public class GameControls implements OnTouchListener {
 		_touchingPoint = new Point(tpx, tpy);
 
 		joystickEntidade = new Parede(xBJ, yBJ, sBJ, sBJ);
+		joystickEntidadePequeno= new Parede(xSJ,ySJ,sSJ,sSJ);
 		pontoEntidade = new Parede(0, 0, 1, 1);
 
 	}
@@ -187,7 +189,7 @@ public class GameControls implements OnTouchListener {
 				break;
 			} 
 			
-			if (joystickEntidade.colide(pontoEntidade)) {
+			if (joystickEntidadePequeno.colide(pontoEntidade)) {
 				c++;
 				Log.e("down", event.getPointerId(0) + "");
 				idJoystick = action;

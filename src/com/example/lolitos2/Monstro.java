@@ -29,7 +29,7 @@ public class Monstro extends Personagem implements Serializable {
 		setOriginalY(y);
 		setVida(5000);
 		setVidaInicial(5000);
-		ataque = 40;
+		setAtaque(40);
 		movimento = 20;
 		setTransparencia((int) ((Math.random() * 100) + 100));
 		incremento = 1;
@@ -47,10 +47,10 @@ public class Monstro extends Personagem implements Serializable {
 		super(x, y);
 		setOriginalX(x);
 		setOriginalY(y);
-		this.ataque=ataque;
+		this.setAtaque(ataque);
 		this.setVidaInicial(vida);
 		this.setVida(vida);
-		this.ataque=ataque;
+		this.setAtaque(ataque);
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class Monstro extends Personagem implements Serializable {
 	 * Update à transparencia caso o monsto seja um fantasma
 	 */
 	public void update() {
-		if (getTransparencia() >= 240)
+		if (getTransparencia() > 235)
 			incremento = -17;
 		if (getTransparencia() <= 150)
 			incremento = 17;
@@ -158,7 +158,7 @@ public class Monstro extends Personagem implements Serializable {
 
 	@Override
 	public Bitmap getImagem() {
-		if(ataque<=40)
+		if(getAtaque()<=40)
 		return Imagens.monstro;
 		else
 			return Imagens.monstro2;
