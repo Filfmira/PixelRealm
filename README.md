@@ -1,7 +1,7 @@
 # PixelRealm
 
 
-##Jogo
+##Game
 
 The aplication is a game based on "Realm od the Mad God"
 
