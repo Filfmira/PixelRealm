@@ -3,7 +3,7 @@
 
 ##Game
 
-The aplication is a game based on "Realm od the Mad God"
+The aplication is a game based on <a href="http://www.realmofthemadgod.com/">"Realm of the Mad God"</a> .
 
 The player controls the character (Hero) with the goal  to kill the several enemies you face in order to make progress in
 game.
