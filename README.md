@@ -1,5 +1,6 @@
 # PixelRealm
 
+
 ##Jogo
 
 O programa desenvolvido foi uma aplicação para Android de um jogo baseado no “Realm of the Mad God”.
@@ -11,6 +12,7 @@ jogo.
   <img src="http://i.imgur.com/H5sHvdX.png" width="500">
 </p>
 
+Video: https://www.youtube.com/watch?v=ttyefxrLIoA
 
 ##Interface
 O Herói toma uma posição central no ecrã, e para o mover pelo mapa, o utilizador pode recorrer a um
