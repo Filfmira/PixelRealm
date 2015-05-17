@@ -60,8 +60,9 @@ caught by our Hero. Those gems can be of three types:
 
 As stated before, a "portal" provides access to the next level. A higher level is characterized by having stronger enemies (removing more life form the hero whenever they attack).
 
-Authors of the project:
 
-https://github.com/Filfmira
+##Authors of the project:
 
-https://github.com/norim13
+<a href="https://github.com/Filfmira">@filfmira</a> 
+
+<a href="https://github.com/norim13">@norim13</a> 
