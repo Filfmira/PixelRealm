@@ -25,7 +25,7 @@ The Hero can take life to its enemies in two ways:
 1. "Face-to-face" where the Hero meets an enemy, and while
 are in contact, both will lose life acording  with the attacker's power
 
-2.Launching projectiles (in the  game interface represented as
+2. Launching projectiles (in the  game interface represented as
 arrows) in the enemy's direction (by touching the screen in the area where it
 plans to launch arrow).
 
