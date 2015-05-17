@@ -130,3 +130,10 @@ tablets, nunca distorcendo as imagens.
 
 Foram ainda aplicados vários layouts, dependendo da resolução, e orientação
 do ecrã, para tirar mais partido do “screen estate”.
+
+
+Este projecto foi realizado por:
+
+https://github.com/Filfmira
+
+https://github.com/norim13
