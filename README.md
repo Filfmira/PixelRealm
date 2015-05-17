@@ -16,15 +16,9 @@ Video: https://www.youtube.com/watch?v=ttyefxrLIoA
 
 ##Interface
 
-The Hero takes a central position on the screen, and to move on the map, you have to use a
+The Hero takes a central position on the screen and to move on the map, you have to use a
 joystick located in the lower left corner of the screen.
 
-O Herói pode tirar vida aos seus inimigos de duas formas: a primeira é num
-“confronto cara-a-cara”, em que o Herói vai ao encontro de um inimigo, e enquanto
-estiverem em contacto, vão ambos perdendo vida de acordo com o poder de ataque
-do outro; e a segunda é lançando projécteis (na interface do jogo representados como
-setas) na direcção do inimigo (bastando para isto tocar na zona do ecrã para onde se
-pretende lançar a seta).
 
 The Hero can take life to its enemies in two ways:
 
