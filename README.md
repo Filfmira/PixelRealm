@@ -52,7 +52,7 @@ caught by our Hero. Those gems can be of three types:
 
 ###Objective and Levels
 
-As stated before, a "portal" provides access to the next level. A higher level is characterized by having stronger enemies (removing more life form the hero whenever they attack).
+The player must kill the enemies shooting them arrows. For each enemie/monster killed the Hero may catch a gem who can the player progress in the level. When enough gems are catched, the "portal" opens. As stated before, the "portal" provides access to the next level. A higher level is characterized by having stronger enemies (removing more life form the hero whenever they attack).
 
 
 ##Authors of the project:
